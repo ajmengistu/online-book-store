@@ -1,8 +1,8 @@
 body {
-    background-image: linear-gradient(to right, rgb(81, 255, 0), #ffee03);
-    margin-top: 150px !important;
+    background-image: url("images/stack_of_books.jpg");
+    background-repeat: no-repeat;
+    
 }
-
 .register-left {
     text-align: center;
     color: #fff;
@@ -32,7 +32,7 @@ body {
 }
 
 .register-left .btn-primary:hover {
-    background: #000;
+    background: blue;
 }
 
 .register-right {
@@ -53,8 +53,7 @@ body {
     color: #555;
 }
 
-.register-form
-{
+.register-form {
     padding: 30px;
 }
 
@@ -80,5 +79,5 @@ body {
 }
 
 body {
-    background-image: url("images/library.jpg");
+    background-image: url("images/stack_of_books.jpg");
 }

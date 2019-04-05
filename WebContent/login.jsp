@@ -6,22 +6,23 @@
       <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
       <!-- Bootstrap CSS -->
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-      <title>LOGIN</title>
+      <title>Login</title>
       <style type="text/css">
          body {
          background-image: url("images/books.jpg");
-         background-attachment: fixed;
+         background-repeat: no-repeat;
          }
       </style>
    </head>
    <body>
       <div class="row">
-         <div class="container">
+         <div class="container" style="margin-top: 150px; margin-left: 500px">
             <div class="form" class="col-sm-10" style="width: 600px; margin-left: 250px; margin-top: 50px;">
                <div class="jumbotron">
                   <div class="form-group" style="text-align: center;">
                      <h1>ACCOUNT LOGIN</h1>
                   </div>
+                  
                   <form class="form-horizontal" style="margin-left: 50px;" method="post" action="login.do">
                      <div class="form-group input-group">
                         <input type="email" required autocomplete="on" placeholder="Email" class="form-control" name="email"/>
@@ -29,21 +30,22 @@
                      <div class="form-group input-group">
                         <input type="password"required autocomplete="off" placeholder="Password" class="form-control" name="password"/>
                      </div>
-                     <!-- Validate User Account -->
-                     <div>
-                        <!-- <p align=center style="color: red; font-weight: bold;">There was a Problem. Please Try Again</p> -->
+                     
+                     <!-- Verify User Account Login Credentials-->
+                     <div>                        
                         <%                 
                            String invalid = (String) request.getAttribute("invalid");
-                           if (invalid == null) invalid = "";
-                                               
-                           %>
+                           if (invalid == null) invalid = "";                                               
+                        %>
                         <p align=center style="color: red; font-weight: bold;"><%= invalid %></p>
                      </div>
                      <div class="form-group">
                         <button class="btn btn-primary">SIGN IN</button>
                      </div>
-                     <p><a href="/practice-web-app/register">New user</a></p>
+                     
+                     <p><a href="/online-book-store/register">New User</a></p>
                   </form>
+                  
                </div>
             </div>
          </div>

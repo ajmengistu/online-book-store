@@ -4,17 +4,17 @@
 <html>
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-      <title>Book Store Registration</title>
+      <title>User Registration</title>
       <link rel="stylesheet" type="text/css" href="register.css">
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
    </head>
    <body>
-      <div class="container">
+      <div class="container" style="margin-top: 150px;">
          <div class="row">
             <div class="col-mid-10 offset=mid-1">
                <div class="row">
-                  <div class="col-mid-5 register-left">
-                     <img src="images/white-arrow.png">
+                  <div class="col-mid-5 register-left" style="color: black;">
+                     <img src="images/black_arrow.png">
                      <h3>Join Us</h3>
                      <h6>Create an account &amp; browse unlimited number of books!</h6>
                      <button type="button" class="btn btn-primary">About</button>
@@ -23,9 +23,13 @@
                      <h2>Sign up</h2>
                      <h4 align="center">Create an account</h4>
                      <div class="register-form">
+                     
                         <form class="form-horizontal" method="post" action=register.do>
                            <div class="form-group">   
-                              <input required autocomplete="off" placeholder="Name" class="form-control" name="name"/>
+                              <input required autocomplete="off" placeholder="First Name" class="form-control" name="first_name"/>
+                           </div>
+                           <div class="form-group">   
+                              <input required autocomplete="off" placeholder="Last Name" class="form-control" name="last_name"/>
                            </div>
                            <div class="form-group">   
                               <input type="email"required autocomplete="off" placeholder="Email" class="form-control" name="email"/>
@@ -34,22 +38,24 @@
                               <input type="password"required autocomplete="off" placeholder="Password" class="form-control" name="password"/>
                            </div>
                            <div class="form-group">   
-                              <input type="password"required autocomplete="off" placeholder="Re-Enter Password" class="form-control" name="re-enter-password"/>
+                              <input type="password"required autocomplete="off" placeholder="Confirm Password" class="form-control" name="confirm_password"/>
                            </div>
-                           <!-- Validate Registration -->
-                           <div>
-                              <!-- <p align=center style="color: red; font-weight: bold;">Invalid Registration!</p> -->
+                           
+                           <!-- Confirm Registration -->                           
+                           <div>                              
                               <% 
                                  String invalid = (String) request.getAttribute("ir");
-                                 if (invalid == null) invalid = "";
-                                 
-                                 %>
+                                 if (invalid == null) invalid = "";                                 
+                              %>
                               <p align=center style="color: red; font-weight: bold;"><%= invalid %></p>
                            </div>
-                           <button type="submit" class="btn btn-primary" style="margin-bottom: 0px">Register</button>
+                          
+                           <button type="submit" class="btn btn-primary" style="margin-bottom: 0px">Register</button>                        
                         </form>
+                        
                         <br>
                      </div>
+                     <p style="font-weight: bold; color: blue"><a href="/online-book-store/login">Login</a></p>
                   </div>
                </div>
             </div>
