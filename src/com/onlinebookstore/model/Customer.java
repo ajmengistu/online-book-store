@@ -51,10 +51,13 @@ public class Customer extends Person {
 	 * @throws NoSuchAlgorithmException
 	 */
 	public static boolean addCustomer(String first, String last, String email,
-			String password) throws NoSuchAlgorithmException {
-
+			String password) {
 		// Get hashed password and salt as a string 2-tuple
 		String[] hashedPasswordAndSalt = getSecurePasswordAndSalt(password);
+
+		if (hashedPasswordAndSalt[0].equals("Error")) {
+			return false;
+		}
 
 		con = getConnection();
 
@@ -96,12 +99,11 @@ public class Customer extends Person {
 	 */
 
 	/**
-	 * Return true, if the email of a new user already exists in the database or
-	 * if for some reason connection to the database fails. Otherwise, return
-	 * false.
+	 * Return true, if an email already exists in the database or if for some
+	 * reason connection to the database fails. Otherwise, return false.
 	 * 
 	 * @param email
-	 *            email of a new customer registering for an account
+	 *            email of a user (new or existing) registering for an account
 	 * 
 	 */
 	public static boolean verifyEmail(String email) {
@@ -124,16 +126,92 @@ public class Customer extends Person {
 					result = false;
 				}
 
-				if (pstmt != null)
-					pstmt.close();
 				if (rs != null)
 					rs.close();
+				if (pstmt != null)
+					pstmt.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
 
 		return result;
+	}
+
+	/**
+	 * Returns a string of the salt value of the user corresponding to the
+	 * loginEmail.
+	 * 
+	 * @param loginEmail
+	 *            login email of the user attempting to login to their account.
+	 * */
+	public static String getUserSalt(String loginEmail) {
+		con = getConnection();
+
+		PreparedStatement pstmt = null;
+		if (con != null) {
+			String getSalt = "SELECT salt FROM customers WHERE email=?;";
+			try {
+				pstmt = con.prepareStatement(getSalt);
+				pstmt.setString(1, loginEmail);
+
+				ResultSet rs = pstmt.executeQuery();
+
+				while (rs.next()) { // returns only one row
+					return rs.getString("salt");
+				}
+
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return "";
+	}
+
+	/**
+	 * Return true, if user email and password exists in the database.
+	 * Otherwise, return false.
+	 * 
+	 * @param hashedLoginPassword
+	 *            login email of the user attempting to login
+	 * @param loginEmail
+	 *            login password of the user attempting to login
+	 */
+	public static boolean verifyPassword(String hashedLoginPassword,
+			String loginEmail) {
+		con = getConnection();
+
+		PreparedStatement pstmt = null;
+		if (con != null) {
+
+			String getEmailAndPassword = "SELECT id FROM customers WHERE email=? and hashed_password=?;";
+			try {
+				pstmt = con.prepareStatement(getEmailAndPassword);
+				pstmt.setString(1, loginEmail);
+				pstmt.setString(2, hashedLoginPassword);
+
+				ResultSet rs = pstmt.executeQuery();
+
+				if (rs.next()) { // rs should return one row with user id					
+					return true;
+				}
+
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return false; // loginPassword invalid
 	}
 
 	/**
@@ -185,6 +263,14 @@ public class Customer extends Person {
 		return true;
 	}
 
-	// public static void main(String args[]) throws NoSuchAlgorithmException {
-	// }
+	public static void main(String args[]) throws NoSuchAlgorithmException {
+		// byte[] slt = getSalt();
+		// String pass = "hello";
+		// String ss = new String(slt);
+		// System.out.println(ss);
+		// String spass = getSecurePasswordSHA512(pass, slt);
+		// System.out.println(spass);
+		// System.out.println(getSecurePasswordSHA512(pass, ss.getBytes()));
+
+	}
 }

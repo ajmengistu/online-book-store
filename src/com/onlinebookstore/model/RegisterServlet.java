@@ -59,13 +59,8 @@ public class RegisterServlet extends HttpServlet {
 				sendErrorMessage("Email already exists", request, response);
 			} else {
 				// Otherwise, add the new customer into the database
-				boolean newCustomerAdded = false;
-				try {
-					newCustomerAdded = Customer.addCustomer(first_name,
-							last_name, email, password);
-				} catch (NoSuchAlgorithmException e) {
-					e.printStackTrace();
-				}
+				boolean newCustomerAdded = Customer.addCustomer(first_name,
+						last_name, email, password);
 
 				if (newCustomerAdded) {
 					// Show message: 'Registration Successful'

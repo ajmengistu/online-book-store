@@ -57,6 +57,9 @@ public abstract class Person {
 
 	/**
 	 * Return a new secure hashed password using SHA512 algorithm.
+	 * 
+	 * @param passwordToHash
+	 * @param salt
 	 */
 	public static String getSecurePasswordSHA512(String passwordToHash,
 			byte[] salt) {
@@ -76,23 +79,29 @@ public abstract class Person {
 	}
 
 	/**
-	 * Returns a string that is a secure password and a string that is a salt
-	 * for a specific user.
+	 * Returns an array of size 2 containing a string that is hashed and a
+	 * string version of the salt used to create the hashed password for a
+	 * specific user. Otherwise, return an array of size two containing an error
+	 * message: ["Error", "Cannot get hashed password and salt"].
 	 * 
 	 * @param password
 	 *            that customer entered.
-	 * @throws NoSuchAlgorithmException
 	 */
-	public static String[] getSecurePasswordAndSalt(String passwordToHash)
-			throws NoSuchAlgorithmException {
+	public static String[] getSecurePasswordAndSalt(String passwordToHash) {
 		String[] result = new String[2];
 
-		byte[] salt = Person.getSalt();
-		String hashedPassword = Person.getSecurePasswordSHA512(passwordToHash,
-				salt);
+		try {
+			byte[] salt = Person.getSalt();
+			String hashedPassword = Person.getSecurePasswordSHA512(
+					passwordToHash, salt);
 
-		result[0] = hashedPassword;
-		result[1] = new String(salt);
+			result[0] = hashedPassword;
+			result[1] = new String(salt);
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+			return new String[] { "Error",
+					"Cannot get secure password and salt." };
+		}
 
 		return result;
 	}
