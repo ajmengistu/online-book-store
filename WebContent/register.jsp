@@ -62,6 +62,8 @@ body {
 										// When this page is first requested via ".../register", show an empty string status.
 										if (status == null)
 											status = "";
+										if (session != null && session.getAttribute("firstName") != null)
+											response.sendRedirect("welcome");
 									%>
 									<p align=center style="color: red; font-weight: bold;"><%=status%></p>
 								</div>

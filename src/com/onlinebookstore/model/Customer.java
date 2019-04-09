@@ -263,14 +263,6 @@ public class Customer extends Person {
 		return true;
 	}
 
-	public static void main(String args[]) throws NoSuchAlgorithmException {
-		// byte[] slt = getSalt();
-		// String pass = "hello";
-		// String ss = new String(slt);
-		// System.out.println(ss);
-		// String spass = getSecurePasswordSHA512(pass, slt);
-		// System.out.println(spass);
-		// System.out.println(getSecurePasswordSHA512(pass, ss.getBytes()));
-
-	}
+//	public static void main(String args[]) throws NoSuchAlgorithmException {
+//	}
 }

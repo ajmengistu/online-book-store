@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.onlinebookstore.model.Customer;
 
@@ -34,6 +35,18 @@ public class RegisterServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		response.setHeader("Cache-Control", "no-cache"); // Forces caches to
+															// obtain a new copy
+															// of the page from
+															// the origin server
+		response.setHeader("Cache-Control", "no-store"); // Directs caches not
+															// to store the page
+															// under any
+															// circumstance
+		response.setDateHeader("Expire", 0); // Causes the proxy cache to see
+												// the page as "stale"
+		response.setHeader("Pragma", "no-cache"); // HTTP 1.0 backward
+													// compatibility
 
 		// Get all the string data from the fields of the registration form
 		// for validation. If validation is successful, add the customer
@@ -65,14 +78,10 @@ public class RegisterServlet extends HttpServlet {
 					// on their mind.
 					System.out.println("New Customer added: " + first_name
 							+ " " + last_name);
-					// sendRegistrationSuccessfulMessage(response.getWriter());
-					RequestDispatcher rd = request
-							.getRequestDispatcher(WEB.LOGIN);
-					rd.include(request, response);
-					// HttpSession session = request.getSession();
-					// session.setAttribute("registration_status", "success");
-					// response.sendRedirect(WEB.REGISTRATION_SUCCESSFUL);
 
+					HttpSession session = request.getSession();
+					session.setAttribute("registration_status", "success");
+					response.sendRedirect(WEB.REGISTRATION_SUCCESSFUL);
 				} else { // Connection to the database failed
 					sendErrorMessage("Please try again", request, response);
 				}
@@ -98,18 +107,4 @@ public class RegisterServlet extends HttpServlet {
 		rd.forward(request, response);
 	}
 
-	/**
-	 * Send a message 'registration successful' to the new customer that just
-	 * registered.
-	 * 
-	 * @param out
-	 *            PrintWriter object
-	 * */
-	private void sendRegistrationSuccessfulMessage(PrintWriter out) {
-		out.println("<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js'></script>");
-		out.println("<script src='https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.all.js'></script>");
-		out.println("<script>");
-		out.println("$(document).ready(function(){swal ( 'Great' ,  'Registration Successful!' ,  'success' );});");
-		out.println("</script>");
-	}
 }

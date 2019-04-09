@@ -1,11 +1,8 @@
 package com.onlinebookstore.model;
 
-import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-
-import javax.xml.bind.DatatypeConverter;
 
 public abstract class Person {
 	private String firstName, lastName, email, hashedPassword, salt;
@@ -125,21 +122,6 @@ public abstract class Person {
 		return new String(hexChars);
 	}
 
-	public static void main(String args[]) throws NoSuchAlgorithmException {
-		// String pass = "green";
-		// System.out.println(pass);
-		// byte[] salt = getSalt();
-		// System.out.println(salt);
-		// System.out.println(new String(salt));
-		// String hash = (getSecurePasswordSHA512(pass, salt));
-		// System.out.println(hash);
-		// String slt = new String(salt);
-		// System.out.println(slt);
-		// byte[] bslt = slt.getBytes();
-		// System.out.println(bslt);
-		// String hash2 = getSecurePasswordSHA512(pass, (bslt));
-		// System.out.println(hash2);
-		// System.out.println(hash.equals(hash2));
-
-	}
+//	public static void main(String args[]) throws NoSuchAlgorithmException {
+//	}
 }

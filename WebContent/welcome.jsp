@@ -35,8 +35,5 @@
 
 	<p align=center
 		style="color: black; font-size: 32px; font-weight: bold; margin-top: 200px;"><%="Welcome back, " + firstName + "!"%></p>
-
-
-
 </body>
 </html>

@@ -1,7 +1,6 @@
 package com.onlinebookstore.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -42,15 +41,18 @@ public class LoginServlet extends HttpServlet {
 		// of the corresponding user. Note: each account is associated with a
 		// unique email.
 		String salt = Customer.getUserSalt(loginEmail);
+
 		if (salt.length() != 0) {
 			String hashedLoginPassword = Customer.getSecurePasswordSHA512(
 					loginPassword, salt.getBytes());
 
 			if (Customer.verifyPassword(hashedLoginPassword, loginEmail)) {
+				// Get Customer object with their information.
+
 				// Bind valid user information: email & password to a session.
 				HttpSession session = request.getSession();
 				session.setAttribute("email", loginEmail);
-				session.setAttribute("firstName", "John");
+				session.setAttribute("firstName", loginEmail);
 
 				// Direct user to welcome page
 				System.out.println("Login successful");
@@ -87,13 +89,5 @@ public class LoginServlet extends HttpServlet {
 		System.out.println(message);
 		RequestDispatcher rd = request.getRequestDispatcher(WEB.LOGIN);
 		rd.forward(request, response);
-	}
-
-	private void sendLoginSuccessfulMessage(PrintWriter out) {
-		out.println("<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js'></script>");
-		out.println("<script src='https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.all.js'></script>");
-		out.println("<script>");
-		out.println("$(document).ready(function(){swal ( 'Great' ,  'Welcome back!' ,  'success' );});");
-		out.println("</script>");
 	}
 }
