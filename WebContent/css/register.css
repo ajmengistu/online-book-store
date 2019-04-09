@@ -1,5 +1,5 @@
 body {
-    background-image: url("images/stack_of_books.jpg");
+    background-image: url("./images/stack_of_books.jpg");
     background-repeat: no-repeat;
     
 }
@@ -76,8 +76,4 @@ body {
 @keyframes mover {
     0%{transform: translateY(0);}
     100%{transform: translateY(-20px); }
-}
-
-body {
-    background-image: url("images/stack_of_books.jpg");
 }

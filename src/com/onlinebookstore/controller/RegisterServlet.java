@@ -2,12 +2,6 @@ package com.onlinebookstore.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.security.NoSuchAlgorithmException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -32,7 +26,7 @@ public class RegisterServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
-		response.sendRedirect("register");
+		response.sendRedirect(WEB.REGISTER);
 	}
 
 	/**
@@ -71,10 +65,14 @@ public class RegisterServlet extends HttpServlet {
 					// on their mind.
 					System.out.println("New Customer added: " + first_name
 							+ " " + last_name);
-					sendRegistrationSuccessfulMessage(response.getWriter());
+					// sendRegistrationSuccessfulMessage(response.getWriter());
 					RequestDispatcher rd = request
-							.getRequestDispatcher("login");
+							.getRequestDispatcher(WEB.LOGIN);
 					rd.include(request, response);
+					// HttpSession session = request.getSession();
+					// session.setAttribute("registration_status", "success");
+					// response.sendRedirect(WEB.REGISTRATION_SUCCESSFUL);
+
 				} else { // Connection to the database failed
 					sendErrorMessage("Please try again", request, response);
 				}
@@ -96,7 +94,7 @@ public class RegisterServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("status", message);
 		System.out.println(message);
-		RequestDispatcher rd = request.getRequestDispatcher("register");
+		RequestDispatcher rd = request.getRequestDispatcher(WEB.REGISTER);
 		rd.forward(request, response);
 	}
 

@@ -26,7 +26,7 @@ public class LoginServlet extends HttpServlet {
 	 * */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
-		response.sendRedirect("login");
+		response.sendRedirect(WEB.LOGIN);
 	}
 
 	/**
@@ -47,15 +47,15 @@ public class LoginServlet extends HttpServlet {
 					loginPassword, salt.getBytes());
 
 			if (Customer.verifyPassword(hashedLoginPassword, loginEmail)) {
-				// Bind valid user information: email & password to a session. 
+				// Bind valid user information: email & password to a session.
 				HttpSession session = request.getSession();
 				session.setAttribute("email", loginEmail);
 				session.setAttribute("firstName", "John");
-				
+
 				// Direct user to welcome page
-//				sendLoginSuccessfulMessage(response.getWriter());
-				RequestDispatcher rd = request.getRequestDispatcher("welcome");
-				rd.include(request, response);
+				System.out.println("Login successful");
+				// sendLoginSuccessfulMessage(response.getWriter());
+				response.sendRedirect(WEB.WELCOME);
 			} else {
 				// email exists, but password is incorrect.
 				// However, send a generic message to person attempting to
@@ -85,10 +85,10 @@ public class LoginServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("status", message);
 		System.out.println(message);
-		RequestDispatcher rd = request.getRequestDispatcher("login");
+		RequestDispatcher rd = request.getRequestDispatcher(WEB.LOGIN);
 		rd.forward(request, response);
 	}
-	
+
 	private void sendLoginSuccessfulMessage(PrintWriter out) {
 		out.println("<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js'></script>");
 		out.println("<script src='https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.all.js'></script>");
