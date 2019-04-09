@@ -14,7 +14,6 @@
 		response.setDateHeader("Expire", 0); //Causes the proxy cache to see the page as "stale"
 		response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
 
-		boolean show = false;
 		String registration_status = (String) session
 				.getAttribute("registration_status");
 		if (registration_status == null) {

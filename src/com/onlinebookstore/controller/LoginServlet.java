@@ -53,11 +53,12 @@ public class LoginServlet extends HttpServlet {
 				HttpSession session = request.getSession();
 				session.setAttribute("email", loginEmail);
 				session.setAttribute("firstName", loginEmail);
+				session.setAttribute("login_status", "success");
 
 				// Direct user to welcome page
 				System.out.println("Login successful");
 				// sendLoginSuccessfulMessage(response.getWriter());
-				response.sendRedirect(WEB.WELCOME);
+				response.sendRedirect(WEB.LOGIN_SUCCESSFUL);
 			} else {
 				// email exists, but password is incorrect.
 				// However, send a generic message to person attempting to

@@ -32,6 +32,15 @@
 		<servlet-name>SuccessfulRegistrationPage</servlet-name>
 		<url-pattern>/registration_successful</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>SuccessfulLoginPage</servlet-name>
+		<jsp-file>/login_successful.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SuccessfulLoginPage</servlet-name>
+		<url-pattern>/login_successful</url-pattern>
+	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>LoginPage</servlet-name>
