@@ -20,7 +20,7 @@
 			response.sendRedirect(WEB.LOGIN);
 		} else {
 			session.setAttribute("registration_status", null);
-			session.invalidate();
+			//session.invalidate();
 		}
 	%>
 	<script

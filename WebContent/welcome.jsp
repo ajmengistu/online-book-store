@@ -24,11 +24,12 @@
 			response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
 
 			String firstName = (String) session.getAttribute("firstName");
+			String email = (String) session.getAttribute("email");
 
 			if (firstName == null)
 				response.sendRedirect(WEB.LOGIN);
 		%>
-		<p align="center" style="color: rgb(35, 216, 35);"><%="Hello, " + firstName%></p>
+		<p align="center" style="color: rgb(35, 216, 35);"><%="Hello, " + firstName + "." + "Email: " + email%></p>
 	</div>
 
 	<tagfiles:customer_navbar />

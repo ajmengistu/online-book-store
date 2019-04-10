@@ -3,8 +3,7 @@ package com.onlinebookstore.model;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 
-public class Customer extends Person {
-	private static Connection con = null;
+public class Customer extends User {
 
 	public Customer() {
 	}
@@ -50,8 +49,8 @@ public class Customer extends Person {
 	 *            new Customer password
 	 * @throws NoSuchAlgorithmException
 	 */
-	public static boolean addCustomer(String first, String last, String email,
-			String password) {
+	public static boolean addNewCustomer(String first, String last,
+			String email, String password) {
 		// Get hashed password and salt as a string 2-tuple
 		String[] hashedPasswordAndSalt = getSecurePasswordAndSalt(password);
 
@@ -97,46 +96,6 @@ public class Customer extends Person {
 	 * public static Customer getCustomer(String email) { return new
 	 * Customer("NO", "Matches"); }
 	 */
-
-	/**
-	 * Return true, if an email already exists in the database or if for some
-	 * reason connection to the database fails. Otherwise, return false.
-	 * 
-	 * @param email
-	 *            email of a user (new or existing) registering for an account
-	 * 
-	 */
-	public static boolean verifyEmail(String email) {
-		PreparedStatement pstmt = null;
-		boolean result = true;
-
-		con = getConnection();
-
-		if (con != null) {
-			String query = "SELECT email FROM customers WHERE email=?;";
-			try {
-				pstmt = con.prepareStatement(query);
-				pstmt.setString(1, email);
-
-				ResultSet rs = pstmt.executeQuery();
-
-				if (rs.next()) { // email already exists in the database
-					result = true;
-				} else {
-					result = false;
-				}
-
-				if (rs != null)
-					rs.close();
-				if (pstmt != null)
-					pstmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-
-		return result;
-	}
 
 	/**
 	 * Returns a string of the salt value of the user corresponding to the
@@ -197,7 +156,7 @@ public class Customer extends Person {
 
 				ResultSet rs = pstmt.executeQuery();
 
-				if (rs.next()) { // rs should return one row with user id					
+				if (rs.next()) { // rs should return one row with user id
 					return true;
 				}
 
@@ -214,55 +173,6 @@ public class Customer extends Person {
 		return false; // loginPassword invalid
 	}
 
-	/**
-	 * Connect to the local database for development purposes. The database must
-	 * be named "onlinebookstore". The username is "root" with the password
-	 * "admin".
-	 */
-	private static Connection getConnection() {
-		String url = "jdbc:mysql://localhost:3306/onlinebookstore";
-		String username = "root";
-		String password = "admin";
-
-		// Return existing connection after first call
-		if (con != null) {
-			return con;
-		}
-
-		System.out.println("Getting local connection...");
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-
-			System.out.println("Getting database connection");
-
-			con = DriverManager.getConnection(url, username, password);
-			if (con != null)
-				System.out.println("Connected");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		return con;
-	}
-
-	public static boolean closeConnection() {
-		System.out.println("Closing connection...");
-
-		if (con != null) {
-			try {
-				con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-				return false;
-			}
-		}
-
-		System.out.println("Closed");
-		return true;
-	}
-
-//	public static void main(String args[]) throws NoSuchAlgorithmException {
-//	}
+	// public static void main(String args[]) throws NoSuchAlgorithmException {
+	// }
 }

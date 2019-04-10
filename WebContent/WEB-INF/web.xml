@@ -15,6 +15,17 @@
 		<servlet-name>RegisterPage</servlet-name>
 		<url-pattern>/register</url-pattern>
 	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>AdminRegisterPage</servlet-name>
+		<jsp-file>/admin_register.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AdminRegisterPage</servlet-name>
+		<url-pattern>/admin_register</url-pattern>
+	</servlet-mapping>
+
+
 	<servlet>
 		<servlet-name>RegisterServlet</servlet-name>
 		<servlet-class>com.onlinebookstore.controller.RegisterServlet</servlet-class>
@@ -32,7 +43,7 @@
 		<servlet-name>SuccessfulRegistrationPage</servlet-name>
 		<url-pattern>/registration_successful</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>SuccessfulLoginPage</servlet-name>
 		<jsp-file>/login_successful.jsp</jsp-file>

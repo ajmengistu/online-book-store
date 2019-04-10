@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>User Registration</title>
+<title>Administrator Registration</title>
 <link rel="stylesheet" type="text/css" href="css/register.css">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -32,7 +32,7 @@ body {
 						<div class="register-form">
 
 							<form class="form-horizontal" method="post" action=register.do>
-							<div class="form-group">
+								<div class="form-group">
 									<input required autocomplete="off" placeholder="Employee ID"
 										class="form-control" name="emp_id" />
 								</div>
@@ -67,7 +67,7 @@ body {
 										if (status == null)
 											status = "";
 										if (session != null && session.getAttribute("firstName") != null)
-											response.sendRedirect("welcome");
+											response.sendRedirect("admin_welcome");
 									%>
 									<p align=center style="color: red; font-weight: bold;"><%=status%></p>
 								</div>

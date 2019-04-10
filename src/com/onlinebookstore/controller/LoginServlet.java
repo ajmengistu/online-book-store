@@ -42,6 +42,9 @@ public class LoginServlet extends HttpServlet {
 		// unique email.
 		String salt = Customer.getUserSalt(loginEmail);
 
+		
+		// Get a Person object: Admin or Customer with first, last names, email.
+		
 		if (salt.length() != 0) {
 			String hashedLoginPassword = Customer.getSecurePasswordSHA512(
 					loginPassword, salt.getBytes());
