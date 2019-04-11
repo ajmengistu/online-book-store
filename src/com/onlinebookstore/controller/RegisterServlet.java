@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.onlinebookstore.model.Administrator;
-import com.onlinebookstore.model.Customer;
 import com.onlinebookstore.model.User;
 
 /**
@@ -81,9 +80,9 @@ public class RegisterServlet extends HttpServlet {
 							request, response);
 
 				} else if (employee_id == null) {
-					newUserAdded = Customer.addNewCustomer(first_name,
-							last_name, email, password);
-					verifyNewUserIsAdded(request, response, newUserAdded, null);
+//					newUserAdded = Customer.addNewCustomer(first_name,
+//							last_name, email, password);
+//					verifyNewUserIsAdded(request, response, newUserAdded, null);
 
 				} else {
 					newUserAdded = Administrator

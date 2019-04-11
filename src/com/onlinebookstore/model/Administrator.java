@@ -6,6 +6,10 @@ import java.sql.SQLException;
 
 public class Administrator extends User {
 	String employeeID;
+	
+	public Administrator(String firstName, String lastName, String email) {
+		super(firstName, lastName, email);
+	}
 
 	public static boolean addNewAdministrator(String employee_id, String first,
 			String last, String email, String password) {
@@ -44,11 +48,9 @@ public class Administrator extends User {
 		return false;
 	}
 
-	/**
-	 * Returns true, if employee_id exists in the employee table. Otherwise,
-	 * false.
-	 */
-	public static boolean verifyEmployeeID(String employee_id, String firstName, String lastName) {
+
+	public static boolean verifyEmployeeID(String employee_id,
+			String firstName, String lastName) {
 		boolean result = false;
 		con = getConnection();
 
@@ -59,8 +61,8 @@ public class Administrator extends User {
 				pstmt = con.prepareStatement(queryEmployeeID);
 				pstmt.setString(1, employee_id);
 				pstmt.setString(2, firstName);
-				pstmt.setString(3,  lastName);
-				
+				pstmt.setString(3, lastName);
+
 				ResultSet rs = pstmt.executeQuery();
 
 				if (rs.next()) {

@@ -9,6 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import java.util.Arrays;
+
 public abstract class User {
 	private String firstName, lastName, email, hashedPassword, salt;
 	public static Connection con = null;
@@ -17,13 +19,19 @@ public abstract class User {
 	}
 
 	// Constructor to create a new person.
-	public User(String firstName, String lastName, String email,
-			String password, String salt) {
+	public User(String firstName, String lastName, String email) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
-		this.hashedPassword = password;
-		this.salt = salt;
+	}
+
+	public User(String firstName, String lastName, String email,
+			String hashedPassword, String salt) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.hashedPassword = hashedPassword;
+		this.email = email;
 	}
 
 	public String getFirstName() {
@@ -38,18 +46,96 @@ public abstract class User {
 		return email;
 	}
 
-	public String getHashedPassword() {
-		return hashedPassword;
+	public static String[] verifyUserLoginCredentials(String loginEmail,
+			String loginPassword) {
+		String queryCustomersTable = "SELECT salt FROM customers WHERE email=?;";
+		String queryAdministratorsTable = "SELECT salt FROM administrators WHERE email=?;";
+
+		String salt = getUserSalt(queryCustomersTable, loginEmail);
+		if (salt != null) {
+			String hashedLoginPassword = getSecurePasswordSHA512(loginPassword,
+					salt.getBytes());
+
+			String getUserInfo = "SELECT first_name, last_name, email FROM customers WHERE email=? and hashed_password=?;";
+			return verifyPassword(hashedLoginPassword, loginEmail, getUserInfo);
+		} else {
+			salt = getUserSalt(queryAdministratorsTable, loginEmail);
+			String getUserInfo = "SELECT first_name, last_name, email FROM administrator WHERE email=? and hashed_password=?;";
+
+			if (salt != null) {
+				String hashedLoginPassword = getSecurePasswordSHA512(
+						loginPassword, salt.getBytes());
+
+				return verifyPassword(hashedLoginPassword, loginEmail,
+						getUserInfo);
+			}
+		}
+
+		return null;
 	}
 
-	public String getPersonSalt() {
-		return salt;
+	public static String[] verifyPassword(String hashedLoginPassword,
+			String loginEmail, String getUserInfo) {
+
+		con = getConnection();
+
+		PreparedStatement pstmt = null;
+		if (con != null) {
+
+			try {
+				pstmt = con.prepareStatement(getUserInfo);
+				pstmt.setString(1, loginEmail);
+				pstmt.setString(2, hashedLoginPassword);
+
+				ResultSet rs = pstmt.executeQuery();
+
+				if (rs.next()) { // rs should return one row with user id
+					String firstName = rs.getString("first_name");
+					String lastName = rs.getString("last_name");
+					String email = rs.getString("email");
+
+					return new String[] { firstName, lastName, email };
+				}
+
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return null;
+			}
+		}
+
+		return null; // loginPassword invalid
 	}
 
-	public static User addNewUser(String employee_id, String first,
-			String last, String email, String password) {
+	public static String getUserSalt(String query, String email) {
+		con = getConnection();
 
-		return null; // Unsuccessful, new User was not added
+		PreparedStatement pstmt = null;
+		if (con != null) {
+			try {
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, email);
+
+				ResultSet rs = pstmt.executeQuery();
+
+				if (rs.next()) { // returns only one row
+					return rs.getString("salt");
+				}
+
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return null;
 	}
 
 	public static boolean queryEmailExistance(String email, String query) {
@@ -83,14 +169,6 @@ public abstract class User {
 		return result;
 	}
 
-	/**
-	 * Return true, if an email already exists in the database or if for some
-	 * reason connection to the database fails. Otherwise, return false.
-	 * 
-	 * @param email
-	 *            email of a user (new or existing) registering for an account
-	 * 
-	 */
 	public static boolean emailAlreadyExists(String email) {
 		String queryCustomersTable = "SELECT email FROM customers WHERE email=?;";
 		String queryAdminTable = "SELECT email FROM administrators WHERE email=?;";
@@ -103,11 +181,6 @@ public abstract class User {
 		}
 	}
 
-	/**
-	 * Return a random byte array of size 16.
-	 * 
-	 * @throws NoSuchAlgorithmException
-	 * */
 	public static byte[] getSalt() throws NoSuchAlgorithmException {
 		SecureRandom sr = new SecureRandom();
 		byte[] salt = new byte[16];
@@ -115,12 +188,12 @@ public abstract class User {
 		return salt;
 	}
 
-	/**
+	/***
 	 * Return a new secure hashed password using SHA512 algorithm.
 	 * 
 	 * @param passwordToHash
 	 * @param salt
-	 */
+	 **/
 	public static String getSecurePasswordSHA512(String passwordToHash,
 			byte[] salt) {
 		String securePassword = null;
@@ -138,7 +211,7 @@ public abstract class User {
 		return securePassword;
 	}
 
-	/**
+	/***
 	 * Returns an array of size 2 containing a string that is hashed and a
 	 * string version of the salt used to create the hashed password for a
 	 * specific user. Otherwise, return an array of size two containing an error
@@ -146,7 +219,7 @@ public abstract class User {
 	 * 
 	 * @param password
 	 *            that customer entered.
-	 */
+	 **/
 	public static String[] getSecurePasswordAndSalt(String passwordToHash) {
 		String[] result = new String[2];
 
@@ -166,13 +239,13 @@ public abstract class User {
 		return result;
 	}
 
-	/**
+	/***
 	 * Returns a new string version of the byte array. Converts a 16 bytes array
 	 * into hexadecimal string of length 128.
 	 * 
 	 * @param bytes
 	 *            a byte array of a hashed password.
-	 */
+	 **/
 	private final static char[] hexArray = "0123456789ABCDEF".toCharArray();
 
 	public static String bytesToHex(byte[] bytes) {
@@ -185,11 +258,11 @@ public abstract class User {
 		return new String(hexChars);
 	}
 
-	/**
+	/***
 	 * Connect to the local database for development purposes. The database must
 	 * be named "onlinebookstore". The username is "root" with the password
 	 * "admin".
-	 */
+	 **/
 	public static Connection getConnection() {
 		String url = "jdbc:mysql://localhost:3306/onlinebookstore";
 		String username = "root";

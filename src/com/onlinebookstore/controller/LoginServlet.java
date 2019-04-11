@@ -8,9 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.onlinebookstore.model.Customer;
+import com.onlinebookstore.model.User;
 
 /**
  * Servlet implementation class LoginServlet
@@ -38,47 +37,42 @@ public class LoginServlet extends HttpServlet {
 		String loginPassword = request.getParameter("password");
 
 		// Verify if login email already exists. If so, get the salt
-		// of the corresponding user. Note: each account is associated with a
-		// unique email.
-		String salt = Customer.getUserSalt(loginEmail);
-
+		// of the corresponding user. Note: each User account is associated with
+		// a unique email.
+		String[] user = User.verifyUserLoginCredentials(loginEmail, loginPassword);
+//		if(user == null)
 		
-		// Get a Person object: Admin or Customer with first, last names, email.
-		
-		if (salt.length() != 0) {
-			String hashedLoginPassword = Customer.getSecurePasswordSHA512(
-					loginPassword, salt.getBytes());
-
-			if (Customer.verifyPassword(hashedLoginPassword, loginEmail)) {
-				// Get Customer object with their information.
-
-				// Bind valid user information: email & password to a session.
-				HttpSession session = request.getSession();
-				session.setAttribute("email", loginEmail);
-				session.setAttribute("firstName", loginEmail);
-				session.setAttribute("login_status", "success");
-
-				// Direct user to welcome page
-				System.out.println("Login successful");
-				// sendLoginSuccessfulMessage(response.getWriter());
-				response.sendRedirect(WEB.LOGIN_SUCCESSFUL);
-			} else {
-				// email exists, but password is incorrect.
-				// However, send a generic message to person attempting to
-				// login
-				System.out.println("invalid password");
-				sendErrorMessage(
-						"You have entered an invalid email or password",
-						request, response);
-			}
-		} else {
-			// loginEmail does not exist in the database. Send a
-			// generic message.
-			System.out.println("invalid email");
-			sendErrorMessage("You have entered an invalid email or password",
-					request, response);
-
-		}
+//		// Get an Array first, last names, email of an Admin or Customer.
+//			if (Customer.verifyPassword(hashedLoginPassword, loginEmail)) {
+//				// Get Customer object with their information.
+//
+//				// Bind valid user information: email & password to a session.
+//				HttpSession session = request.getSession();
+//				session.setAttribute("email", loginEmail);
+//				session.setAttribute("firstName", loginEmail);
+//				session.setAttribute("login_status", "success");
+//
+//				// Direct user to welcome page
+//				System.out.println("Login successful");
+//				// sendLoginSuccessfulMessage(response.getWriter());
+//				response.sendRedirect(WEB.LOGIN_SUCCESSFUL);
+//			} else {
+//				// email exists, but password is incorrect.
+//				// However, send a generic message to person attempting to
+//				// login
+//				System.out.println("invalid password");
+//				sendErrorMessage(
+//						"You have entered an invalid email or password",
+//						request, response);
+//			}
+//		} else {
+//			// loginEmail does not exist in the database. Send a
+//			// generic message.
+//			System.out.println("invalid email");
+//			sendErrorMessage("You have entered an invalid email or password",
+//					request, response);
+//
+//		}
 
 	}
 
@@ -89,8 +83,10 @@ public class LoginServlet extends HttpServlet {
 	 */
 	private void sendErrorMessage(String message, HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("status", message);
+
 		System.out.println(message);
+
+		request.setAttribute("status", message);
 		RequestDispatcher rd = request.getRequestDispatcher(WEB.LOGIN);
 		rd.forward(request, response);
 	}
