@@ -9,29 +9,33 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import java.util.Arrays;
-
-public abstract class User {
-	private String firstName, lastName, email, hashedPassword, salt;
+public class User {
+	private String firstName, lastName, email, userRole, userID, password;
 	public static Connection con = null;
 
 	public User() {
 	}
 
 	// Constructor to create a new person.
-	public User(String firstName, String lastName, String email) {
+	public User(String firstName, String lastName, String email, String userRole) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
+		this.userRole = userRole;
+		// this.userID = userID;
 	}
 
+	// Constructor to create a new person.
 	public User(String firstName, String lastName, String email,
-			String hashedPassword, String salt) {
+			String userRole, String password) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
-		this.hashedPassword = hashedPassword;
-		this.email = email;
+		this.userRole = userRole;
+		this.password = password;
+	}
+	public String getPassword(){
+		return password;
 	}
 
 	public String getFirstName() {
@@ -46,55 +50,89 @@ public abstract class User {
 		return email;
 	}
 
-	public static String[] verifyUserLoginCredentials(String loginEmail,
-			String loginPassword) {
-		String queryCustomersTable = "SELECT salt FROM customers WHERE email=?;";
-		String queryAdministratorsTable = "SELECT salt FROM administrators WHERE email=?;";
+	public String getUserRole() {
+		return userRole;
+	}
 
-		String salt = getUserSalt(queryCustomersTable, loginEmail);
-		if (salt != null) {
-			String hashedLoginPassword = getSecurePasswordSHA512(loginPassword,
-					salt.getBytes());
+	public String getUserID() {
+		return userID;
+	}
 
-			String getUserInfo = "SELECT first_name, last_name, email FROM customers WHERE email=? and hashed_password=?;";
-			return verifyPassword(hashedLoginPassword, loginEmail, getUserInfo);
-		} else {
-			salt = getUserSalt(queryAdministratorsTable, loginEmail);
-			String getUserInfo = "SELECT first_name, last_name, email FROM administrator WHERE email=? and hashed_password=?;";
+	public static boolean verifyEmployeeID(String employeeID, String firstName,
+			String lastName) {
+		boolean result = false;
+		PreparedStatement pstmt = null;
 
-			if (salt != null) {
-				String hashedLoginPassword = getSecurePasswordSHA512(
-						loginPassword, salt.getBytes());
+		con = getConnection();
 
-				return verifyPassword(hashedLoginPassword, loginEmail,
-						getUserInfo);
+		if (con != null) {
+			String query = "SELECT * FROM employees WHERE binary first_name=? and binary last_name=? and binary employee_id=?;";
+			try {
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, firstName);
+				pstmt.setString(2, lastName);
+				pstmt.setString(3, employeeID);
+
+				ResultSet rs = pstmt.executeQuery();
+
+				if (rs.next()) {
+					result = true;
+				}
+
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return false;
 			}
 		}
 
+		return result;
+	}
+
+	public static User verifyUserLoginCredentials(String loginEmail,
+			String loginPassword) {
+		String userSalt = getUserSalt(loginEmail);
+
+		if (userSalt != null) {
+			// If loginEmail exists in the users table
+			String hashedLoginPassword = getSecurePasswordSHA512(loginPassword,
+					userSalt.getBytes());
+
+			return verifyPassword(loginEmail, hashedLoginPassword);
+		}
+		System.out.format("email: %s is invalid\n", loginEmail);
 		return null;
 	}
 
-	public static String[] verifyPassword(String hashedLoginPassword,
-			String loginEmail, String getUserInfo) {
+	public static User verifyPassword(String loginEmail,
+			String hashedLoginPassword) {
+		User userLogingIn = null;
 
 		con = getConnection();
 
 		PreparedStatement pstmt = null;
 		if (con != null) {
+			String getUser = "SELECT * FROM users WHERE binary email=? and binary hashed_password=?;";
 
 			try {
-				pstmt = con.prepareStatement(getUserInfo);
+				pstmt = con.prepareStatement(getUser);
 				pstmt.setString(1, loginEmail);
 				pstmt.setString(2, hashedLoginPassword);
 
 				ResultSet rs = pstmt.executeQuery();
 
-				if (rs.next()) { // rs should return one row with user id
+				if (rs.next()) { // rs should return one row
 					String firstName = rs.getString("first_name");
 					String lastName = rs.getString("last_name");
 					String email = rs.getString("email");
+					String userRole = rs.getString("user_role");
 
-					return new String[] { firstName, lastName, email };
+					userLogingIn = new User(firstName, lastName, email,
+							userRole);
+					System.out.println("Returning an existing User");
 				}
 
 				if (rs != null)
@@ -108,22 +146,26 @@ public abstract class User {
 			}
 		}
 
-		return null; // loginPassword invalid
+		return userLogingIn;
 	}
 
-	public static String getUserSalt(String query, String email) {
+	public static String getUserSalt(String email) {
+		PreparedStatement pstmt = null;
+		String userSalt = null;
+
 		con = getConnection();
 
-		PreparedStatement pstmt = null;
 		if (con != null) {
+			String getUserSalt = "SELECT salt FROM users WHERE binary email=?;";
+
 			try {
-				pstmt = con.prepareStatement(query);
+				pstmt = con.prepareStatement(getUserSalt);
 				pstmt.setString(1, email);
 
 				ResultSet rs = pstmt.executeQuery();
 
 				if (rs.next()) { // returns only one row
-					return rs.getString("salt");
+					userSalt = rs.getString("salt");
 				}
 
 				if (rs != null)
@@ -135,7 +177,7 @@ public abstract class User {
 			}
 		}
 
-		return null;
+		return userSalt;
 	}
 
 	public static boolean queryEmailExistance(String email, String query) {
@@ -170,15 +212,34 @@ public abstract class User {
 	}
 
 	public static boolean emailAlreadyExists(String email) {
-		String queryCustomersTable = "SELECT email FROM customers WHERE email=?;";
-		String queryAdminTable = "SELECT email FROM administrators WHERE email=?;";
+		PreparedStatement pstmt = null;
+		boolean result = false;
 
-		if ((queryEmailExistance(email, queryCustomersTable))
-				|| (queryEmailExistance(email, queryAdminTable))) {
-			return true;
-		} else {
-			return false; // email does not exist in the database
+		con = getConnection();
+
+		if (con != null) {
+			String query = "SELECT email FROM users WHERE binary email=?;";
+			try {
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, email);
+
+				ResultSet rs = pstmt.executeQuery();
+
+				if (rs.next()) { // email already exist in the database
+					result = true;
+				}
+
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return false;
+			}
 		}
+
+		return result;
 	}
 
 	public static byte[] getSalt() throws NoSuchAlgorithmException {
@@ -307,6 +368,39 @@ public abstract class User {
 		return true;
 	}
 
-	// public static void main(String args[]) throws NoSuchAlgorithmException {
-	// }
+	public static boolean addNewUser(User newUser) {
+		// Get hashed password and salt as a string 2-tuple
+		String[] hashedPasswordAndSalt = getSecurePasswordAndSalt(newUser.getPassword());
+
+		if (hashedPasswordAndSalt[0].equals("Error")) {
+			return false;
+		}
+
+		con = getConnection();
+
+		PreparedStatement pstmt = null;
+		if (con != null) {
+			String insertNewCustomer = "INSERT INTO users (first_name, last_name, email, hashed_password, salt, user_role) VALUES (?, ?, ?, ?, ?, ?);";
+			try {
+				pstmt = con.prepareStatement(insertNewCustomer);
+				pstmt.setString(1, newUser.getFirstName());
+				pstmt.setString(2, newUser.getLastName());
+				pstmt.setString(3, newUser.getEmail());
+				pstmt.setString(4, hashedPasswordAndSalt[0]); // hashed password
+				pstmt.setString(5, hashedPasswordAndSalt[1]); // salt
+				pstmt.setString(6, newUser.getUserRole());
+				pstmt.executeUpdate();
+
+				if (pstmt != null)
+					pstmt.close();
+
+				return true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return false;
+			}
+		}
+
+		return false;
+	}
 }

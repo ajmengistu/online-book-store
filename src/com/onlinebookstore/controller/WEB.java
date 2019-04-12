@@ -7,4 +7,6 @@ public interface WEB {
 	public String ADMIN_REGISTER = "admin_register";
 	public String REGISTRATION_SUCCESSFUL = "registration_successful"; // registration_successful.jsp
 	public String LOGIN_SUCCESSFUL = "login_successful"; // login_successful.jsp
+	public String CUSTOMER = "CUSTOMER";
+	public String ADMINISTRATOR = "ADMINISTRATOR";
 }

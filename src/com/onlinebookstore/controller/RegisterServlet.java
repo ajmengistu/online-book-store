@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.onlinebookstore.model.Administrator;
 import com.onlinebookstore.model.User;
 
 /**
@@ -62,41 +61,53 @@ public class RegisterServlet extends HttpServlet {
 			sendErrorMessage(employee_id, "password does not match", request,
 					response);
 		} else {
-			// Verify that the email does not already exist in the customers
-			// and administrators table. Note: one unique email per User.
+			// Verify that the email does not already exist in the users table.
+			// Note: one unique email per User.
 			boolean emailAlreadyExists = User.emailAlreadyExists(email);
 
 			if (emailAlreadyExists) {
 				sendErrorMessage(employee_id, "email already exists", request,
 						response);
-			} else { // Otherwise, add the new Customer or Administrator into
-						// the database.
+			} else { // Otherwise, add the new Customer or Administrator
 				boolean newUserAdded = false;
 
 				if ((employee_id != null)
-						&& (!Administrator.verifyEmployeeID(employee_id,
-								first_name, last_name))) {
+						&& (!User.verifyEmployeeID(employee_id, first_name,
+								last_name))) {
 					sendErrorMessage(employee_id, "employee ID is invalid",
 							request, response);
 
 				} else if (employee_id == null) {
-//					newUserAdded = Customer.addNewCustomer(first_name,
-//							last_name, email, password);
-//					verifyNewUserIsAdded(request, response, newUserAdded, null);
+					// Add a new Customer
+					User newUser = new User(first_name, last_name, email,
+							WEB.CUSTOMER, password);
+					// newUserAdded = User.addNewUser(first_name, last_name,
+					// email, password, WEB.CUSTOMER);
+					newUserAdded = User.addNewUser(newUser);
 
-				} else {
-					newUserAdded = Administrator
-							.addNewAdministrator(employee_id, first_name,
-									last_name, email, password);
-					System.out.println("registering....admin");
 					verifyNewUserIsAdded(request, response, newUserAdded, null);
+
+					System.out.println("Registering Customer: " + first_name);
+				} else {
+					// Add an Administrator
+					User newUser = new User(first_name, last_name, email,
+							WEB.ADMINISTRATOR, password);
+					newUserAdded = User.addNewUser(newUser);
+					// newUserAdded = User.addNewUser(first_name, last_name,
+					// email, password, WEB.ADMINISTRATOR);
+
+					verifyNewUserIsAdded(request, response, newUserAdded,
+							employee_id);
+
+					System.out.println("Registering Admin: " + first_name);
 				}
 			}
 		}
 	}
 
 	/**
-	 * Verify if a new User was added to the database successfully.
+	 * Verify if a new User (Customer or Administrator) was added to the
+	 * database successfully.
 	 */
 	private void verifyNewUserIsAdded(HttpServletRequest request,
 			HttpServletResponse response, boolean newUserAdded,
@@ -109,8 +120,8 @@ public class RegisterServlet extends HttpServlet {
 			// fresh on their mind.
 			HttpSession session = request.getSession();
 			session.setAttribute("registration_status", "success");
-			response.sendRedirect(WEB.REGISTRATION_SUCCESSFUL);			
-			
+			response.sendRedirect(WEB.REGISTRATION_SUCCESSFUL);
+
 		} else { // New User was not successfully added
 			sendErrorMessage(employee_id, "please try again", request, response);
 		}

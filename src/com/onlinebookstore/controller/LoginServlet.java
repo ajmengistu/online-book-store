@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.onlinebookstore.model.User;
 
@@ -36,49 +37,38 @@ public class LoginServlet extends HttpServlet {
 		String loginEmail = request.getParameter("email");
 		String loginPassword = request.getParameter("password");
 
-		// Verify if login email already exists. If so, get the salt
-		// of the corresponding user. Note: each User account is associated with
-		// a unique email.
-		String[] user = User.verifyUserLoginCredentials(loginEmail, loginPassword);
-//		if(user == null)
-		
-//		// Get an Array first, last names, email of an Admin or Customer.
-//			if (Customer.verifyPassword(hashedLoginPassword, loginEmail)) {
-//				// Get Customer object with their information.
-//
-//				// Bind valid user information: email & password to a session.
-//				HttpSession session = request.getSession();
-//				session.setAttribute("email", loginEmail);
-//				session.setAttribute("firstName", loginEmail);
-//				session.setAttribute("login_status", "success");
-//
-//				// Direct user to welcome page
-//				System.out.println("Login successful");
-//				// sendLoginSuccessfulMessage(response.getWriter());
-//				response.sendRedirect(WEB.LOGIN_SUCCESSFUL);
-//			} else {
-//				// email exists, but password is incorrect.
-//				// However, send a generic message to person attempting to
-//				// login
-//				System.out.println("invalid password");
-//				sendErrorMessage(
-//						"You have entered an invalid email or password",
-//						request, response);
-//			}
-//		} else {
-//			// loginEmail does not exist in the database. Send a
-//			// generic message.
-//			System.out.println("invalid email");
-//			sendErrorMessage("You have entered an invalid email or password",
-//					request, response);
-//
-//		}
+		// Verify if login email already exists. Note: each User account is
+		// associated with a unique email.
+		User user = User.verifyUserLoginCredentials(loginEmail, loginPassword);
+
+		if (user != null) {
+			// Bind valid user information to a session.
+			HttpSession session = request.getSession();
+			session.setAttribute("email", user.getEmail());
+			session.setAttribute("firstName", user.getFirstName());
+			session.setAttribute("lastName", user.getLastName());
+			session.setAttribute("userRole", user.getUserRole());
+			session.setAttribute("login_status", "success");
+
+			System.out.println("Login successful");
+
+			// Direct User to the Customers welcome page or Admin welcome page
+			if (user.getUserRole().equals(WEB.CUSTOMER)) {
+				response.sendRedirect(WEB.LOGIN_SUCCESSFUL);
+			} else {// "admin"
+			// response.sendRedirect(WEB.LOGIN_SUCCESSFUL); //SEND TO admin
+			// welcmoepage
+			}
+		} else {
+			// loginEmail or password is invalid. Send a generic message.
+			sendErrorMessage("invalid email or password", request, response);
+		}
 
 	}
 
 	/**
-	 * Provide a generic message for security; to not give potential hackers
-	 * extra information. Send message:
+	 * Provide a generic message for security i.e., to not give potential
+	 * hackers extra information. Send message:
 	 * "You have entered an invalid email or password"
 	 */
 	private void sendErrorMessage(String message, HttpServletRequest request,
