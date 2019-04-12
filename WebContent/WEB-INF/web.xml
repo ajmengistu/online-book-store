@@ -25,6 +25,14 @@
 		<url-pattern>/admin_register</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>AdminWelcomePage</servlet-name>
+		<jsp-file>/admin_welcome.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AdminWelcomePage</servlet-name>
+		<url-pattern>/admin_welcome</url-pattern>
+	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>RegisterServlet</servlet-name>

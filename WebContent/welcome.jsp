@@ -26,16 +26,22 @@
 			String firstName = (String) session.getAttribute("firstName");
 			String lastName = (String) session.getAttribute("lastName");
 			String email = (String) session.getAttribute("email");
+			String userRole = (String) session.getAttribute("userRole");
 
-			if (firstName == null || lastName == null || email == null)
+			if (firstName == null || lastName == null || email == null
+					|| userRole == null) {
 				response.sendRedirect(WEB.LOGIN);
+			} else if (userRole.equals(WEB.ADMINISTRATOR)) {
+				response.sendRedirect(WEB.ADMIN_WELCOME);
+			}
 		%>
-		<p align="center" style="color: black;"><%="Hello, " + firstName + " " + lastName + ".\n" + "Email: " + email%></p>
+		<p align="center" style="color: black; font-weight: bold;"><%="Hello, " + firstName + " " + lastName + ".\n"
+					+ "Email: " + email%></p>
 	</div>
 
 	<tagfiles:customer_navbar />
 
 	<p align=center
-		style="color: black; font-size: 32px; font-weight: bold; margin-top: 200px;"><%="Welcome back, " + firstName + " " + lastName + "!"%></p>
+		style="color: black; font-size: 32px; font-weight: bold; margin-top: 200px;"><%="Welcome back " + firstName + " " + lastName + "!"%></p>
 </body>
 </html>

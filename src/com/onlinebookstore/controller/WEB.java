@@ -2,6 +2,7 @@ package com.onlinebookstore.controller;
 
 public interface WEB {
 	public String WELCOME = "welcome"; // welcome.jsp
+	public String ADMIN_WELCOME = "admin_welcome"; // admin_welcome.jsp
 	public String LOGIN = "login"; // login.jsp
 	public String REGISTER = "register";// register.jsp
 	public String ADMIN_REGISTER = "admin_register";

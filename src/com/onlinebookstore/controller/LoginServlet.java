@@ -48,17 +48,13 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("firstName", user.getFirstName());
 			session.setAttribute("lastName", user.getLastName());
 			session.setAttribute("userRole", user.getUserRole());
-			session.setAttribute("login_status", "success");
+			session.setAttribute("login_status", "SUCCESSFUL");
 
 			System.out.println("Login successful");
 
-			// Direct User to the Customers welcome page or Admin welcome page
-			if (user.getUserRole().equals(WEB.CUSTOMER)) {
-				response.sendRedirect(WEB.LOGIN_SUCCESSFUL);
-			} else {// "admin"
-			// response.sendRedirect(WEB.LOGIN_SUCCESSFUL); //SEND TO admin
-			// welcmoepage
-			}
+			// Direct User to their Admin or Customer welcome page
+			response.sendRedirect(WEB.LOGIN_SUCCESSFUL);
+
 		} else {
 			// loginEmail or password is invalid. Send a generic message.
 			sendErrorMessage("invalid email or password", request, response);

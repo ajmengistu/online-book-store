@@ -14,12 +14,20 @@
 		response.setDateHeader("Expire", 0); //Causes the proxy cache to see the page as "stale"
 		response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
 
+		String url = null;
+
 		if ((String) session.getAttribute("login_status") == null) {
 			response.sendRedirect(WEB.LOGIN);
 		} else {
+			if (session.getAttribute("userRole") == WEB.ADMINISTRATOR) {
+				url = "/online-book-store/admin_welcome";
+			} else {
+				url = "/online-book-store/welcome";
+			}
 			session.setAttribute("login_status", null);
 		}
 	%>
+
 	<script
 		src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js'></script>
 	<script
@@ -30,7 +38,7 @@
 			text : 'Login Successful!',
 			type : 'success'
 		}).then(function() {
-			window.location = '/online-book-store/welcome';
+			window.location = '<%=url%>';
 		});
 	</script>
 </body>

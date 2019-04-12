@@ -31,8 +31,12 @@
 			String email = (String) session.getAttribute("email");
 			String userRole = (String) session.getAttribute("userRole");
 
-			if (firstName == null || lastName == null || email == null || userRole == WEB.CUSTOMER)
+			if (firstName == null || lastName == null || email == null
+					|| userRole == null) {
 				response.sendRedirect(WEB.LOGIN);
+			} else if (userRole.equals(WEB.CUSTOMER)) {
+				response.sendRedirect(WEB.WELCOME);
+			}
 		%>
 		<p align="center" style="color: black; font-weight: bold;"><%="Hello, " + firstName + " " + lastName + ".\n"
 					+ "Email: " + email%></p>
