@@ -93,4 +93,13 @@
 		<servlet-name>LogoutServlet</servlet-name>
 		<url-pattern>/logout.do</url-pattern>
 	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>AddBooksPage</servlet-name>
+		<jsp-file>/add_books.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddBooksPage</servlet-name>
+		<url-pattern>/add_books</url-pattern>
+	</servlet-mapping>
 </web-app>

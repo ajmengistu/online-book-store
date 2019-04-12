@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 public class User {
 	private String firstName, lastName, email, userRole, userID, password;
-	public static Connection con = null;
+	private static Connection con = null;
 
 	public User() {
 	}

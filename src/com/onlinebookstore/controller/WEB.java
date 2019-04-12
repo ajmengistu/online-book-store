@@ -10,4 +10,5 @@ public interface WEB {
 	public String LOGIN_SUCCESSFUL = "login_successful"; // login_successful.jsp
 	public String CUSTOMER = "CUSTOMER";
 	public String ADMINISTRATOR = "ADMINISTRATOR";
+	public String ADD_BOOKS = "add_books"; // add_books.jsp
 }
