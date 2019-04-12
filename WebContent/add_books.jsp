@@ -38,12 +38,13 @@
 			String email = (String) session.getAttribute("email");
 			String userRole = (String) session.getAttribute("userRole");
 
-			/* if (firstName == null || lastName == null || email == null
+			if (firstName == null || lastName == null || email == null
 					|| userRole == null) {
 				response.sendRedirect(WEB.LOGIN);
 			} else if (userRole.equals(WEB.CUSTOMER)) {
+				/* If a Customer attempts to access this Administrator webpage, send them to their welcome page. */
 				response.sendRedirect(WEB.WELCOME);
-			} */
+			}
 		%>
 		<p align="center" style="color: black; font-weight: bold;"><%="Hello, " + firstName + " " + lastName + ".\n"
 					+ "Email: " + email%></p>
@@ -86,23 +87,23 @@
 						</div>
 						<div class="form-group input-group">
 							<input required placeholder="Price" class="form-control"
-								type="number" name="price" />
+								type="decimal" name="price" />
 						</div>
 						<div class="form-group input-group">
 							<input required placeholder="Quantity" class="form-control"
 								type="number" name="quantity" />
 						</div>
 						<div class="form-group">
-							Type: <select>
-								<option name="fiction" required>Fiction</option>
-								<option name="nonfiction" required>Non-fiction</option>
+							Type: <select name="type">
+								<option value="fiction" required>Fiction</option>
+								<option value="nonfiction" required>Non-fiction</option>
 							</select>
 						</div>
 						<div class="form-group">
 							<label for="file-upload">Select Image: </label> <input
-								type="file" id="file-upload">
+								type="file" name="image">
 						</div>
-						
+
 						<div class="form-group">
 							<button class="btn btn-primary">Submit</button>
 						</div>
