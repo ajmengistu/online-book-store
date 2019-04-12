@@ -20,7 +20,7 @@ body {
 		<div class="row">
 			<div class="col-mid-10 offset=mid-1">
 				<div class="row">
-					<div class="col-mid-5 register-left" style="color: black;">
+					<div class="col-mid-5 register-left" style="color: black; font-weight: bold;">
 						<img src="images/black_arrow.png">
 						<h3>Join Us</h3>
 						<h6>Create an account &amp; browse unlimited number of books!</h6>
