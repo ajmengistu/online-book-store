@@ -8,6 +8,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class User {
 	private String firstName, lastName, email, userRole, userID, password;
@@ -22,7 +23,6 @@ public class User {
 		this.lastName = lastName;
 		this.email = email;
 		this.userRole = userRole;
-		// this.userID = userID;
 	}
 
 	// Constructor to create a new person.
@@ -34,7 +34,8 @@ public class User {
 		this.userRole = userRole;
 		this.password = password;
 	}
-	public String getPassword(){
+
+	public String getPassword() {
 		return password;
 	}
 
@@ -56,6 +57,11 @@ public class User {
 
 	public String getUserID() {
 		return userID;
+	}
+
+	public String toString() {
+		return getFirstName() + " " + getLastName() + " " + getEmail() + " "
+				+ userRole;
 	}
 
 	public static boolean verifyEmployeeID(String employeeID, String firstName,
@@ -370,7 +376,8 @@ public class User {
 
 	public static boolean addNewUser(User newUser) {
 		// Get hashed password and salt as a string 2-tuple
-		String[] hashedPasswordAndSalt = getSecurePasswordAndSalt(newUser.getPassword());
+		String[] hashedPasswordAndSalt = getSecurePasswordAndSalt(newUser
+				.getPassword());
 
 		if (hashedPasswordAndSalt[0].equals("Error")) {
 			return false;
@@ -402,5 +409,79 @@ public class User {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Return users in the users table that have an attribute that have a
+	 * substring match with the query.
+	 */
+	public static ArrayList<User> getUserSearch(String query) {
+		ArrayList<User> allUsers = new ArrayList<User>();
+
+		con = getConnection();
+
+		PreparedStatement pstmt = null;
+		if (con != null) {
+			try {
+				String getAllUsers = "SELECT first_name, last_name, email, user_role FROM users WHERE (first_name like ?) or (last_name like ?) or (user_role like ?);";
+				pstmt = con.prepareStatement(getAllUsers);
+				pstmt.setString(1, "%" + query + "%");
+				pstmt.setString(2, "%" + query + "%");
+				pstmt.setString(3, "%" + query + "%");
+
+				ResultSet rs = pstmt.executeQuery();
+
+				while (rs.next()) {
+					String firstName = rs.getString("first_name");
+					String lastName = rs.getString("last_name");
+					String email = rs.getString("email");
+					String userRole = rs.getString("user_role");
+
+					allUsers.add(new User(firstName, lastName, email, userRole));
+				}
+
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return new ArrayList<User>();
+			}
+		}
+		return allUsers;
+	}
+
+	public static ArrayList<User> getUsers() {
+		ArrayList<User> allUsers = new ArrayList<User>();
+
+		con = getConnection();
+
+		PreparedStatement pstmt = null;
+		if (con != null) {
+			try {
+				String getAllUsers = "SELECT first_name, last_name, email, user_role FROM users;";
+				pstmt = con.prepareStatement(getAllUsers);
+
+				ResultSet rs = pstmt.executeQuery();
+				while (rs.next()) {
+					String firstName = rs.getString("first_name");
+					String lastName = rs.getString("last_name");
+					String email = rs.getString("email");
+					String userRole = rs.getString("user_role");
+
+					allUsers.add(new User(firstName, lastName, email, userRole));
+				}
+
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return new ArrayList<User>();
+			}
+		}
+		return allUsers;
 	}
 }
