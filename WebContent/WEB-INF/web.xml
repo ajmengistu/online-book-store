@@ -92,7 +92,6 @@
     <servlet-name>AddBooksPage</servlet-name>
     <url-pattern>/add_books</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>AddBookServlet</servlet-name>
     <servlet-class>com.onlinebookstore.controller.AddBookServlet</servlet-class>
@@ -101,8 +100,7 @@
     <servlet-name>AddBookServlet</servlet-name>
     <url-pattern>/add_books.do</url-pattern>
   </servlet-mapping>
-  
-   <servlet>
+  <servlet>
     <servlet-name>AddBookErrorPage</servlet-name>
     <jsp-file>/add_books_error.jsp</jsp-file>
   </servlet>
@@ -110,13 +108,29 @@
     <servlet-name>AddBookErrorPage</servlet-name>
     <url-pattern>/add_books_error</url-pattern>
   </servlet-mapping>
-  
-   <servlet>
+  <servlet>
     <servlet-name>AddBookSuccessPage</servlet-name>
     <jsp-file>/add_books_success.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>AddBookSuccessPage</servlet-name>
     <url-pattern>/add_books_success</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>SearchUsers</servlet-name>
+    <servlet-class>com.onlinebookstore.controller.SearchUsers</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchUsers</servlet-name>
+    <url-pattern>/search</url-pattern>
+  </servlet-mapping>
+  
+    <servlet>
+    <servlet-name>ViewUsers</servlet-name>
+    <jsp-file>/view_users.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ViewUsers</servlet-name>
+    <url-pattern>/view_users</url-pattern>
   </servlet-mapping>
 </web-app>

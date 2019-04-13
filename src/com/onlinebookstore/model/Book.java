@@ -96,7 +96,7 @@ public class Book {
 			} catch (SQLException e) {
 				e.printStackTrace();
 				System.out.println("ERROR: book was not added!");
-				return false;	
+				return false;
 			}
 		}
 		System.out.println("ERROR: book was not added!");
