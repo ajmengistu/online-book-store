@@ -133,4 +133,13 @@
     <servlet-name>ViewUsers</servlet-name>
     <url-pattern>/view_users</url-pattern>
   </servlet-mapping>
+  
+    <servlet>
+    <servlet-name>BrowseBooks</servlet-name>
+    <jsp-file>/browse.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BrowseBooks</servlet-name>
+    <url-pattern>/browse</url-pattern>
+  </servlet-mapping>
 </web-app>
