@@ -8,14 +8,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Welcome</title>
 <link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+<link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <tagfiles:navbar_style />
 </head>
 <body>
+	<br>
+	
 	<tagfiles:title_header />
+	<tagfiles:searchbar />
 
-	<!-- Greet User Account Holder -->
+	<br>
+
 	<div>
 		<%
 			response.setHeader("Cache-Control", "no-cache"); //Forces caches to obtain a new copy of the page from the origin server
@@ -35,12 +42,18 @@
 				response.sendRedirect(WEB.ADMIN_WELCOME);
 			}
 		%>
-		<p align="center" style="color: black; font-weight: bold;"><%="Hello, " + firstName + " " + lastName + ".\n"
-					+ "Email: " + email%></p>
 	</div>
 
+	<!-- Greet User & Show Email -->
+	<div style="text-align: center;">
+		<span style="color: blue; font-weight: bold;"><%="Hello, " + firstName + " " + lastName%></span>
+		<span><b>|</b></span> <span style="color: green; font-weight: bold;"><%=email%></span>
+	</div>
+
+	<!-- Customer Navigation Bar -->
 	<tagfiles:customer_navbar />
 
+	<!-- Welcome Banner -->
 	<p align=center
 		style="color: black; font-size: 32px; font-weight: bold; margin-top: 200px;"><%="Welcome back " + firstName + " " + lastName + "!"%></p>
 </body>
