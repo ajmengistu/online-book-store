@@ -17,5 +17,21 @@
       <rtexprvalue>true</rtexprvalue>
     </attribute>
   </tag>
+  
+  <tag>
+    <description>Generate a list of top rated books</description>
+    <name>ListTopRatedBooks</name>
+    <tag-class>com.onlinebookstore.controller.ListTopRatedBooks</tag-class>
+    <body-content>scriptless</body-content>
+    <description>This tag is for displaying list of top rated books</description>
+  </tag>  
+
+  <tag>
+    <description>Generate a list of popular books</description>
+    <name>ListPopularBooks</name>
+    <tag-class>com.onlinebookstore.controller.ListPopularBooks</tag-class>
+    <body-content>scriptless</body-content>
+    <description>This tag is for displaying list of popular books</description>
+  </tag>  
  
 </taglib>

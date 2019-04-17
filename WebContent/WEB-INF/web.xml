@@ -122,10 +122,9 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>SearchUsers</servlet-name>
-    <url-pattern>/search</url-pattern>
+    <url-pattern>/search_users</url-pattern>
   </servlet-mapping>
-  
-    <servlet>
+  <servlet>
     <servlet-name>ViewUsers</servlet-name>
     <jsp-file>/view_users.jsp</jsp-file>
   </servlet>
@@ -133,13 +132,12 @@
     <servlet-name>ViewUsers</servlet-name>
     <url-pattern>/view_users</url-pattern>
   </servlet-mapping>
-  
-    <servlet>
+  <servlet>
     <servlet-name>BrowseBooks</servlet-name>
-    <jsp-file>/browse.jsp</jsp-file>
+    <jsp-file>/browse_books.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>BrowseBooks</servlet-name>
-    <url-pattern>/browse</url-pattern>
+    <url-pattern>/browse_books</url-pattern>
   </servlet-mapping>
 </web-app>
