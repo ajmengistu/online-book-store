@@ -14,4 +14,8 @@ Apache Tomcat 7.0 or higher.
 Download repository locally.
 Using Eclipse Java EE import repository.
 ```
-## 
+## Book Database Used
+### Kaggle Dataset
+* https://www.kaggle.com/zygmunt/goodbooks-10k
+* Data Source Used: `books.csv`
+* The dataset `books.csv` contains a list of 10,000 books with various attributes including number of ratings, average ratings, publication year, and image urls. 
