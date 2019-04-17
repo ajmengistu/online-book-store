@@ -57,6 +57,9 @@ body {
 						<p>
 							<a href="/online-book-store/register">New User</a>
 						</p>
+						<p>
+							<a href="/online-book-store/home">Maybe Later</a>
+						</p>
 					</form>
 
 				</div>
