@@ -8,11 +8,11 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import com.onlinebookstore.model.Book;
 
-public class ListPopularBooks extends SimpleTagSupport{
+public class ListAncientLiteratureBooks extends SimpleTagSupport{
 
 	public void doTag() throws JspException, IOException {
-		// Get the top 15 rated books
-		ArrayList<Book> topRatedBooks = Book.getPopularBooks();
+		// Get the top 25 rated books
+		ArrayList<Book> topRatedBooks = Book.getAncientLiteratureBooks();
 
 		for (Book book : topRatedBooks) {
 			getJspContext().setAttribute("title", book.getTitle());

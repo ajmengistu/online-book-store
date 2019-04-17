@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Book {
 	private String genre, title, ISBN, publisher, image;
-	private int yearPublished, stock, ratings;
+	private int yearPublished, stock, numberOfRatings;
 	private double price, averageRatings;
 	private Author author;
 
@@ -27,14 +27,16 @@ public class Book {
 	}
 
 	public Book(String title, Author name, Double averageRatings,
-			Integer ratings, String imageUrl, Double price, Integer stock) {
+			Integer numOfRatings, String imageUrl, Double price, Integer stock,
+			Integer yearPublished) {
 		this.title = title;
 		this.author = name;
 		this.averageRatings = averageRatings;
-		this.ratings = ratings;
+		this.numberOfRatings = numOfRatings;
 		this.image = imageUrl;
 		this.price = price;
 		this.stock = stock;
+		this.yearPublished = yearPublished;
 	}
 
 	public Author getAuthor() {
@@ -45,9 +47,10 @@ public class Book {
 		return averageRatings;
 	}
 
-	public int getRatings(){
-		return ratings;
+	public int getNumberOfRatings() {
+		return numberOfRatings;
 	}
+
 	public String getGenre() {
 		return genre;
 	}
@@ -143,9 +146,12 @@ public class Book {
 					String imageUrl = rs.getString("image");
 					Double price = rs.getDouble("price");
 					Integer stock = rs.getInt("stock");
+					Integer yearPublished = rs
+							.getInt("original_publication_year");
 
 					topRatedBooks.add(new Book(title, new Author(authors),
-							averageRatings, ratings, imageUrl, price, stock));
+							averageRatings, ratings, imageUrl, price, stock,
+							yearPublished));
 				}
 
 				if (rs != null)
@@ -165,21 +171,32 @@ public class Book {
 	}
 
 	public static ArrayList<Book> getTopRatedBooks() {
-		String getBooks = "SELECT title, authors, average_ratings, ratings, image, price, stock "
-				+ "FROM books ORDER BY average_ratings DESC LIMIT 15;";
-
+		String getBooks = "SELECT * FROM books "
+				+ "ORDER BY average_ratings DESC LIMIT 25;";
 		return getBooksToDisplay(getBooks);
 	}
 
 	public static ArrayList<Book> getPopularBooks() {
-		String getPopularBooks = "SELECT title, authors, average_ratings, ratings, image, price, stock "
-				+ "FROM books ORDER BY ratings DESC LIMIT 15;";
+		String getPopularBooks = "SELECT * FROM books ORDER BY ratings DESC LIMIT 25;";
 		return getBooksToDisplay(getPopularBooks);
 	}
 
+	public static ArrayList<Book> getTopRatedBooksByYear() {
+		String getTopRatedBooksByYear = "SELECT * FROM books "
+				+ "GROUP BY original_publication_year "
+				+ "HAVING MAX(average_ratings) "
+				+ "ORDER BY original_publication_year DESC LIMIT 25;";
+		return getBooksToDisplay(getTopRatedBooksByYear);
+	}
+
+	public static ArrayList<Book> getAncientLiteratureBooks() {
+		String getAncientBooks = "SELECT * FROM books ORDER BY original_publication_year LIMIT 25;";
+		return getBooksToDisplay(getAncientBooks);
+	}
+
 	public static void main(String args[]) {
-		for (Book b : getPopularBooks())
-			System.out.println(b.getTitle());
+		for (Book b : getAncientLiteratureBooks())
+			System.out.println(b.getTitle() + " " + b.getYearPublished());
 
 	}
 

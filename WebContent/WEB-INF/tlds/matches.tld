@@ -1,37 +1,89 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
-<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd" version="2.0">
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+	version="2.0">
 
-   <tlib-version>1.2</tlib-version>
-    <uri>match-functions</uri>
+	<tlib-version>1.2</tlib-version>
+	<uri>match-functions</uri>
 
-  <tag>
-    <description>Generate a list of Users</description>
-    <name>listusers</name>
-    <tag-class>com.onlinebookstore.controller.ListUsers</tag-class>
-    <body-content>scriptless</body-content>
-    <description>This tag is for displaying list of users</description>
-    
-    <attribute>
-      <name>query</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-    </attribute>
-  </tag>
-  
-  <tag>
-    <description>Generate a list of top rated books</description>
-    <name>ListTopRatedBooks</name>
-    <tag-class>com.onlinebookstore.controller.ListTopRatedBooks</tag-class>
-    <body-content>scriptless</body-content>
-    <description>This tag is for displaying list of top rated books</description>
-  </tag>  
+	<tag>
+		<description>Generate a list of Users</description>
+		<name>listusers</name>
+		<tag-class>com.onlinebookstore.controller.ListUsers</tag-class>
+		<body-content>scriptless</body-content>
+		<description>This tag is for displaying list of users</description>
 
-  <tag>
-    <description>Generate a list of popular books</description>
-    <name>ListPopularBooks</name>
-    <tag-class>com.onlinebookstore.controller.ListPopularBooks</tag-class>
-    <body-content>scriptless</body-content>
-    <description>This tag is for displaying list of popular books</description>
-  </tag>  
- 
+		<attribute>
+			<name>query</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<description>Generate a list of top rated books</description>
+		<name>ListTopRatedBooks</name>
+		<tag-class>com.onlinebookstore.controller.ListTopRatedBooks
+		</tag-class>
+		<body-content>scriptless</body-content>
+		<description>This tag is for displaying list of top rated books
+		</description>
+	</tag>
+
+	<tag>
+		<description>Generate a list of popular books</description>
+		<name>ListPopularBooks</name>
+		<tag-class>com.onlinebookstore.controller.ListPopularBooks</tag-class>
+		<body-content>scriptless</body-content>
+		<description>This tag is for displaying list of popular books
+		</description>
+	</tag>
+
+
+	<tag>
+		<description>Generate a star ratings</description>
+		<name>ListStarRatings</name>
+		<tag-class>com.onlinebookstore.controller.ListStarRatings</tag-class>
+		<body-content>scriptless</body-content>
+		<description>This tag is for displaying star ratings for a book
+		</description>
+
+		<attribute>
+			<name>rating</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<description>Generate a list of top rated books by year</description>
+		<name>ListTopRatedBooksByYear</name>
+		<tag-class>com.onlinebookstore.controller.ListTopRatedBooksByYear
+		</tag-class>
+		<body-content>scriptless</body-content>
+		<description>This tag is for displaying top rated books by year
+		</description>
+
+		<attribute>
+			<name>rating</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<description>Generate a list of ancient literature books</description>
+		<name>ListAncientLiteratureBooks</name>
+		<tag-class>com.onlinebookstore.controller.ListAncientLiteratureBooks
+		</tag-class>
+		<body-content>scriptless</body-content>
+		<description>This tag is for displaying ancient literature books
+		</description>
+
+		<attribute>
+			<name>rating</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
 </taglib>
