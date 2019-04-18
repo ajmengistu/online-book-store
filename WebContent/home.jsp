@@ -13,12 +13,6 @@
 <tagfiles:carouselCSS />
 <tagfiles:navbar_style />
 
-<style>
-.checked {
-	color: orange;
-}
-</style>
-
 </head>
 <body>
 	<br>
@@ -51,7 +45,9 @@
 								<!-- Title -->
 								<h6 class="card-text"
 									style="overflow: hidden; border: none; text-overflow: ellipsis; display: -webkit-box; line-height: 30px; /* fallback */ max-height: 65px; /* fallback */ -webkit-line-clamp: 2; /* number of lines to
-                                    show */ -webkit-box-orient: vertical;">${title}</h6>
+                                    show */ -webkit-box-orient: vertical;">
+									<a href="book?id=${bookId}">${title}</a>
+								</h6>
 
 								<!-- Author -->
 								<p

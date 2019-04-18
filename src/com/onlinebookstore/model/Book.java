@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Book {
 	private String genre, title, ISBN, publisher, image;
-	private int yearPublished, stock, numberOfRatings;
+	private int yearPublished, stock, numberOfRatings, bookId;
 	private double price, averageRatings;
 	private Author author;
 
@@ -26,9 +26,9 @@ public class Book {
 		this.image = image;
 	}
 
-	public Book(String title, Author name, Double averageRatings,
-			Integer numOfRatings, String imageUrl, Double price, Integer stock,
-			Integer yearPublished) {
+	public Book(Integer bookId, String title, Author name,
+			Double averageRatings, Integer numOfRatings, String imageUrl,
+			Double price, Integer stock, Integer yearPublished) {
 		this.title = title;
 		this.author = name;
 		this.averageRatings = averageRatings;
@@ -37,6 +37,11 @@ public class Book {
 		this.price = price;
 		this.stock = stock;
 		this.yearPublished = yearPublished;
+		this.bookId = bookId;
+	}
+
+	public int getBookId() {
+		return bookId;
 	}
 
 	public Author getAuthor() {
@@ -139,6 +144,7 @@ public class Book {
 				ResultSet rs = pstmt.executeQuery();
 
 				while (rs.next()) {
+					Integer bookId = rs.getInt("book_id");
 					String title = rs.getString("title");
 					String authors = rs.getString("authors");
 					Double averageRatings = rs.getDouble("average_ratings");
@@ -149,9 +155,9 @@ public class Book {
 					Integer yearPublished = rs
 							.getInt("original_publication_year");
 
-					topRatedBooks.add(new Book(title, new Author(authors),
-							averageRatings, ratings, imageUrl, price, stock,
-							yearPublished));
+					topRatedBooks.add(new Book(bookId, title, new Author(
+							authors), averageRatings, ratings, imageUrl, price,
+							stock, yearPublished));
 				}
 
 				if (rs != null)
@@ -162,7 +168,7 @@ public class Book {
 			} catch (SQLException e) {
 				e.printStackTrace();
 				System.out.println("ERROR: Cannot Retrieve Books");
-				new ArrayList<Book>();
+				return new ArrayList<Book>();
 			}
 		}
 		System.out.println("No Connection...");
@@ -194,10 +200,52 @@ public class Book {
 		return getBooksToDisplay(getAncientBooks);
 	}
 
-	public static void main(String args[]) {
-		for (Book b : getAncientLiteratureBooks())
-			System.out.println(b.getTitle() + " " + b.getYearPublished());
+	public static Book getBookById(int bookID) {
+		Connection con = User.getConnection();
 
+		Book book = null;
+		PreparedStatement pstmt = null;
+		if (con != null) {
+			try {
+				String getBook = "SELECT * FROM books WHERE book_id=?";
+				pstmt = con.prepareStatement(getBook);
+				pstmt.setInt(1, bookID);
+				ResultSet rs = pstmt.executeQuery();
+
+				while (rs.next()) {
+					Integer bookId = rs.getInt("book_id");
+					String title = rs.getString("title");
+					String authors = rs.getString("authors");
+					Double averageRatings = rs.getDouble("average_ratings");
+					Integer ratings = rs.getInt("ratings");
+					String imageUrl = rs.getString("image");
+					Double price = rs.getDouble("price");
+					Integer stock = rs.getInt("stock");
+					Integer yearPublished = rs
+							.getInt("original_publication_year");
+
+					book = new Book(bookId, title, new Author(authors),
+							averageRatings, ratings, imageUrl, price, stock,
+							yearPublished);
+				}
+
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+				System.out.println("ERROR: Cannot Retrieve Book");
+				return null;
+			}
+		}
+		System.out.println("No Connection...");
+		return book;
 	}
 
+//	public static void main(String args[]) {
+//		Book b = getBookById(2);
+//		System.out.println(b.getTitle() + " " + b.getBookId());
+//	}
 }

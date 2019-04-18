@@ -15,12 +15,13 @@ public class ListPopularBooks extends SimpleTagSupport{
 		ArrayList<Book> topRatedBooks = Book.getPopularBooks();
 
 		for (Book book : topRatedBooks) {
+			getJspContext().setAttribute("bookId", book.getBookId());
 			getJspContext().setAttribute("title", book.getTitle());
 			getJspContext().setAttribute("author", book.getAuthor().getName());
 			getJspContext().setAttribute("numOfRatings", String.format("%,d",book.getNumberOfRatings()));
 			getJspContext().setAttribute("averageRating", book.getAverageRatings());
 			getJspContext().setAttribute("image", book.getImage());
-			getJspContext().setAttribute("price", book.getPrice());
+			getJspContext().setAttribute("price", book.getPrice());			
 			getJspBody().invoke(null);
 		}
 	}

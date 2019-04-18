@@ -14,8 +14,8 @@ public class ListStarRatings extends SimpleTagSupport {
 	}
 
 	public void doTag() throws JspException, IOException {
-		String oneStar = "<span class='fa fa-star checked'></span>";
-		String halfStar = "<span class='fa fa-star-half-full checked'></span>";
+		String oneStar = "<span class='fa fa-star checked' style='color: orange;'></span>";
+		String halfStar = "<span class='fa fa-star-half-full checked' style='color: orange;'></span>";
 		String noStar = "<span class='fa fa-star'></span>";
 
 		JspWriter out = getJspContext().getOut();

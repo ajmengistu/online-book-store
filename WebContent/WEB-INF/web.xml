@@ -143,7 +143,6 @@
 		<servlet-name>BrowseBooks</servlet-name>
 		<url-pattern>/browse_books</url-pattern>
 	</servlet-mapping>
-
 	<servlet>
 		<servlet-name>ViewHome</servlet-name>
 		<jsp-file>/home.jsp</jsp-file>
@@ -151,5 +150,14 @@
 	<servlet-mapping>
 		<servlet-name>ViewHome</servlet-name>
 		<url-pattern>/home</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ViewBookDetails</servlet-name>
+		<jsp-file>/view_book_details.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ViewBookDetails</servlet-name>
+		<url-pattern>/view_book_details</url-pattern>
 	</servlet-mapping>
 </web-app>
