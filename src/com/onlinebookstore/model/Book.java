@@ -27,8 +27,8 @@ public class Book {
 	}
 
 	public Book(Integer bookId, String title, Author name,
-			Double averageRatings, Integer numOfRatings, String imageUrl,
-			Double price, Integer stock, Integer yearPublished) {
+			Double averageRatings, int numOfRatings, String imageUrl,
+			Double price, int stock, int yearPublished) {
 		this.title = title;
 		this.author = name;
 		this.averageRatings = averageRatings;
@@ -37,6 +37,15 @@ public class Book {
 		this.price = price;
 		this.stock = stock;
 		this.yearPublished = yearPublished;
+		this.bookId = bookId;
+	}
+
+	public Book(String title, Author author, String image, double price,
+			int bookId) {
+		this.title = title;
+		this.author = author;
+		this.image = image;
+		this.price = price;
 		this.bookId = bookId;
 	}
 
@@ -244,8 +253,8 @@ public class Book {
 		return book;
 	}
 
-//	public static void main(String args[]) {
-//		Book b = getBookById(2);
-//		System.out.println(b.getTitle() + " " + b.getBookId());
-//	}
+	// public static void main(String args[]) {
+	// Book b = getBookById(2);
+	// System.out.println(b.getTitle() + " " + b.getBookId());
+	// }
 }

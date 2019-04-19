@@ -38,6 +38,7 @@ public class GetBookDetailsServlet extends HttpServlet {
 		request.setAttribute("yearPublished", book.getYearPublished());
 		request.setAttribute("image", book.getImage());
 		request.setAttribute("price", book.getPrice());
+		request.setAttribute("bookId", book.getBookId());
 		// getstock
 		// get isbn13,isbn
 		rd.forward(request, response);

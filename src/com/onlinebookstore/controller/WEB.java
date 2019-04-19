@@ -11,4 +11,5 @@ public interface WEB {
 	public String CUSTOMER = "CUSTOMER";
 	public String ADMINISTRATOR = "ADMINISTRATOR";
 	public String ADD_BOOKS = "add_books"; // add_books.jsp
+	public String HOME = "home"; // home.jsp
 }
