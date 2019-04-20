@@ -19,38 +19,35 @@ import com.onlinebookstore.model.Book;
 @WebServlet("/cart")
 public class ShoppingCartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	ArrayList<Book> shoppingCart = new ArrayList<Book>();
-
+	public ArrayList<Book> shoppingCart = new ArrayList<Book>();
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		
+		String bookId = request.getParameter("id");
 
-		HttpSession session = request.getSession();
-		if (session == null || session.getAttribute("firstName") == null) {
-			response.sendRedirect("login");
-		} else {
-			
-			String bookId = request.getParameter("id");
-
-			System.out.println("item #:" + bookId);
-
-			Book book = Book.getBookById(Integer.parseInt(bookId));
-			shoppingCart.add(book);
-
-			for (int i = 0; i < shoppingCart.size(); i++) {
-				System.out.println(i + ": " + shoppingCart.get(i));
-			}
-			RequestDispatcher rd = request
-					.getRequestDispatcher("shopping_cart.jsp");
-			request.setAttribute("shoppingCart", shoppingCart);
-			rd.forward(request, response);
-			// HttpSession session = request.getSession();
-			// session.setAttribute("shoppingCart", shoppingCart);
-			// response.sendRedirect("shopping_cart.jsp");
+		System.out.println("item #:" + bookId);
+		HttpSession session = request.getSession(false);
+		if(session.getAttribute("shoppingCart") == null){
+			shoppingCart = new ArrayList<Book>();
 		}
+		Book book = Book.getBookById(Integer.parseInt(bookId));
+		shoppingCart.add(book);
+
+		for (int i = 0; i < shoppingCart.size(); i++) {
+			System.out.println(i + ": " + shoppingCart.get(i));
+		}
+
+		
+		session.setAttribute("shoppingCart", shoppingCart);
+
+		RequestDispatcher rd = request
+				.getRequestDispatcher("shopping_cart.jsp");
+		request.setAttribute("shoppingCart", shoppingCart);
+		rd.forward(request, response);
 	}
 
 	/**

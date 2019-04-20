@@ -52,6 +52,12 @@ public class LoginServlet extends HttpServlet {
 
 			System.out.println("Login successful");
 
+			
+			if(session.getAttribute("shoppingCart") != null){
+				System.out.println("login servlet: shopping cart not null!");
+			}
+			
+			
 			// Direct User to their Admin or Customer welcome page
 			response.sendRedirect(WEB.LOGIN_SUCCESSFUL);
 
@@ -59,6 +65,7 @@ public class LoginServlet extends HttpServlet {
 			// loginEmail or password is invalid. Send a generic message.
 			sendErrorMessage("invalid email or password", request, response);
 		}
+		
 
 	}
 
