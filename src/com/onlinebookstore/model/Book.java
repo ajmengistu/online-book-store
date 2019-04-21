@@ -1,5 +1,6 @@
 package com.onlinebookstore.model;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -253,8 +254,34 @@ public class Book {
 		return book;
 	}
 
-	// public static void main(String args[]) {
-	// Book b = getBookById(2);
-	// System.out.println(b.getTitle() + " " + b.getBookId());
-	// }
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null)
+			return false;
+
+		Book book = (Book) o;
+
+		return book.getBookId() == this.bookId;
+	}
+
+	public static void main(String args[]) {
+		Book b = getBookById(2);
+		Book c = getBookById(3);
+		BigDecimal bc = new BigDecimal(1.02 + "");
+		BigDecimal cc = new BigDecimal(1.02 + "");
+		System.out.println(bc.toString());
+		System.out.println(cc.toString());
+		System.out.println("tostring" + cc);
+		BigDecimal r = bc.subtract(cc);
+		System.out.println(r);
+		System.out.println(r.equals(new BigDecimal("0.00")));
+		System.out.println(bc.multiply(new BigDecimal("18")));
+
+		System.out.println(b.getPrice());
+		System.out.println(c.getPrice());
+		System.out.println(b.getPrice() - c.getPrice());
+		System.out.println(b.getPrice() * 77);
+
+	}
 }

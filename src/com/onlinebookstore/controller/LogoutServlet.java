@@ -1,15 +1,12 @@
 package com.onlinebookstore.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import com.onlinebookstore.model.Book;
 
 /**
  * Servlet implementation class LogoutServlet
@@ -28,7 +25,7 @@ public class LogoutServlet extends HttpServlet {
 
 		session.setAttribute("firstName", null);
 		session.setAttribute("email", null);
-		session.setAttribute("shoppingCart", new ArrayList<Book>());
+//		session.setAttribute("shoppingCart", new ArrayList<Book>());
 		session.invalidate();
 		response.sendRedirect(WEB.HOME);
 	}

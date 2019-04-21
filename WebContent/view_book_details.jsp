@@ -1,6 +1,6 @@
 <%@ taglib prefix="tagfiles" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="match" uri="match-functions"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -52,8 +52,9 @@
 							<match:ListStarRatings rating="${averageRatings}"></match:ListStarRatings>
 							<span>${numOfRatings}</span>
 						</p>
-						<a href="cart?id=${bookId}" class="btn btn-primary">Add to
-							Cart</a>
+						<form action="cart.do?id=${bookId}" method="post">
+							<button class="btn btn-primary" style="">Add to Cart</button>
+						</form>
 					</div>
 				</div>
 			</div>

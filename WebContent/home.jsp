@@ -38,8 +38,8 @@
 						<div class="card" style="border: none;">
 
 							<!-- Book Image -->
-							<img src="${image}" alt="img"
-								style="height: 210px; width: 120px; margin-left: 20px;">
+							<a href="book?id=${bookId}"><img src="${image}" alt="img"
+								style="height: 210px; width: 120px; margin-left: 20px;"></a>
 
 							<div class="card-body">
 								<!-- Title -->
