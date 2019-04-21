@@ -10,11 +10,12 @@ import java.util.ArrayList;
 public class Book {
 	private String genre, title, ISBN, publisher, image;
 	private int yearPublished, stock, numberOfRatings, bookId;
-	private double price, averageRatings;
+	private BigDecimal price;
+	private double averageRatings;
 	private Author author;
 
 	public Book(String genre, String title, Author name, String ISBN,
-			String publisher, int yearPublished, double price, int stock,
+			String publisher, int yearPublished, BigDecimal price, int stock,
 			String image) {
 		this.genre = genre;
 		this.title = title;
@@ -29,7 +30,7 @@ public class Book {
 
 	public Book(Integer bookId, String title, Author name,
 			Double averageRatings, int numOfRatings, String imageUrl,
-			Double price, int stock, int yearPublished) {
+			BigDecimal price, int stock, int yearPublished) {
 		this.title = title;
 		this.author = name;
 		this.averageRatings = averageRatings;
@@ -41,7 +42,7 @@ public class Book {
 		this.bookId = bookId;
 	}
 
-	public Book(String title, Author author, String image, double price,
+	public Book(String title, Author author, String image, BigDecimal price,
 			int bookId) {
 		this.title = title;
 		this.author = author;
@@ -86,7 +87,7 @@ public class Book {
 		return yearPublished;
 	}
 
-	public double getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
 
@@ -122,7 +123,8 @@ public class Book {
 				pstmt.setString(3, newBook.getISBN());
 				pstmt.setString(4, newBook.getPublisher());
 				pstmt.setInt(5, newBook.getYearPublished());
-				pstmt.setDouble(6, newBook.getPrice());
+				pstmt.setDouble(6,
+						Double.parseDouble(newBook.getPrice().toString()));
 				pstmt.setInt(7, newBook.getQuantity());
 				pstmt.setString(8, newBook.getGenre());
 				pstmt.setString(9, newBook.getImage());
@@ -160,14 +162,14 @@ public class Book {
 					Double averageRatings = rs.getDouble("average_ratings");
 					Integer ratings = rs.getInt("ratings");
 					String imageUrl = rs.getString("image");
-					Double price = rs.getDouble("price");
+					String price = rs.getString("price");
 					Integer stock = rs.getInt("stock");
 					Integer yearPublished = rs
 							.getInt("original_publication_year");
 
 					topRatedBooks.add(new Book(bookId, title, new Author(
-							authors), averageRatings, ratings, imageUrl, price,
-							stock, yearPublished));
+							authors), averageRatings, ratings, imageUrl,
+							new BigDecimal(price), stock, yearPublished));
 				}
 
 				if (rs != null)
@@ -229,14 +231,14 @@ public class Book {
 					Double averageRatings = rs.getDouble("average_ratings");
 					Integer ratings = rs.getInt("ratings");
 					String imageUrl = rs.getString("image");
-					Double price = rs.getDouble("price");
+					String price = rs.getString("price");
 					Integer stock = rs.getInt("stock");
 					Integer yearPublished = rs
 							.getInt("original_publication_year");
 
-					book = new Book(bookId, title, new Author(authors),
-							averageRatings, ratings, imageUrl, price, stock,
-							yearPublished);
+					 book = new Book(bookId, title, new Author(authors),
+					 averageRatings, ratings, imageUrl, new BigDecimal(price), stock,
+					 yearPublished);
 				}
 
 				if (rs != null)
@@ -266,22 +268,23 @@ public class Book {
 	}
 
 	public static void main(String args[]) {
-		Book b = getBookById(2);
-		Book c = getBookById(3);
-		BigDecimal bc = new BigDecimal(1.02 + "");
-		BigDecimal cc = new BigDecimal(1.02 + "");
-		System.out.println(bc.toString());
-		System.out.println(cc.toString());
-		System.out.println("tostring" + cc);
-		BigDecimal r = bc.subtract(cc);
-		System.out.println(r);
-		System.out.println(r.equals(new BigDecimal("0.00")));
-		System.out.println(bc.multiply(new BigDecimal("18")));
-
-		System.out.println(b.getPrice());
-		System.out.println(c.getPrice());
-		System.out.println(b.getPrice() - c.getPrice());
-		System.out.println(b.getPrice() * 77);
+		// Book b = getBookById(2);
+		// Book c = getBookById(3);
+		// BigDecimal bc = new BigDecimal(1.02 + "");
+		// BigDecimal cc = new BigDecimal(1.02 + "");
+		// System.out.println(bc.toString());
+		// System.out.println(cc.toString());
+		// System.out.println("tostring" + cc);
+		// BigDecimal r = bc.subtract(cc);
+		// System.out.println(r);
+		// System.out.println(r.equals(new BigDecimal("0.00")));
+		// System.out.println(bc.multiply(new BigDecimal("18")));
+		//
+		// System.out.println(b.getPrice());
+		// System.out.println(c.getPrice());
+		// System.out.println(b.getPrice() - c.getPrice());
+		// System.out.println(b.getPrice() * 77);
+		System.out.println(getBookById(8).getPrice());
 
 	}
 }

@@ -21,7 +21,7 @@ public class ListPopularBooks extends SimpleTagSupport{
 			getJspContext().setAttribute("numOfRatings", String.format("%,d",book.getNumberOfRatings()));
 			getJspContext().setAttribute("averageRating", book.getAverageRatings());
 			getJspContext().setAttribute("image", book.getImage());
-			getJspContext().setAttribute("price", book.getPrice());			
+			getJspContext().setAttribute("price", book.getPrice());	
 			getJspBody().invoke(null);
 		}
 	}

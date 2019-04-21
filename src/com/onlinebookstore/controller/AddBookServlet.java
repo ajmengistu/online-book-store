@@ -1,6 +1,7 @@
 package com.onlinebookstore.controller;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -8,7 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.onlinebookstore.model.*;
+import com.onlinebookstore.model.Author;
+import com.onlinebookstore.model.Book;
 
 /**
  * Servlet implementation class AddBookServlet
@@ -54,7 +56,7 @@ public class AddBookServlet extends HttpServlet {
 		} else {
 			Book newBook = new Book(type, title, new Author(author), isbn,
 					publisher, Integer.valueOf(yearPublished),
-					Double.valueOf(price), Integer.valueOf(quantity), image);
+					new BigDecimal(price), Integer.valueOf(quantity), image);
 
 			if (Book.addBook(newBook)) {
 				System.out.println("Book Added");
