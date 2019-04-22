@@ -11,7 +11,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class User {
-	private String firstName, lastName, email, userRole, userID, password;
+	private String firstName, lastName, email, userRole, password;
+	private int userId;
 	private static Connection con = null;
 
 	public User() {
@@ -35,6 +36,16 @@ public class User {
 		this.password = password;
 	}
 
+	// Constructor to create a new person.
+	public User(int userId, String firstName, String lastName, String email,
+			String userRole) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.userRole = userRole;
+		this.userId = userId;
+	}
+
 	public String getPassword() {
 		return password;
 	}
@@ -55,8 +66,8 @@ public class User {
 		return userRole;
 	}
 
-	public String getUserID() {
-		return userID;
+	public int getUserId() {
+		return userId;
 	}
 
 	public String toString() {
@@ -131,12 +142,13 @@ public class User {
 				ResultSet rs = pstmt.executeQuery();
 
 				if (rs.next()) { // rs should return one row
+					int userId = rs.getInt("user_id");
 					String firstName = rs.getString("first_name");
 					String lastName = rs.getString("last_name");
 					String email = rs.getString("email");
 					String userRole = rs.getString("user_role");
 
-					userLogingIn = new User(firstName, lastName, email,
+					userLogingIn = new User(userId, firstName, lastName, email,
 							userRole);
 					System.out.println("Returning an existing User");
 				}
@@ -483,5 +495,45 @@ public class User {
 			}
 		}
 		return allUsers;
+	}
+
+	public static ArrayList<Item> getCart(int userId) {
+		ArrayList<Item> shoppingCart = new ArrayList<Item>();
+
+		con = getConnection();
+
+		PreparedStatement pstmt = null;
+		if (con != null) {
+			try {
+				String getShoppingCart = "SELECT book_id, quantity FROM carts WHERE user_id=? ORDER BY date_added ASC;";
+				pstmt = con.prepareStatement(getShoppingCart);
+				pstmt.setInt(1, userId);
+				ResultSet rs = pstmt.executeQuery();
+
+				while (rs.next()) {
+					int bookId = rs.getInt("book_id");
+					int quantity = rs.getInt("quantity");
+
+					Book book = Book.getBookById(bookId);
+					shoppingCart.add(new Item(book, quantity));
+				}
+
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return new ArrayList<Item>();
+			}
+		}
+		return shoppingCart;
+	}
+
+	public static void main(String args[]) {
+		ArrayList<Item> l = getCart(1);
+		for (Item i : l) {
+			System.out.println(i);
+		}
 	}
 }

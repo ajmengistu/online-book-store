@@ -2,6 +2,7 @@
 <%@ taglib prefix="match" uri="match-functions"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -20,8 +21,17 @@
 	<tagfiles:searchbar />
 	<br>
 
-	<!-- Customer Navigation Bar -->
-	<tagfiles:home_page_navbar />
+	<!-- Navigation Bar -->
+	<c:choose>
+		<c:when test="${firstName != null}">
+			<tagfiles:customer_navbar />
+			<br />
+		</c:when>
+		<c:otherwise>
+			<tagfiles:home_page_navbar />
+			<br />
+		</c:otherwise>
+	</c:choose>
 	<br>
 
 	<!-- Display Books -->
@@ -218,11 +228,7 @@
 	<br>
 	<br>
 	<!-- Footer -->
-	<footer class="container-fluid text-center"
-		style="background-color: grey;
-      padding: 40px;">
-	<p style="font-weight: bold;">OnlineBookStore Copyright (c) 2019</p>
-	</footer>
+	<tagfiles:footer />
 
 	<!-- BootStrap Scripts & CarouselJavaScript -->
 	<tagfiles:carouselJS />

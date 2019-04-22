@@ -112,13 +112,7 @@
 		</div>
 	</div>
 
-	<!-- Footer -->
-	<footer class="container-fluid text-center"
-		style="background-color: grey;
-      padding: 40px; position: relative;
-  margin-top: 453px;">
-	<p style="font-weight: bold;">OnlineBookStore Copyright (c) 2019</p>
-	</footer>
+	<tagfiles:footer />
 
 	<!-- BootStrap Scripts & CarouselJavaScript -->
 	<tagfiles:carouselJS />

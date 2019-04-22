@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 	<%
 		response.setHeader("Cache-Control", "no-cache"); //Forces caches to obtain a new copy of the page from the origin server
 		response.setHeader("Cache-Control", "no-store"); //Directs caches not to store the page under any circumstance
@@ -22,19 +23,19 @@
 			if (session.getAttribute("userRole") == WEB.ADMINISTRATOR) {
 				url = "/online-book-store/admin_welcome";
 			} else {
-				url = "/online-book-store/welcome";
+				url = "/online-book-store/home";
 			}
 			session.setAttribute("login_status", null);
 		}
 	%>
-
+	
 	<script
 		src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js'></script>
 	<script
 		src='https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.all.js'></script>
 	<script>
 		swal({
-			title : 'Great!',
+			title : 'Welcome back, ${firstName} ${lastName}!',
 			text : 'Login Successful!',
 			type : 'success'
 		}).then(function() {
