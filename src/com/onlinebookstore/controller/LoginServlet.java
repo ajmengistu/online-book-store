@@ -42,10 +42,7 @@ public class LoginServlet extends HttpServlet {
 		if (user != null) {
 			// Bind valid user information to a session.
 			HttpSession session = request.getSession();
-			session.setAttribute("email", user.getEmail());
-			session.setAttribute("firstName", user.getFirstName());
-			session.setAttribute("lastName", user.getLastName());
-			session.setAttribute("userRole", user.getUserRole());
+			session.setAttribute("user", user);
 			session.setAttribute("login_status", "SUCCESSFUL");
 
 			System.out.println("Login successful");

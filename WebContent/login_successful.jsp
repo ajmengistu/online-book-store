@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@ page import="com.onlinebookstore.controller.WEB"%>
+<%@ page import="com.onlinebookstore.controller.*"%>
+<%@ page import="com.onlinebookstore.model.*"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -20,7 +21,8 @@
 		if ((String) session.getAttribute("login_status") == null) {
 			response.sendRedirect(WEB.LOGIN);
 		} else {
-			if (session.getAttribute("userRole") == WEB.ADMINISTRATOR) {
+			User user = (User) session.getAttribute("user"); 
+			if (user.getUserRole() == WEB.ADMINISTRATOR) {
 				url = "/online-book-store/admin_welcome";
 			} else {
 				url = "/online-book-store/home";
@@ -35,7 +37,7 @@
 		src='https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.all.js'></script>
 	<script>
 		swal({
-			title : 'Welcome back, ${firstName} ${lastName}!',
+			title : 'Welcome back, ${user.getFirstName()} ${user.getLastName()}!',
 			text : 'Login Successful!',
 			type : 'success'
 		}).then(function() {

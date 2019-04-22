@@ -23,7 +23,7 @@
 
 	<!-- Navigation Bar -->
 	<c:choose>
-		<c:when test="${firstName != null}">
+		<c:when test="${user != null}">
 			<tagfiles:customer_navbar />
 			<br />
 		</c:when>

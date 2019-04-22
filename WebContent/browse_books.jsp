@@ -2,6 +2,7 @@
 <%@ taglib prefix="match" uri="match-functions"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -13,12 +14,6 @@
 <tagfiles:carouselCSS />
 <tagfiles:navbar_style />
 
-<style>
-.checked {
-	color: orange;
-}
-</style>
-
 </head>
 <body>
 	<br>
@@ -26,8 +21,17 @@
 	<tagfiles:searchbar />
 	<br>
 
-	<!-- Customer Navigation Bar -->
-	<tagfiles:customer_navbar />
+	<!-- Navigation Bar -->
+	<c:choose>
+		<c:when test="${user != null}">
+			<tagfiles:customer_navbar />
+			<br />
+		</c:when>
+		<c:otherwise>
+			<tagfiles:home_page_navbar />
+			<br />
+		</c:otherwise>
+	</c:choose>
 	<br>
 
 	<!-- Display Books -->
@@ -44,14 +48,16 @@
 						<div class="card" style="border: none;">
 
 							<!-- Book Image -->
-							<img src="${image}" alt="img"
-								style="height: 210px; width: 120px; margin-left: 20px;">
+							<a href="book?id=${bookId}"><img src="${image}" alt="img"
+								style="height: 210px; width: 120px; margin-left: 20px;"></a>
 
 							<div class="card-body">
 								<!-- Title -->
 								<h6 class="card-text"
 									style="overflow: hidden; border: none; text-overflow: ellipsis; display: -webkit-box; line-height: 30px; /* fallback */ max-height: 65px; /* fallback */ -webkit-line-clamp: 2; /* number of lines to
-                                    show */ -webkit-box-orient: vertical;">${title}</h6>
+                                    show */ -webkit-box-orient: vertical;">
+									<a href="book?id=${bookId}">${title}</a>
+								</h6>
 
 								<!-- Author -->
 								<p
@@ -222,11 +228,7 @@
 	<br>
 	<br>
 	<!-- Footer -->
-	<footer class="container-fluid text-center"
-		style="background-color: grey;
-      padding: 40px;">
-	<p style="font-weight: bold;">OnlineBookStore Copyright (c) 2019</p>
-	</footer>
+	<tagfiles:footer />
 
 	<!-- BootStrap Scripts & CarouselJavaScript -->
 	<tagfiles:carouselJS />
