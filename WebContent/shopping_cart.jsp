@@ -28,17 +28,17 @@ body, html {
 	<br>
 
 	<!-- Navigation Bar -->
-	<%
-		if (session == null || session.getAttribute("firstName") == null) {
-	%>
-	<tagfiles:home_page_navbar />
-	<%
-		} else {
-	%>
-	<tagfiles:customer_navbar />
-	<%
-		}
-	%>
+	<c:choose>
+		<c:when test="${user != null}">
+			<tagfiles:customer_navbar />
+			<br />
+		</c:when>
+		<c:otherwise>
+			<tagfiles:home_page_navbar />
+			<br />
+		</c:otherwise>
+	</c:choose>
+	<br>
 	<br>
 	<br>
 

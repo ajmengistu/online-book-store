@@ -1,19 +1,23 @@
 package com.onlinebookstore.controller;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 
+import com.onlinebookstore.model.Item;
 import com.onlinebookstore.model.User;
 
 /**
  * Servlet implementation class LoginServlet
  */
-//@WebServlet("/LoginServlet")
+// @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -47,12 +51,14 @@ public class LoginServlet extends HttpServlet {
 
 			System.out.println("Login successful");
 
-			
-			if(session.getAttribute("shoppingCart") != null){
-				System.out.println("login servlet: shopping cart not null!");
+			@SuppressWarnings("unchecked")
+			ArrayList<Item> shoppingCart = (ArrayList<Item>) session
+					.getAttribute("shoppingCart");
+
+			if (session.getAttribute("shoppingCart") != null) {
+				User.addItems(shoppingCart, user.getUserId());
 			}
-			
-			
+
 			// Direct User to their Admin or Customer welcome page
 			response.sendRedirect(WEB.LOGIN_SUCCESSFUL);
 
@@ -60,7 +66,6 @@ public class LoginServlet extends HttpServlet {
 			// loginEmail or password is invalid. Send a generic message.
 			sendErrorMessage("invalid email or password", request, response);
 		}
-		
 
 	}
 

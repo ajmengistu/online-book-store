@@ -17,11 +17,23 @@ body {
 }
 </style>
 <body>
+
+	<%
+		// Get the status of the user registration from the RegisterServlet.java class
+		String status = (String) request.getAttribute("status");
+		// When this page is first requested via ".../register", show an empty string status.
+		if (status == null)
+			status = "";
+		if (session != null && session.getAttribute("user") != null)
+			response.sendRedirect("home");
+	%>
+
 	<div class="container" style="margin-top: 150px;">
 		<div class="row">
 			<div class="col-mid-10 offset=mid-1">
 				<div class="row">
-					<div class="col-mid-5 register-left" style="color: black; font-weight: bold;">
+					<div class="col-mid-5 register-left"
+						style="color: black; font-weight: bold;">
 						<img src="images/black_arrow.png">
 						<h3>Join Us</h3>
 						<h6>Create an account &amp; browse unlimited number of books!</h6>
@@ -57,15 +69,6 @@ body {
 
 								<!-- Registration Confirmation Message-->
 								<div>
-									<%
-										// Get the status of the user registration from the RegisterServlet.java class
-										String status = (String) request.getAttribute("status");
-										// When this page is first requested via ".../register", show an empty string status.
-										if (status == null)
-											status = "";
-										if (session != null && session.getAttribute("firstName") != null)
-											response.sendRedirect("welcome");
-									%>
 									<p align=center style="color: red; font-weight: bold;"><%=status%></p>
 								</div>
 
@@ -83,7 +86,7 @@ body {
 			</div>
 		</div>
 	</div>
-	
+
 	<tagfiles:bootstrapScripts />
 </body>
 </html>

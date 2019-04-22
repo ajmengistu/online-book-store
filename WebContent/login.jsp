@@ -23,7 +23,7 @@ body {
 			status = "";
 		// User attempted to login 
 		if (session.getAttribute("user") != null)
-			response.sendRedirect("welcome");
+			response.sendRedirect("home");
 	%>
 
 	<div class="row">

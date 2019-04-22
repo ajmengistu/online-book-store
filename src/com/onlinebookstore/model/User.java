@@ -530,10 +530,72 @@ public class User {
 		return shoppingCart;
 	}
 
-	public static void main(String args[]) {
-		ArrayList<Item> l = getCart(1);
-		for (Item i : l) {
-			System.out.println(i);
+	public static void addItems(ArrayList<Item> items, int userId) {
+
+		for (Item item : items) {
+			con = getConnection();
+			int qnty = 0;
+
+			// Check if item already exist, if it does, get the quantity.
+			PreparedStatement pstmt = null;
+			if (con != null) {
+				try {
+					String getQuantity = "SELECT quantity FROM carts WHERE user_id=? and book_id=?;";
+					pstmt = con.prepareStatement(getQuantity);
+					pstmt.setInt(1, userId);
+					pstmt.setInt(2, item.getBook().getBookId());
+					ResultSet rs = pstmt.executeQuery();
+
+					if (rs.next()) {
+						qnty = rs.getInt("quantity");
+					}
+
+					if (rs != null)
+						rs.close();
+					if (pstmt != null)
+						pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+
+			// Use qnty to update or insert
+			String query = "";
+			if (qnty != 0) {
+				query = "UPDATE carts SET quantity = ? WHERE user_id=? and book_id=?;";
+			} else {
+				query = "INSERT INTO carts VALUES (?, ?, ?, NOW());";
+			}
+
+			con = getConnection();
+
+			pstmt = null;
+			if (con != null) {
+				try {
+					pstmt = con.prepareStatement(query);
+					// UPDATE
+					if (qnty != 0) {
+						pstmt.setInt(1, qnty + item.getQuantity());
+						pstmt.setInt(2, userId);
+						pstmt.setInt(3, item.getBook().getBookId());
+					} else { // INSERT
+						pstmt.setInt(1, userId);
+						pstmt.setInt(2, item.getBook().getBookId());
+						pstmt.setInt(3, item.getQuantity());
+					}
+
+					pstmt.executeUpdate();
+
+					if (pstmt != null)
+						pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
 		}
+	}
+
+	public static void main(String args[]) {
+
 	}
 }
