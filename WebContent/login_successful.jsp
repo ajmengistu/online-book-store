@@ -21,16 +21,20 @@
 		if ((String) session.getAttribute("login_status") == null) {
 			response.sendRedirect(WEB.LOGIN);
 		} else {
-			User user = (User) session.getAttribute("user"); 
+			User user = (User) session.getAttribute("user");
 			if (user.getUserRole() == WEB.ADMINISTRATOR) {
 				url = "/online-book-store/admin_welcome";
 			} else {
-				url = "/online-book-store/home";
+				if (session.getAttribute("cart") != null) {
+					url = "/online-book-store/cart.do";
+				} else {
+					url = "/online-book-store/home";
+				}
 			}
 			session.setAttribute("login_status", null);
 		}
 	%>
-	
+
 	<script
 		src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js'></script>
 	<script

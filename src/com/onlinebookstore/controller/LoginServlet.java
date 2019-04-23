@@ -57,6 +57,8 @@ public class LoginServlet extends HttpServlet {
 
 			if (session.getAttribute("shoppingCart") != null) {
 				User.addItems(shoppingCart, user.getUserId());
+				session.setAttribute("shoppingCart", null);
+				session.setAttribute("cart", "cart.do");
 			}
 
 			// Direct User to their Admin or Customer welcome page

@@ -505,7 +505,7 @@ public class User {
 		PreparedStatement pstmt = null;
 		if (con != null) {
 			try {
-				String getShoppingCart = "SELECT book_id, quantity FROM carts WHERE user_id=? ORDER BY date_added ASC;";
+				String getShoppingCart = "SELECT book_id, quantity FROM carts WHERE user_id=? ORDER BY date_created ASC;";
 				pstmt = con.prepareStatement(getShoppingCart);
 				pstmt.setInt(1, userId);
 				ResultSet rs = pstmt.executeQuery();
@@ -595,7 +595,107 @@ public class User {
 		}
 	}
 
-	public static void main(String args[]) {
+	public static void addBookToCart(int userId, int bookId) {
+		con = getConnection();
+		int qnty = 0;
+
+		// Check if item already exist, if it does, get the quantity.
+		PreparedStatement pstmt = null;
+		if (con != null) {
+			try {
+				String getQuantity = "SELECT quantity FROM carts WHERE user_id=? and book_id=?;";
+				pstmt = con.prepareStatement(getQuantity);
+				pstmt.setInt(1, userId);
+				pstmt.setInt(2, bookId);
+
+				ResultSet rs = pstmt.executeQuery();
+
+				if (rs.next()) {
+					qnty = rs.getInt("quantity");
+				}
+
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		// Use qnty to update or insert
+		String query = "";
+		if (qnty != 0) {
+			query = "UPDATE carts SET quantity = ? WHERE user_id=? and book_id=?;";
+		} else {
+			query = "INSERT INTO carts VALUES (?, ?, ?, NOW());";
+		}
+
+		con = getConnection();
+
+		pstmt = null;
+		if (con != null) {
+			try {
+				pstmt = con.prepareStatement(query);
+				// UPDATE
+				if (qnty != 0) {
+					pstmt.setInt(1, qnty + 1);
+					pstmt.setInt(2, userId);
+					pstmt.setInt(3, bookId);
+				} else { // INSERT
+					pstmt.setInt(1, userId);
+					pstmt.setInt(2, bookId);
+					pstmt.setInt(3, 1);
+				}
+
+				pstmt.executeUpdate();
+
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 
 	}
+
+	public static void updateCart(int userId, int bookId, int quantity) {
+		String query = "";
+		if (quantity > 0) {
+			query = "UPDATE carts SET quantity=? WHERE user_id=? and book_id=?;";
+		} else {
+			query = "DELETE FROM carts WHERE user_id=? and book_id=?;";
+		}
+
+		con = getConnection();
+
+		PreparedStatement pstmt = null;
+		if (con != null) {
+			try {
+				pstmt = con.prepareStatement(query);
+				// UPDATE
+				if (quantity > 0) {
+					pstmt.setInt(1, quantity);
+					pstmt.setInt(2, userId);
+					pstmt.setInt(3, bookId);
+				} else { // DELETE
+					pstmt.setInt(1, userId);
+					pstmt.setInt(2, bookId);
+				}
+
+				pstmt.executeUpdate();
+
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	// public static void main(String args[]) {
+	//
+	// }
+
 }

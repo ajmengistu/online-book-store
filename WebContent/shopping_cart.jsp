@@ -38,15 +38,18 @@ body, html {
 			<br />
 		</c:otherwise>
 	</c:choose>
-	<br>
-	<br>
-	<br>
 
 	<c:if test="${! empty shoppingCart}">
+
+
 		<div class="container" style="margin-left: 25%;">
 			<div class="row" style="margin-left: -20%;">
 				<div class="col-md-8" style="margin-left: 0%;">
+
 					<div class="card card-body bg-light">
+						<div style="margin-bottom: 1%;">
+							<h4 style="font-weight: bold;">Shopping Cart</h4>
+						</div>
 						<table class="table">
 							<thead>
 								<tr style="text-align: center;">
@@ -98,7 +101,7 @@ body, html {
 				</div>
 				<div class="col-md-4">
 					<div class="card card-body bg-light">
-						<h4>Cart Summary</h4>
+						<h4 style="font-weight: bold;">Cart Summary</h4>
 						<br>
 						<table class="table">
 							<tbody>

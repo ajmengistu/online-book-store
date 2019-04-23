@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import com.onlinebookstore.model.Book;
 import com.onlinebookstore.model.Item;
+import com.onlinebookstore.model.User;
 
 /**
  * Servlet implementation class CartServlet
@@ -24,66 +25,117 @@ public class ShoppingCartServlet extends HttpServlet {
 	private BigDecimal SHIPPING_COST = new BigDecimal("5.99");
 	public List<Item> shoppingCart = new ArrayList<Item>();
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect("shopping_cart");
+		// response.sendRedirect("shopping_cart");
+		// doPost(request, response);
+		System.out.println("Inside");
+		HttpSession session = request.getSession(false);
+		if (session != null && session.getAttribute("user") != null) {
+			System.out.println("FIRSTTIME------------");
+
+			if (session.getAttribute("shoppingCart") == null) {
+				User user = (User) session.getAttribute("user");
+				shoppingCart = User.getCart(user.getUserId());
+				System.out.println("hello");
+			}
+
+		}
+		
+		if (session != null) {
+			System.out.println("hello");
+			getCost(session);
+			session.setAttribute("shoppingCart", shoppingCart);
+			response.sendRedirect("shopping_cart");
+		}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-
+		// Get parameters bookId and quantity.
 		int bookId = Integer.parseInt(request.getParameter("id"));
+		// If quantity is null, user is clicking on the 'Add to Cart' button.
+		// Else, user is clicking on the 'Update' button in shopping Cart page.
 		String quantity = request.getParameter("quantity");
-
-		System.out.println("item #:" + bookId);
-
+		// Check if a shoppingCart has not be created already for this session.
 		HttpSession session = request.getSession(false);
 		if (session.getAttribute("shoppingCart") == null) {
+			// Only done once per session.
 			shoppingCart = new ArrayList<>();
 		}
 
-		System.out.println("Shopping Cart servlet--------------");
+		if (session.getAttribute("user") != null) {
+			User user = (User) session.getAttribute("user");
+			// User is logged-in (has an account)
+			// Remove all the items already in the shoppingCart
+			if (session.getAttribute("shoppingCart") != null) {
+				shoppingCart = new ArrayList<>();
+			}
 
-		System.out.println(shoppingCart.toString());
-
-		for (int i = 0; i < shoppingCart.size(); i++) {
-			System.out.println(i + ": " + shoppingCart.get(i));
+			// User clicked on Add to Cart
+			if (quantity == null) {
+				User.addBookToCart(user.getUserId(), bookId);
+				shoppingCart = User.getCart(user.getUserId());
+			} else { // User wants to update Cart
+				User.updateCart(user.getUserId(), bookId,
+						Integer.parseInt(quantity));
+				shoppingCart = User.getCart(user.getUserId());
+			}
+		} else { // Anonymous User (has no account)
+			// Check if the Book with bookId is already in the shoppingCart
+			int index = getIndexOfBook(bookId);
+			// Update Shopping Cart
+			updateShoppingCart(index, quantity, bookId);
 		}
 
-		int x = -1;
-		for (int i = 0; i < shoppingCart.size(); i++) {
-			if (shoppingCart.get(i).getBook().getBookId() == bookId) {
-				System.out.println("Found it");
-				x = i;
+		getCost(session);
+		session.setAttribute("shoppingCart", shoppingCart);
+		response.sendRedirect("shopping_cart");
+	}
+
+	private void getCost(HttpSession session) {
+		BigDecimal totalCost = new BigDecimal("0.00");
+		BigDecimal subTotal = new BigDecimal("0.00");
+		BigDecimal shippingCost = new BigDecimal("0.00");
+		
+		if (session != null && shoppingCart != null) {
+			for (int i = 0; i < shoppingCart.size(); i++) {
+				BigDecimal temp = new BigDecimal(shoppingCart.get(i).getBook()
+						.getPrice()
+						+ "").multiply(new BigDecimal(shoppingCart.get(i)
+						.getQuantity() + ""));
+				subTotal = subTotal.add(temp);
+			}
+			if (!subTotal.equals(new BigDecimal("0.00"))) {
+				shippingCost = this.SHIPPING_COST;
+				totalCost = shippingCost.add(subTotal);
 			}
 		}
+		
+		session.setAttribute("totalCost", totalCost);
+		session.setAttribute("subTotal", subTotal);
+		session.setAttribute("shippingCost", shippingCost);
+	}
 
-		// If item already exists
-		if (x != -1) {
+	private void updateShoppingCart(int index, String quantity, int bookId) {
+		if (index != -1) {
+			// If item already exists
 			// Update Shopping Cart
 			if (quantity == null) {
 				// Adding the same item to cart
 				System.out.println("adding item to cart");
-				shoppingCart.get(x).setQuantity(
-						shoppingCart.get(x).getQuantity() + 1);
+				shoppingCart.get(index).setQuantity(
+						shoppingCart.get(index).getQuantity() + 1);
 			} else {
 				// Updating the quantity
 				int qty = Integer.parseInt(quantity);
 				if (qty == 0) {
 					System.out.println("removing item from cart!");
-					shoppingCart.remove(x);
+					shoppingCart.remove(index);
 				} else {
 					System.out.println("Updating cart quantity");
 					// set the new quantity
-					shoppingCart.get(x).setQuantity(qty);
+					shoppingCart.get(index).setQuantity(qty);
 				}
 			}
 		} else { // Otherwise, add new item to cart
@@ -93,29 +145,16 @@ public class ShoppingCartServlet extends HttpServlet {
 			shoppingCart.add(item);
 		}
 
-		System.out.println("Shopping Cart servlet--------------");
+	}
 
-		BigDecimal totalCost = new BigDecimal("0.00");
-		BigDecimal subTotal = new BigDecimal("0.00");
-		BigDecimal shippingCost = new BigDecimal("0.00");
+	private int getIndexOfBook(int bookId) {
+		int x = -1;
 		for (int i = 0; i < shoppingCart.size(); i++) {
-			BigDecimal temp = new BigDecimal(shoppingCart.get(i).getBook()
-					.getPrice()
-					+ "").multiply(new BigDecimal(shoppingCart.get(i)
-					.getQuantity() + ""));
-			subTotal = subTotal.add(temp);
+			if (shoppingCart.get(i).getBook().getBookId() == bookId) {
+				System.out.println("Found it");
+				x = i;
+			}
 		}
-		if (!subTotal.equals(new BigDecimal("0.00"))) {
-			shippingCost = this.SHIPPING_COST;
-			totalCost = shippingCost.add(subTotal);
-		}
-		System.out.println();
-		session.setAttribute("totalCost", totalCost);
-		session.setAttribute("subTotal", subTotal);
-		session.setAttribute("shippingCost", shippingCost);
-
-		session.setAttribute("shoppingCart", shoppingCart);
-
-		response.sendRedirect("shopping_cart");
+		return x;
 	}
 }
