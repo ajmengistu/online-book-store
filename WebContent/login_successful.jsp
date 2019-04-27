@@ -3,10 +3,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ page import="com.onlinebookstore.controller.*"%>
 <%@ page import="com.onlinebookstore.model.*"%>
+<%@ page import="java.util.ArrayList"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>OnlineBookStore: Login Successful</title>
 </head>
 <body>
 
@@ -23,13 +24,14 @@
 		} else {
 			User user = (User) session.getAttribute("user");
 			if (user.getUserRole() == WEB.ADMINISTRATOR) {
-				url = "/online-book-store/admin_welcome";
+		url = "/online-book-store/admin_welcome";
 			} else {
-				if (session.getAttribute("cart") != null) {
-					url = "/online-book-store/cart.do";
-				} else {
-					url = "/online-book-store/home";
-				}
+		if (session.getAttribute("cart") != null) {
+			url = "/online-book-store/cart.do";
+		} else {
+			// Send User to their home page. Note: User must have signed-in with an empty shoppingCart. 
+			url = "/online-book-store/home";
+		}
 			}
 			session.setAttribute("login_status", null);
 		}

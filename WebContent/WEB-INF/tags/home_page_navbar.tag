@@ -10,9 +10,9 @@
 	</button>
 	<div class="collapse navbar-collapse" id="navbarNavDropdown">
 		<ul class="navbar-nav w-100">
-			<li class="nav-item active"><a class="nav-link"
-				href="#">Popular Books <span
-					class="sr-only">(current)</span></a></li>
+			<li class="nav-item active"><a class="nav-link" href="#">Popular
+					Books <span class="sr-only">(current)</span>
+			</a></li>
 			<li class="nav-item active"><a class="nav-link" href="#">
 					Top Rated Books <span class="sr-only">(current)</span>
 			</a></li>
@@ -47,7 +47,7 @@
 				</div></li>
 
 			<li class="nav-item active" style="margin-right: 20px;"><a
-				class="nav-link" href="cart.do"><b><i
+				class="nav-link" href="shopping_cart"><b><i
 						class="fa
                                     fa-shopping-cart fa-2x"></i>
 						Cart (<span class="text-warning"><c:choose>
@@ -64,13 +64,5 @@
 		</ul>
 	</div>
 </nav>
-
-<div class="container">
-	<div class="form-group col-md-12 mx-auto">
-		<input class="form-control autocomplete input-lg"
-			placeholder="Enter A"
-			style="border: 1.4px solid aquamarine; border-radius: 20px;" />
-	</div>
-</div>
 
 

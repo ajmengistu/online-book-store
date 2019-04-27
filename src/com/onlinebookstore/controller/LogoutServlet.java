@@ -23,9 +23,8 @@ public class LogoutServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 
-		session.setAttribute("firstName", null);
-		session.setAttribute("email", null);
-//		session.setAttribute("shoppingCart", new ArrayList<Book>());
+		session.setAttribute("user", null);
+		session.setAttribute("shoppingCart", null);
 		session.invalidate();
 		response.sendRedirect(WEB.HOME);
 	}

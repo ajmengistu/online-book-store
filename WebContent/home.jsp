@@ -14,6 +14,7 @@
 <tagfiles:carouselCSS />
 </head>
 <body>
+	<br>
 
 	<!-- Navigation Bar -->
 	<c:choose>

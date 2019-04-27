@@ -25,10 +25,9 @@ public class ShoppingCartServlet extends HttpServlet {
 	private BigDecimal SHIPPING_COST = new BigDecimal("5.99");
 	public List<Item> shoppingCart = new ArrayList<Item>();
 
+	/* When a GET Request is made via 'cart.do' */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		// response.sendRedirect("shopping_cart");
-		// doPost(request, response);
 		System.out.println("Inside");
 		HttpSession session = request.getSession(false);
 		if (session != null && session.getAttribute("user") != null) {

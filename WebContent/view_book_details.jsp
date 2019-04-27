@@ -14,11 +14,11 @@
 <tagfiles:bootstrapCSS />
 <tagfiles:awesomefonts />
 <tagfiles:carouselCSS />
-<tagfiles:navbar_style />
 </head>
 <body>
 	<br>
-
+	<br>
+	<br>
 	<!-- Navigation Bar -->
 	<c:choose>
 		<c:when test="${user != null}">

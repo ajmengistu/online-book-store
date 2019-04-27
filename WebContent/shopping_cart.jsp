@@ -13,15 +13,13 @@
 <tagfiles:bootstrapCSS />
 <tagfiles:awesomefonts />
 <tagfiles:carouselCSS />
-<tagfiles:navbar_style />
 <style>
-body, html {
-	height: 100%;
-}
 </style>
 </head>
 <body>
-<br>
+	<br>
+	<br>
+	<br>
 	<!-- Navigation Bar -->
 	<c:choose>
 		<c:when test="${user != null}">
@@ -35,8 +33,6 @@ body, html {
 	</c:choose>
 
 	<c:if test="${! empty shoppingCart}">
-
-
 		<div class="container" style="margin-left: 25%;">
 			<div class="row" style="margin-left: -20%;">
 				<div class="col-md-8" style="margin-left: 0%;">
@@ -60,7 +56,8 @@ body, html {
 									<tr>
 										<td><img src="${item.getBook().getImage()}" alt="img"
 											style="height: 150px; width: 90px; margin-left: 20px;"></td>
-										<td><a href="book?id=${item.getBook().getBookId()}&title=${item.getBook().getTitle()}"
+										<td><a
+											href="book?id=${item.getBook().getBookId()}&title=${item.getBook().getTitle()}"
 											style="font-weight: bold; font-size: 20px;">${item.getBook().getTitle()}</a>
 											<p>by ${item.getBook().getAuthor().getName()}</p></td>
 										<td style="color: rgb(236, 74, 74); font-weight: bold;">$${item.getBook().getPrice()}</td>
@@ -148,7 +145,6 @@ body, html {
 
 	<!-- Footer -->
 	<tagfiles:footer />
-
 
 	<!-- BootStrap Scripts & CarouselJavaScript -->
 	<tagfiles:carouselJS />

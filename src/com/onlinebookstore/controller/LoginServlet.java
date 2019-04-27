@@ -55,11 +55,19 @@ public class LoginServlet extends HttpServlet {
 			ArrayList<Item> shoppingCart = (ArrayList<Item>) session
 					.getAttribute("shoppingCart");
 
+			// If a User signed-in to their account with a non-empty
+			// shoppingCart.
 			if (session.getAttribute("shoppingCart") != null) {
+				// Add those items to their shoppingCart in the database.
 				User.addItems(shoppingCart, user.getUserId());
+				// Start a new/fresh shoppingCart session
 				session.setAttribute("shoppingCart", null);
+				// Send them to their shopping_cart.jsp page
 				session.setAttribute("cart", "cart.do");
 			}
+
+			session.setAttribute("numOfItems",
+					getNumItems(User.getCart(user.getUserId())));
 
 			// Direct User to their Admin or Customer welcome page
 			response.sendRedirect(WEB.LOGIN_SUCCESSFUL);
@@ -69,6 +77,16 @@ public class LoginServlet extends HttpServlet {
 			sendErrorMessage("invalid email or password", request, response);
 		}
 
+	}
+
+	private int getNumItems(ArrayList<Item> cart) {
+		// Compute number of items in the current Users shopping cart
+		int numOfItems = 0;
+
+		for (Item item : cart) {
+			numOfItems += item.getQuantity();
+		}
+		return numOfItems;
 	}
 
 	/**
