@@ -14,6 +14,7 @@ public class ListTopRatedBooks extends SimpleTagSupport {
 		ArrayList<Book> topRatedBooks = Book.getTopRatedBooks(); 
 
 		for(Book book : topRatedBooks){
+			getJspContext().setAttribute("bookId", book.getBookId());
 			getJspContext().setAttribute("title", book.getTitle());
 			getJspContext().setAttribute("author", book.getAuthor().getName());
 			getJspContext().setAttribute("numOfRatings", String.format("%,d",book.getNumberOfRatings()));

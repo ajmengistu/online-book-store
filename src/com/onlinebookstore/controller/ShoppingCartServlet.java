@@ -41,15 +41,33 @@ public class ShoppingCartServlet extends HttpServlet {
 			}
 
 		}
-		
+
 		if (session != null) {
-			System.out.println("hello");
+			System.out.println("Calculating User shopping cart costs...");
 			getCost(session);
+			getTotalNumOfItems(session);
 			session.setAttribute("shoppingCart", shoppingCart);
 			response.sendRedirect("shopping_cart");
 		}
 	}
 
+	private void getTotalNumOfItems(HttpSession session) {
+		int numOfItems = 0;
+
+		for (Item item : shoppingCart) {
+			numOfItems += item.getQuantity();
+		}
+
+		session.setAttribute("numOfItems", numOfItems);
+
+	}
+
+	/**
+	 * A post request is made when a Customer/User adds an item to their cart by
+	 * clicking on 'Add to Cart' button in the 'view_book_details.jsp' page or
+	 * when a Customer/User updates their item count in the 'shopping_cart.jsp'
+	 * page by clicking on 'Update' button.
+	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// Get parameters bookId and quantity.
@@ -59,6 +77,8 @@ public class ShoppingCartServlet extends HttpServlet {
 		String quantity = request.getParameter("quantity");
 		// Check if a shoppingCart has not be created already for this session.
 		HttpSession session = request.getSession(false);
+		session.setAttribute("numOfItems", shoppingCart.size());
+
 		if (session.getAttribute("shoppingCart") == null) {
 			// Only done once per session.
 			shoppingCart = new ArrayList<>();
@@ -89,15 +109,17 @@ public class ShoppingCartServlet extends HttpServlet {
 		}
 
 		getCost(session);
+		getTotalNumOfItems(session);
 		session.setAttribute("shoppingCart", shoppingCart);
 		response.sendRedirect("shopping_cart");
+
 	}
 
 	private void getCost(HttpSession session) {
 		BigDecimal totalCost = new BigDecimal("0.00");
 		BigDecimal subTotal = new BigDecimal("0.00");
 		BigDecimal shippingCost = new BigDecimal("0.00");
-		
+
 		if (session != null && shoppingCart != null) {
 			for (int i = 0; i < shoppingCart.size(); i++) {
 				BigDecimal temp = new BigDecimal(shoppingCart.get(i).getBook()
@@ -111,7 +133,7 @@ public class ShoppingCartServlet extends HttpServlet {
 				totalCost = shippingCost.add(subTotal);
 			}
 		}
-		
+
 		session.setAttribute("totalCost", totalCost);
 		session.setAttribute("subTotal", subTotal);
 		session.setAttribute("shippingCost", shippingCost);

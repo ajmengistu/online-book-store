@@ -34,8 +34,19 @@ public class GetBookDetailsServlet extends HttpServlet {
 		request.setAttribute("title", book.getTitle());
 		request.setAttribute("author", book.getAuthor().getName());
 		request.setAttribute("averageRatings", book.getAverageRatings());
-		request.setAttribute("numOfRatings", String.format("%,d",book.getNumberOfRatings()));
-		request.setAttribute("yearPublished", book.getYearPublished());
+		request.setAttribute("numOfRatings",
+				String.format("%,d", book.getNumberOfRatings()));
+		
+		// Convert book published year: -144 (an int) -> "144 BC" (a String)
+		int yearPublished = book.getYearPublished();
+		String yearPublishedString = Integer.toString(yearPublished);
+		if (yearPublished < 0) {
+			yearPublishedString = (yearPublished * -1) + " BC";
+			System.out.println("Less than 0");
+			System.out.println(yearPublishedString);
+
+		}
+		request.setAttribute("yearPublished", yearPublishedString);
 		request.setAttribute("image", book.getImage());
 		request.setAttribute("price", book.getPrice());
 		request.setAttribute("bookId", book.getBookId());

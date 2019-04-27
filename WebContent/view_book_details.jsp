@@ -18,13 +18,18 @@
 </head>
 <body>
 	<br>
-	<tagfiles:title_header />
-	<tagfiles:searchbar />
-	<br>
 
-	<!-- Customer Navigation Bar -->
-	<tagfiles:home_page_navbar />
-	<br>
+	<!-- Navigation Bar -->
+	<c:choose>
+		<c:when test="${user != null}">
+			<tagfiles:customer_navbar />
+			<br />
+		</c:when>
+		<c:otherwise>
+			<tagfiles:home_page_navbar />
+			<br />
+		</c:otherwise>
+	</c:choose>
 
 	<div class="container" style="margin-top: 10px;">
 		<div class="card" style="border: none;">

@@ -1,7 +1,7 @@
 <%@ tag language="java" pageEncoding="ISO-8859-1"%>
 <!-- Footer -->
 <footer class="page-footer font-small blue-grey lighten-5"
-	style="margin-top: 37%; font-size: 13.5px;">
+	style="margin-top: 10%; font-size: 13.5px;">
 
 	<div style="background-color: #21d192;">
 		<div class="container">

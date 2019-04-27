@@ -21,12 +21,7 @@ body, html {
 </style>
 </head>
 <body>
-
-	<br>
-	<tagfiles:title_header />
-	<tagfiles:searchbar />
-	<br>
-
+<br>
 	<!-- Navigation Bar -->
 	<c:choose>
 		<c:when test="${user != null}">
@@ -65,7 +60,7 @@ body, html {
 									<tr>
 										<td><img src="${item.getBook().getImage()}" alt="img"
 											style="height: 150px; width: 90px; margin-left: 20px;"></td>
-										<td><a href="book?id=${item.getBook().getBookId()}"
+										<td><a href="book?id=${item.getBook().getBookId()}&title=${item.getBook().getTitle()}"
 											style="font-weight: bold; font-size: 20px;">${item.getBook().getTitle()}</a>
 											<p>by ${item.getBook().getAuthor().getName()}</p></td>
 										<td style="color: rgb(236, 74, 74); font-weight: bold;">$${item.getBook().getPrice()}</td>

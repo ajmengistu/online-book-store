@@ -7,19 +7,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>OnlineBookStore: Browse Books</title>
+<title>OnlineBookStore: Online Shopping for Books</title>
 
 <tagfiles:bootstrapCSS />
 <tagfiles:awesomefonts />
 <tagfiles:carouselCSS />
-<tagfiles:navbar_style />
-
 </head>
 <body>
-	<br>
-	<tagfiles:title_header />
-	<tagfiles:searchbar />
-	<br>
 
 	<!-- Navigation Bar -->
 	<c:choose>
@@ -48,7 +42,8 @@
 						<div class="card" style="border: none;">
 
 							<!-- Book Image -->
-							<a href="book?id=${bookId}"><img src="${image}" alt="img"
+							<a href="book?id=${bookId}&title=${title}"><img
+								src="${image}" alt="img" title="${title}"
 								style="height: 210px; width: 120px; margin-left: 20px;"></a>
 
 							<div class="card-body">
@@ -56,7 +51,7 @@
 								<h6 class="card-text"
 									style="overflow: hidden; border: none; text-overflow: ellipsis; display: -webkit-box; line-height: 30px; /* fallback */ max-height: 65px; /* fallback */ -webkit-line-clamp: 2; /* number of lines to
                                     show */ -webkit-box-orient: vertical;">
-									<a href="book?id=${bookId}">${title}</a>
+									<a href="book?id=${bookId}&title=${title}">${title}</a>
 								</h6>
 
 								<!-- Author -->
@@ -98,14 +93,17 @@
 						<div class="card" style="border: none;">
 
 							<!-- Book Image -->
-							<img src="${image}" alt="img"
-								style="height: 210px; width: 120px; margin-left: 20px;">
+							<a href="book?id=${bookId}&title=${title}"><img
+								src="${image}" alt="img" title="${title}"
+								style="height: 210px; width: 120px; margin-left: 20px;"></a>
 
 							<div class="card-body">
 								<!-- Title -->
 								<h6 class="card-text"
 									style="overflow: hidden; border: none; text-overflow: ellipsis; display: -webkit-box; line-height: 30px; /* fallback */ max-height: 65px; /* fallback */ -webkit-line-clamp: 2; /* number of lines to
-                                    show */ -webkit-box-orient: vertical;">${title}</h6>
+                                    show */ -webkit-box-orient: vertical;">
+									<a href="book?id=${bookId}&title=${title}">${title}</a>
+								</h6>
 
 								<!-- Author -->
 								<p
@@ -121,6 +119,8 @@
 								<match:ListStarRatings rating="${averageRating}">
 								</match:ListStarRatings>
 								<span>${numOfRatings}</span>
+
+
 							</div>
 						</div>
 					</div>
@@ -144,22 +144,22 @@
 						<div class="card" style="border: none;">
 
 							<!-- Book Image -->
-							<img src="${image}" alt="img"
-								style="height: 210px; width: 120px; margin-left: 20px;">
+							<a href="book?id=${bookId}&title=${title}"><img
+								src="${image}" alt="img" title="${title}"
+								style="height: 210px; width: 120px; margin-left: 20px;"></a>
 
 							<div class="card-body">
 								<!-- Title -->
 								<h6 class="card-text"
 									style="overflow: hidden; border: none; text-overflow: ellipsis; display: -webkit-box; line-height: 30px; /* fallback */ max-height: 65px; /* fallback */ -webkit-line-clamp: 2; /* number of lines to
-                                    show */ -webkit-box-orient: vertical;">${title}</h6>
+                                    show */ -webkit-box-orient: vertical;">
+									<a href="book?id=${bookId}&title=${title}">${title}</a>
+								</h6>
 
 								<!-- Author -->
 								<p
 									style="overflow: hidden; border: none; text-overflow: ellipsis; display: -webkit-box; line-height: 30px; /* fallback */ max-height: 65px; /* fallback */ -webkit-line-clamp: 2; /* number of lines to
                                     show */ -webkit-box-orient: vertical;">${author}</p>
-
-								<!-- Year Published -->
-								<p>${yearPublished}</p>
 
 								<!-- Price -->
 								<h5 style="color: red;">
@@ -194,14 +194,17 @@
 						<div class="card" style="border: none;">
 
 							<!-- Book Image -->
-							<img src="${image}" alt="img"
-								style="height: 210px; width: 120px; margin-left: 20px;">
+							<a href="book?id=${bookId}&title=${title}"><img
+								src="${image}" alt="img" title="${title}"
+								style="height: 210px; width: 120px; margin-left: 20px;"></a>
 
 							<div class="card-body">
 								<!-- Title -->
 								<h6 class="card-text"
 									style="overflow: hidden; border: none; text-overflow: ellipsis; display: -webkit-box; line-height: 30px; /* fallback */ max-height: 65px; /* fallback */ -webkit-line-clamp: 2; /* number of lines to
-                                    show */ -webkit-box-orient: vertical;">${title}</h6>
+                                    show */ -webkit-box-orient: vertical;">
+									<a href="book?id=${bookId}&title=${title}">${title}</a>
+								</h6>
 
 								<!-- Author -->
 								<p
@@ -218,6 +221,7 @@
 								</match:ListStarRatings>
 								<span>${numOfRatings}</span>
 
+
 							</div>
 						</div>
 					</div>
@@ -227,6 +231,8 @@
 	</div>
 	<br>
 	<br>
+
+
 	<!-- Footer -->
 	<tagfiles:footer />
 
