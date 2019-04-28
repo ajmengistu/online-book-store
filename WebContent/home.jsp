@@ -9,26 +9,24 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>OnlineBookStore: Online Shopping for Books</title>
 
-<tagfiles:bootstrapCSS />
+<tagfiles:jQueryScripts />
 <tagfiles:awesomefonts />
 <tagfiles:carouselCSS />
+<tagfiles:bootstrapCSS />
+
 </head>
 <body>
-	<br>
-
 	<!-- Navigation Bar -->
 	<c:choose>
 		<c:when test="${user != null}">
 			<tagfiles:customer_navbar />
-			<br />
 		</c:when>
 		<c:otherwise>
 			<tagfiles:home_page_navbar />
-			<br />
 		</c:otherwise>
 	</c:choose>
-	<br>
 
+	<br>
 	<!-- Display Books -->
 	<div class="container mt-3 primary">
 		<h4>Most Popular Books</h4>
@@ -58,7 +56,8 @@
 								<!-- Author -->
 								<p
 									style="overflow: hidden; border: none; text-overflow: ellipsis; display: -webkit-box; line-height: 30px; /* fallback */ max-height: 65px; /* fallback */ -webkit-line-clamp: 2; /* number of lines to
-                                    show */ -webkit-box-orient: vertical;">${author}</p>
+                                    show */ -webkit-box-orient: vertical;">by
+									${author}</p>
 
 								<!-- Price -->
 								<h5 style="color: red;">
@@ -109,7 +108,8 @@
 								<!-- Author -->
 								<p
 									style="overflow: hidden; border: none; text-overflow: ellipsis; display: -webkit-box; line-height: 30px; /* fallback */ max-height: 65px; /* fallback */ -webkit-line-clamp: 2; /* number of lines to
-                                    show */ -webkit-box-orient: vertical;">${author}</p>
+                                    show */ -webkit-box-orient: vertical;">by
+									${author}</p>
 
 								<!-- Price -->
 								<h5 style="color: red;">
@@ -160,7 +160,8 @@
 								<!-- Author -->
 								<p
 									style="overflow: hidden; border: none; text-overflow: ellipsis; display: -webkit-box; line-height: 30px; /* fallback */ max-height: 65px; /* fallback */ -webkit-line-clamp: 2; /* number of lines to
-                                    show */ -webkit-box-orient: vertical;">${author}</p>
+                                    show */ -webkit-box-orient: vertical;">by
+									${author}</p>
 
 								<!-- Price -->
 								<h5 style="color: red;">
@@ -210,7 +211,8 @@
 								<!-- Author -->
 								<p
 									style="overflow: hidden; border: none; text-overflow: ellipsis; display: -webkit-box; line-height: 30px; /* fallback */ max-height: 65px; /* fallback */ -webkit-line-clamp: 2; /* number of lines to
-                                    show */ -webkit-box-orient: vertical;">${author}</p>
+                                    show */ -webkit-box-orient: vertical;">by
+									${author}</p>
 
 								<!-- Price -->
 								<h5 style="color: red;">
@@ -236,9 +238,11 @@
 
 	<!-- Footer -->
 	<tagfiles:footer />
-
-	<!-- BootStrap Scripts & CarouselJavaScript -->
-	<tagfiles:carouselJS />
+	<!-- jQuery -->
+	<tagfiles:jquery_search_query_database />
+<!-- BootStrap Scripts -->
 	<tagfiles:bootstrapScripts />
+	<!-- CarouselJS -->
+	<tagfiles:carouselJS />
 </body>
 </html>

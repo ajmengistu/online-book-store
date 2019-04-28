@@ -10,16 +10,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>OnlineBookStore: Shopping Cart</title>
 
-<tagfiles:bootstrapCSS />
+<tagfiles:jQueryScripts />
 <tagfiles:awesomefonts />
 <tagfiles:carouselCSS />
+<tagfiles:bootstrapCSS />
 <style>
 </style>
 </head>
 <body>
-	<br>
-	<br>
-	<br>
 	<!-- Navigation Bar -->
 	<c:choose>
 		<c:when test="${user != null}">
@@ -142,12 +140,13 @@
 		}
 	</script>
 
-
 	<!-- Footer -->
 	<tagfiles:footer />
-
-	<!-- BootStrap Scripts & CarouselJavaScript -->
-	<tagfiles:carouselJS />
+	<!-- jQuery -->
+	<tagfiles:jquery_search_query_database />
+	<!-- BootStrap Scripts -->
 	<tagfiles:bootstrapScripts />
+	<!-- CarouselJS -->
+	<tagfiles:carouselJS />
 </body>
 </html>

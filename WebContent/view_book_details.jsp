@@ -11,14 +11,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>OnlineBookStore: ${title}</title>
 
-<tagfiles:bootstrapCSS />
+<tagfiles:jQueryScripts />
 <tagfiles:awesomefonts />
 <tagfiles:carouselCSS />
+<tagfiles:bootstrapCSS />
 </head>
 <body>
-	<br>
-	<br>
-	<br>
 	<!-- Navigation Bar -->
 	<c:choose>
 		<c:when test="${user != null}">
@@ -47,7 +45,7 @@
 						<span class="badge badge-success" style="margin-bottom: 15px;">In
 							Stock</span>
 						<h4 class="card-title" style="font-size: 30px;">${title}</h4>
-						<p class="card-text" style="font-size: 20px;">${author}</p>
+						<p class="card-text" style="font-size: 20px;">by ${author}</p>
 						<p class="card-text" style="font-size: 20px;">${yearPublished}</p>
 						<!-- Price -->
 						<h5 style="color: red;">
@@ -96,7 +94,8 @@
 								<!-- Author -->
 								<p
 									style="overflow: hidden; border: none; text-overflow: ellipsis; display: -webkit-box; line-height: 30px; /* fallback */ max-height: 65px; /* fallback */ -webkit-line-clamp: 2; /* number of lines to
-                                    show */ -webkit-box-orient: vertical;">${author}</p>
+                                    show */ -webkit-box-orient: vertical;">by
+									${author}</p>
 
 								<!-- Price -->
 								<h5 style="color: red;">
@@ -117,11 +116,14 @@
 		</div>
 	</div>
 
+	<!-- Footer -->
 	<tagfiles:footer />
-
-	<!-- BootStrap Scripts & CarouselJavaScript -->
-	<tagfiles:carouselJS />
+	<!-- jQuery -->
+	<tagfiles:jquery_search_query_database />
+	<!-- BootStrap Scripts -->
 	<tagfiles:bootstrapScripts />
+	<!-- CarouselJS -->
+	<tagfiles:carouselJS />
 </body>
 </html>
 

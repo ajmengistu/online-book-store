@@ -236,9 +236,9 @@ public class Book {
 					Integer yearPublished = rs
 							.getInt("original_publication_year");
 
-					 book = new Book(bookId, title, new Author(authors),
-					 averageRatings, ratings, imageUrl, new BigDecimal(price), stock,
-					 yearPublished);
+					book = new Book(bookId, title, new Author(authors),
+							averageRatings, ratings, imageUrl, new BigDecimal(
+									price), stock, yearPublished);
 				}
 
 				if (rs != null)
@@ -254,6 +254,53 @@ public class Book {
 		}
 		System.out.println("No Connection...");
 		return book;
+	}
+
+	public static ArrayList<Book> getBookBySearch(String query) {
+		ArrayList<Book> matchedBooks = new ArrayList<>();
+		Connection con = User.getConnection();
+
+		PreparedStatement pstmt = null;
+		if (con != null) {
+			try {
+				String getBook = "SELECT * FROM books WHERE (title LIKE ?) OR (authors LIKE ?) ORDER BY ratings DESC LIMIT 4;";
+				pstmt = con.prepareStatement(getBook);
+				pstmt.setString(1, "%" + query + "%");
+				pstmt.setString(2, "%" + query + "%");
+
+				ResultSet rs = pstmt.executeQuery();
+
+				while (rs.next()) {
+					int bookId = rs.getInt("book_id");
+					String title = rs.getString("title");
+					String authors = rs.getString("authors");
+					Double averageRatings = rs.getDouble("average_ratings");
+					Integer ratings = rs.getInt("ratings");
+					String image = rs.getString("image");
+					String price = rs.getString("price");
+					Integer stock = rs.getInt("stock");
+					Integer yearPublished = rs
+							.getInt("original_publication_year");
+
+					Book book = new Book(bookId, title, new Author(authors),
+							averageRatings, ratings, image, new BigDecimal(
+									price), stock, yearPublished);
+					matchedBooks.add(book);
+				}
+
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+				System.out.println("ERROR: Cannot Retrieve Book");
+				return new ArrayList<Book>();
+			}
+		}
+		System.out.println("No Connection...");
+		return matchedBooks;
 	}
 
 	public boolean equals(Object o) {
@@ -284,7 +331,10 @@ public class Book {
 		// System.out.println(c.getPrice());
 		// System.out.println(b.getPrice() - c.getPrice());
 		// System.out.println(b.getPrice() * 77);
-		System.out.println(getBookById(8).getPrice());
+		// System.out.println(getBookById(8).getPrice());
+
+		for (Book book : getBookBySearch("hemingway"))
+			System.out.println(book.toString());
 
 	}
 }

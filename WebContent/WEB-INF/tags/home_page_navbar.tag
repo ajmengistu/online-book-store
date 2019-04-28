@@ -1,6 +1,6 @@
 <%@ tag language="java" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 	<a class="navbar-brand" href="home"
 		style="color: aquamarine; padding: 10px;"><b>Online</b>BookStore</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -9,19 +9,27 @@
 		<span class="navbar-toggler-icon"></span>
 	</button>
 	<div class="collapse navbar-collapse" id="navbarNavDropdown">
+
 		<ul class="navbar-nav w-100">
-			<li class="nav-item active"><a class="nav-link" href="#">Popular
+			<!-- <li class="nav-item active"><a class="nav-link" href="#">Popular
 					Books <span class="sr-only">(current)</span>
+			</a></li>
+			<li class="nav-item active"><a class="nav-link" href="#"> <span class="sr-only">(current)</span>
 			</a></li>
 			<li class="nav-item active"><a class="nav-link" href="#">
 					Top Rated Books <span class="sr-only">(current)</span>
 			</a></li>
 			<li class="nav-item active"><a class="nav-link" href="#">
 					New Books <span class="sr-only">(current)</span>
-			</a></li>
+			</a></li> -->
 			<li class="nav-item active"><a class="nav-link" href="#">
 					Today's Deals <span class="sr-only">(current)</span>
 			</a></li>
+			<div class="form-group col-md-8 mx-auto">
+				<input class="form-control autocomplete form-control-md"
+					placeholder="Search books"
+					style="border: 0px solid; border-radius: 20px;" />
+			</div>
 			<li class="nav-item"><a class="nav-link" href="#"></a></li>
 			<li class="nav-item"><a class="nav-link" href="#"></a></li>
 			<li class="nav-item dropdown ml-auto"><a

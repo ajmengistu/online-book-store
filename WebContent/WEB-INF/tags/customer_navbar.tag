@@ -1,6 +1,6 @@
 <%@ tag language="java" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 	<a class="navbar-brand" href="home"
 		style="color: aquamarine; padding: 10px;"><b>Online</b>BookStore</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -13,21 +13,17 @@
 			<li class="nav-item active"><a class="nav-link" href="#">Popular
 					Books <span class="sr-only">(current)</span>
 			</a></li>
-			<li class="nav-item active"><a class="nav-link" href="#">
-					Top Rated Books <span class="sr-only">(current)</span>
-			</a></li>
-			<li class="nav-item active"><a class="nav-link" href="#">
-					New Books <span class="sr-only">(current)</span>
-			</a></li>
-			<li class="nav-item active"><a class="nav-link" href="#">
-					Today's Deals <span class="sr-only">(current)</span>
-			</a></li>
-			<li class="nav-item"><a class="nav-link" href="#"></a></li>
-			<li class="nav-item dropdown ml-auto"><a
+			<div class="form-group col-md-8 mx-auto">
+				<input class="form-control autocomplete form-control-md"
+					placeholder="Search books"
+					style="border: 0px solid; border-radius: 20px;" />
+			</div>
+
+			<li class="nav-item dropdown ml-auto" style="margin-right: 15px;"><a
 				class="nav-link dropdown-toggle" href="#"
 				id="navbarDropdownMenuLink" data-toggle="dropdown"
 				aria-haspopup="true" aria-expanded="false"> <span
-					style="color: white;">Welcome, ${user.getLastName()}
+					style="color: aquamarine;">Welcome, ${user.getLastName()}
 						${user.getFirstName()}! </span>
 			</a>
 				<div class="dropdown-menu dropdown-menu-right"
@@ -56,11 +52,13 @@
 						</button>
 					</a>
 				</div></li>
+
 			<li class="nav-item active" style="margin-right: 20px;"><a
 				class="nav-link" href="cart.do"><b><i
 						class="fa
                                     fa-shopping-cart fa-2x"></i>
-						Cart (<span class="text-warning">${numOfItems}</span>)</b> <span class="sr-only">(current)</span></a></li>
+						Cart (<span class="text-warning">${numOfItems}</span>)</b> <span
+					class="sr-only">(current)</span></a></li>
 
 		</ul>
 	</div>
