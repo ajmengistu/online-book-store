@@ -32,6 +32,7 @@ public class AddAddress extends HttpServlet {
 			// Replace this with a 404 page
 			response.sendRedirect(WEB.HOME);
 		} else {
+			User user = (User) session.getAttribute("user");
 			String address = request.getParameter("inputAddress");
 			String address2 = request.getParameter("inputAddress2");
 			String city = request.getParameter("inputCity");
@@ -42,10 +43,11 @@ public class AddAddress extends HttpServlet {
 			System.out.println(zip);
 
 			// Add this new address to the database
-			User.addNewAddress(address, address2, city, state, zip);
-			
+			User.addNewAddress(user.getUserId(), address, address2, city,
+					state, zip);
+
 			// Update userAddressID
-//			session.setAttribute("userAddressId", id);
+			// session.setAttribute("userAddressId", id);
 
 			response.sendRedirect("checkout.do");
 		}

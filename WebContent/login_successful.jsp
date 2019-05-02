@@ -43,7 +43,7 @@
 		src='https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.all.js'></script>
 	<script>
 		swal({
-			title : 'Welcome back, ${user.getFirstName()} ${user.getLastName()}!',
+			title : 'Welcome, ${user.getFirstName()} ${user.getLastName()}!',
 			text : 'Login Successful!',
 			type : 'success'
 		}).then(function() {

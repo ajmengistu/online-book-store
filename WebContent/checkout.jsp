@@ -1,4 +1,5 @@
 <%@ taglib prefix="tagfiles" tagdir="/WEB-INF/tags"%>
+<%@ page import="com.onlinebookstore.controller.WEB"%>
 <%@ taglib prefix="match" uri="match-functions"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -20,20 +21,20 @@
 </head>
 <body>
 	<%
-		// Prevent User from access this page from the URL. They must go through the shopping cart page.
-		/* 
-		if (session == null || session.getAttribute("checkout") == null) {
-				response.sendRedirect("login");
-			} else {
-				session.setAttribute("checkout", null);
-			} 
-		 */
+		response.setHeader("Cache-Control", "no-cache"); //Forces caches to obtain a new copy of the page from the origin server
+		response.setHeader("Cache-Control", "no-store"); //Directs caches not to store the page under any circumstance
+		response.setDateHeader("Expire", 0); //Causes the proxy cache to see the page as "stale"
+		response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
+
+		if (session.getAttribute("user") == null)
+			response.sendRedirect(WEB.LOGIN);
 	%>
 
 
 	<div class="container">
 		<nav class="navbar navbar-expand-lg navbar-light bg-dark"> <span
-			class="navbar-brand" style="color: aquamarine;"><b>Online</b>BookStore</span>
+			class="navbar-brand" style="color: aquamarine;"><a
+			href="home" style="color: inherit; text-decoration: none;"><b>Online</b>BookStore</a></span>
 		</nav>
 	</div>
 	<br>

@@ -744,9 +744,31 @@ public class User {
 		return userAddress;
 	}
 
-	public static void addNewAddress(String address, String address2,
-			String city, String state, int zip) {
-		// TODO Auto-generated method stub
+	public static void addNewAddress(int userId, String address,
+			String address2, String city, String state, int zip) {
+		con = getConnection();
+
+		// place Order
+		PreparedStatement pstmt = null;
+		if (con != null) {
+			try {
+				String addAddress = "INSERT INTO addresses (user_id, address1, address2, city, state, zip, date_added) VALUES (?,?,?,?,?,?, NOW());";
+				pstmt = con.prepareStatement(addAddress);
+				pstmt.setInt(1, userId);
+				pstmt.setString(2, address);
+				pstmt.setString(3, address2);
+				pstmt.setString(4, city);
+				pstmt.setString(5, state);
+				pstmt.setInt(6, zip);
+
+				pstmt.executeUpdate();
+
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public static Pair<Integer, String> placeOrder(int userId, int addressId,
@@ -971,7 +993,7 @@ public class User {
 
 	public static ArrayList<Order> getOrderHistory(int orderId) {
 		con = getConnection();
-System.out.println("hello");
+		System.out.println("hello");
 		ArrayList<Order> orderList = new ArrayList<Order>();
 		PreparedStatement pstmt = null;
 		if (con != null) {
@@ -1036,9 +1058,12 @@ System.out.println("hello");
 	}
 
 	public static void main(String args[]) {
-		for (Order order : getOrderHistory(113)) {
-			System.out.println(order);
-		}
+		addNewAddress(29, "4748 Flower West Dr.", "Studio #5", "Box House",
+				"ND", 49499);
+
+		// for (Order order : getOrderHistory(113)) {
+		// System.out.println(order);
+		// }
 		// System.out
 		// .println(getOrderDetails("61b2d54d-f671-4d5f-ab25-40bcf6ea21bb"));
 		// LocalDate.now().plusDays(5)
