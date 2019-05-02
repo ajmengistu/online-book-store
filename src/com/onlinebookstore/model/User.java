@@ -929,7 +929,11 @@ public class User {
 
 		if (con != null) {
 			try {
-				String query = "SELECT * FROM orders, orders_books, addresses WHERE hash=?;";
+				String query = "SELECT * "
+						+ "FROM orders, orders_books, addresses "
+						+ "WHERE orders.order_id = orders_books.order_id "
+						+ "AND orders.address_id = addresses.address_id "
+						+ "AND orders.hash = ?;";
 				pstmt = con.prepareStatement(query);
 				pstmt.setString(1, hash);
 
@@ -966,8 +970,8 @@ public class User {
 	}
 
 	public static void main(String args[]) {
-		// System.out
-		// .println(getOrderSummary("348109d9-6173-4fb5-a971-8519e42a8cd8"));
+		System.out
+				.println(getOrderDetails("61b2d54d-f671-4d5f-ab25-40bcf6ea21bb"));
 		// LocalDate.now().plusDays(5)
 		// .format(DateTimeFormatter.ofPattern("EEEE, MMMM dd, yyyy"));
 		// String str = "2016-03-04 11:30:40";

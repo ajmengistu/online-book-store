@@ -29,7 +29,9 @@ public class OrderDetails extends HttpServlet {
 		if (user != null) {
 			String hash = request.getParameter("o");
 			Order order = (Order) User.getOrderDetails(hash);
+			System.out.println("----------------------------------------------------------");
 			System.out.println(order);
+			System.out.println("----------------------------------------------------------");
 			session.setAttribute("order", order);
 			request.getRequestDispatcher("/order-details.jsp")
 					.forward(request, response);

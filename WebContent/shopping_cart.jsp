@@ -121,18 +121,33 @@
 		</div>
 	</c:if>
 
+	<c:choose>
+		<c:when test="${user != null}">
+			<c:if test="${empty shoppingCart}">
+				<div class="container">
+					<h4>Your Shopping Cart is empty.</h4>
+					<p>
+						Continue shopping on <a href="home">OnlineBookStore homepage!</a>
+					</p>
+				</div>
+			</c:if>
+
+		</c:when>
+		<c:otherwise>
+			<c:if test="${empty shoppingCart}">
+				<div class="container">
+					<h4>Your Shopping Cart is empty.</h4>
+					<p>
+						If you already have an account, <a href="login">Sign In</a> to see
+						your Cart. Continue shopping on <a href="home">OnlineBookStore
+							homepage!</a>
+					</p>
+				</div>
+			</c:if>
+		</c:otherwise>
+	</c:choose>
 
 
-	<c:if test="${empty shoppingCart}">
-		<div class="container">
-			<h4>Your Shopping Cart is empty.</h4>
-			<p>
-				If you already have an account, <a href="login">Sign In</a> to see
-				your Cart. Continue shopping on <a href="home">OnlineBookStore
-					homepage!</a>
-			</p>
-		</div>
-	</c:if>
 
 	<script>
 		function change(id) {			
