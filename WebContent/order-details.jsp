@@ -1,4 +1,6 @@
 <%@ taglib prefix="tagfiles" tagdir="/WEB-INF/tags"%>
+<%@ page import="com.onlinebookstore.controller.WEB"%>
+
 <%@ taglib prefix="match" uri="match-functions"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -49,18 +51,19 @@
 					<table class="table borderless">
 						<tbody>
 							<tr>
-								<td>Items (${numOfItems}):</td>
-								<td style="">$${subTotal}</td>
+								<td>Items (${order.getOrderList().size()}):</td>
+								<td style="">$${order.getTotal()}</td>
+
 
 							</tr>
 							<tr>
 								<td>Shipping & handling:</td>
-								<td style="">$${shippingCost}</td>
+								<td style=""><%=WEB.SHIPPING_COST%></td>
 
 							</tr>
 							<tr style="background-color: #ccffb3; margin-top: 10%;">
 								<td style="font-weight: bold; font-size: 15px;">Order Total</td>
-								<td style="font-weight: bold; font-size: 15px;">$${totalCost}</td>
+								<td style="font-weight: bold; font-size: 15px;">$${order.getTotal()}</td>
 							</tr>
 						</tbody>
 					</table>

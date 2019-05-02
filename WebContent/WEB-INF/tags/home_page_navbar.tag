@@ -11,9 +11,9 @@
 	<div class="collapse navbar-collapse" id="navbarNavDropdown">
 
 		<ul class="navbar-nav w-100">
-			<li class="nav-item active"><a class="nav-link" href="#">
+			<!-- <li class="nav-item active"><a class="nav-link" href="#">
 					Today's Deals <span class="sr-only">(current)</span>
-			</a></li>
+			</a></li> -->
 			<div class="form-group col-md-8 mx-auto">
 				<input class="form-control autocomplete form-control-md"
 					placeholder="Search books"

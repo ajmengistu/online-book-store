@@ -969,9 +969,78 @@ public class User {
 		return order;
 	}
 
+	public static ArrayList<Order> getOrderHistory(int orderId) {
+		con = getConnection();
+System.out.println("hello");
+		ArrayList<Order> orderList = new ArrayList<Order>();
+		PreparedStatement pstmt = null;
+		if (con != null) {
+			try {
+				String query = "SELECT * "
+						+ "FROM orders, orders_books, addresses "
+						+ "WHERE orders.order_id = orders_books.order_id "
+						+ "AND orders.address_id = addresses.address_id "
+						+ "AND orders.user_id = ? " + "ORDER BY date_ordered "
+						+ "DESC, " + "hash DESC;";
+
+				pstmt = con.prepareStatement(query);
+				pstmt.setInt(1, orderId);
+
+				ResultSet rs = pstmt.executeQuery();
+
+				while (rs.next()) {
+					System.out.println("bye");
+					String prevHash = rs.getString("hash");
+
+					Order order = new Order(new ArrayList<Item>(),
+							rs.getBigDecimal("total"),
+							formatDate(rs.getString("date_ordered")), null,
+							prevHash);
+
+					Book book = Book.getBookById(rs.getInt("book_id"));
+					Item item = new Item(book, rs.getInt("quantity"));
+					order.addItemOrdered(item);
+
+					order.setShippingAddress(User.formatAddress(
+							rs.getString("address1"), rs.getString("address2"),
+							rs.getString("city"), rs.getString("state"),
+							rs.getInt("zip")));
+
+					while (rs.next()) {
+						String currHash = rs.getString("hash");
+						if (prevHash.equals(currHash)) {
+							Book b = Book.getBookById(rs.getInt("book_id"));
+							Item i = new Item(b, rs.getInt("quantity"));
+							// The current book belongs to the same order
+							order.addItemOrdered(i);
+						} else {
+							break;
+						}
+					}
+
+					orderList.add(order);
+
+					rs.previous();
+
+				}
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return orderList;
+	}
+
 	public static void main(String args[]) {
-		System.out
-				.println(getOrderDetails("61b2d54d-f671-4d5f-ab25-40bcf6ea21bb"));
+		for (Order order : getOrderHistory(113)) {
+			System.out.println(order);
+		}
+		// System.out
+		// .println(getOrderDetails("61b2d54d-f671-4d5f-ab25-40bcf6ea21bb"));
 		// LocalDate.now().plusDays(5)
 		// .format(DateTimeFormatter.ofPattern("EEEE, MMMM dd, yyyy"));
 		// String str = "2016-03-04 11:30:40";

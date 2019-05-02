@@ -38,22 +38,23 @@ public class Order {
 	public String getOrderNum() {
 		return this.orderNum;
 	}
-	
-	public void addItemOrdered(Item item){
+
+	public void addItemOrdered(Item item) {
 		this.orderList.add(item);
 	}
-	
-	public void setShippingAddress(String address){
+
+	public void setShippingAddress(String address) {
 		this.shippingAddress = address;
 	}
-	public String toString(){
-		return this.total + " " + this.dateOrdered + " " + this.shippingAddress + " "
-				+ this.orderNum + this.orderListToString();
+
+	public String toString() {
+		return this.total + " " + this.dateOrdered + " " + this.shippingAddress
+				+ " " + this.orderNum + this.orderListToString();
 	}
 
 	public String orderListToString() {
 		StringBuilder list = new StringBuilder();
-		for(Item item : orderList){
+		for (Item item : orderList) {
 			list.append("\n").append(item.toString()).append("\n");
 		}
 		return list.toString();

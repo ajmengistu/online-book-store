@@ -10,9 +10,9 @@
 	</button>
 	<div class="collapse navbar-collapse" id="navbarNavDropdown">
 		<ul class="navbar-nav w-100">
-			<li class="nav-item active"><a class="nav-link" href="#">Popular
+			<!-- <li class="nav-item active"><a class="nav-link" href="#">Popular
 					Books <span class="sr-only">(current)</span>
-			</a></li>
+			</a></li> -->
 			<div class="form-group col-md-8 mx-auto">
 				<input class="form-control autocomplete form-control-md"
 					placeholder="Search books"
@@ -32,7 +32,7 @@
 						class="fa
                                         fa-user"
 						aria-hidden="true"></i>&nbsp&nbsp<span style="font-weight: bold;">Your
-							Account</span> </a> <a class="dropdown-item" href="#"><i
+							Account</span> </a> <a class="dropdown-item" href="order-history"><i
 						class="fa
                                         fa-list"
 						aria-hidden="true"></i>&nbsp&nbsp<span>Your
