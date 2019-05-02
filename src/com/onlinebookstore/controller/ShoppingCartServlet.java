@@ -22,7 +22,6 @@ import com.onlinebookstore.model.User;
 @WebServlet("/cart.do")
 public class ShoppingCartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private BigDecimal SHIPPING_COST = new BigDecimal("5.99");
 	public List<Item> shoppingCart = new ArrayList<Item>();
 
 	/* When a GET Request is made via 'cart.do' */
@@ -128,7 +127,7 @@ public class ShoppingCartServlet extends HttpServlet {
 				subTotal = subTotal.add(temp);
 			}
 			if (!subTotal.equals(new BigDecimal("0.00"))) {
-				shippingCost = this.SHIPPING_COST;
+				shippingCost = WEB.SHIPPING_COST;
 				totalCost = shippingCost.add(subTotal);
 			}
 		}
