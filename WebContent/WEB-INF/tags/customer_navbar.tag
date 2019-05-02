@@ -28,23 +28,19 @@
 			</a>
 				<div class="dropdown-menu dropdown-menu-right"
 					aria-labelledby="navbarDropdownMenuLink">
-					<a class="dropdown-item" href="#"><i
+					<a class="dropdown-item" href="account"><i
 						class="fa
                                         fa-user"
-						aria-hidden="true"></i> <span class="text-success">Your
+						aria-hidden="true"></i>&nbsp&nbsp<span style="font-weight: bold;">Your
 							Account</span> </a> <a class="dropdown-item" href="#"><i
 						class="fa
-                                        fa-envelope"
-						aria-hidden="true"></i> <span class="text-success">${user.getEmail()}</span></a>
-					<a class="dropdown-item" href="#"><i
-						class="fa
                                         fa-list"
-						aria-hidden="true"></i> Your Orders</a> <a class="dropdown-item"
-						href="#"><i
+						aria-hidden="true"></i>&nbsp&nbsp<span>Your
+							Orders</span></a><a class="dropdown-item" href="#"><i
 						class="fa
                                         fa-book"
-						aria-hidden="true"></i> Your Recommendations</a> <br> <a
-						class="dropdown-item" href="logout.do">
+						aria-hidden="true"></i>&nbsp&nbsp<span>Your
+							Recommendations</span></a> <br> <a class="dropdown-item" href="logout.do">
 						<button type="button"
 							class="btn btn-warning
                                         btn-md">

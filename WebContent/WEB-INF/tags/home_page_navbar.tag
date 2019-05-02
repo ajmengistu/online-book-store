@@ -11,17 +11,6 @@
 	<div class="collapse navbar-collapse" id="navbarNavDropdown">
 
 		<ul class="navbar-nav w-100">
-			<!-- <li class="nav-item active"><a class="nav-link" href="#">Popular
-					Books <span class="sr-only">(current)</span>
-			</a></li>
-			<li class="nav-item active"><a class="nav-link" href="#"> <span class="sr-only">(current)</span>
-			</a></li>
-			<li class="nav-item active"><a class="nav-link" href="#">
-					Top Rated Books <span class="sr-only">(current)</span>
-			</a></li>
-			<li class="nav-item active"><a class="nav-link" href="#">
-					New Books <span class="sr-only">(current)</span>
-			</a></li> -->
 			<li class="nav-item active"><a class="nav-link" href="#">
 					Today's Deals <span class="sr-only">(current)</span>
 			</a></li>

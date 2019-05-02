@@ -164,4 +164,12 @@
     <servlet-name>CheckOut</servlet-name>
     <url-pattern>/checkout</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>Account</servlet-name>
+    <jsp-file>/account.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Account</servlet-name>
+    <url-pattern>/account</url-pattern>
+  </servlet-mapping>
 </web-app>
