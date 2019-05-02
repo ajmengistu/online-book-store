@@ -156,4 +156,12 @@
     <servlet-name>ShoppingCart</servlet-name>
     <url-pattern>/shopping_cart</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>CheckOut</servlet-name>
+    <jsp-file>/checkout.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CheckOut</servlet-name>
+    <url-pattern>/checkout</url-pattern>
+  </servlet-mapping>
 </web-app>

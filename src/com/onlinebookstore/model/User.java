@@ -1,5 +1,6 @@
 package com.onlinebookstore.model;
 
+import java.math.BigDecimal;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -8,7 +9,12 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.UUID;
+
+import javafx.util.Pair;
 
 public class User {
 	private String firstName, lastName, email, userRole, password;
@@ -694,8 +700,284 @@ public class User {
 
 	}
 
-	// public static void main(String args[]) {
-	//
-	// }
+	public static Pair<Integer, String> getAddress(int userId) {
+		con = getConnection();
 
+		PreparedStatement pstmt = null;
+		Pair<Integer, String> userAddress = null;
+		if (con != null) {
+			try {
+
+				String getMostRecentlyUsedAddress = "SELECT * FROM addresses WHERE user_id=? ORDER BY date_added DESC;";
+
+				pstmt = con.prepareStatement(getMostRecentlyUsedAddress);
+				pstmt.setInt(1, userId);
+				ResultSet rs = pstmt.executeQuery();
+
+				if (rs.next()) {
+					int addressId = rs.getInt("address_id");
+					String address1 = rs.getString("address1");
+					String address2 = rs.getString("address2");
+
+					if (address2 == null) {
+						address2 = "";
+					} else {
+						address2 = address2 + "<br>";
+					}
+					String address = address1.toUpperCase() + "<br>"
+							+ address2.toUpperCase()
+							+ rs.getString("city").toUpperCase() + ", "
+							+ rs.getString("state").toUpperCase() + " "
+							+ rs.getString("zip").toUpperCase();
+					userAddress = new Pair<Integer, String>(addressId, address);
+				}
+
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return null;
+			}
+		}
+		return userAddress;
+	}
+
+	public static void addNewAddress(String address, String address2,
+			String city, String state, int zip) {
+		// TODO Auto-generated method stub
+	}
+
+	public static Pair<Integer, String> placeOrder(int userId, int addressId,
+			BigDecimal subTotal) {
+		con = getConnection();
+
+		// place Order
+		PreparedStatement pstmt = null;
+		String hash = UUID.randomUUID().toString();
+		if (con != null) {
+			try {
+				String placeOrder = "INSERT INTO orders (hash, total, date_ordered, address_id, user_id) VALUES (?,?, NOW(),?,?);";
+				pstmt = con.prepareStatement(placeOrder);
+				pstmt.setString(1, hash);
+				pstmt.setBigDecimal(2, subTotal);
+				pstmt.setInt(3, addressId);
+				pstmt.setInt(4, userId);
+
+				pstmt.executeUpdate();
+
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		// Get userId below
+		con = getConnection();
+
+		int order_id = -1;
+		pstmt = null;
+		if (con != null) {
+			try {
+				String query = "SELECT order_id FROM orders WHERE hash=?;";
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, hash);
+				ResultSet rs = pstmt.executeQuery();
+
+				if (rs.next()) {
+					order_id = rs.getInt("order_id");
+				}
+
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return new Pair<>(order_id, hash);
+	}
+
+	public static void emptyCart(int userId, ArrayList<Item> shoppingCart) {
+		con = getConnection();
+
+		PreparedStatement pstmt = null;
+		if (con != null) {
+			String emptyCart = "DELETE FROM carts WHERE user_id=?;";
+			try {
+				pstmt = con.prepareStatement(emptyCart);
+				pstmt.setInt(1, userId);
+
+				pstmt.executeUpdate();
+
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public static void placeBookOrders(int orderId, ArrayList<Item> shoppingCart) {
+		con = getConnection();
+
+		PreparedStatement pstmt = null;
+		if (con != null) {
+			try {
+				String placeBookOrders = "INSERT INTO orders_books (order_id, book_id, quantity) VALUES (?,?,?);";
+				pstmt = con.prepareStatement(placeBookOrders);
+
+				for (Item item : shoppingCart) {
+					pstmt.setInt(1, orderId);
+					pstmt.setInt(2, item.getBook().getBookId());
+					pstmt.setInt(3, item.getQuantity());
+
+					pstmt.executeUpdate();
+				}
+
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	public static void placePayment(int orderId, String transactionId) {
+		con = getConnection();
+
+		PreparedStatement pstmt = null;
+		if (con != null) {
+			try {
+				String placePayment = "INSERT INTO payments (order_id, transaction_id, date_created) VALUES (?,?, NOW());";
+				pstmt = con.prepareStatement(placePayment);
+
+				pstmt.setInt(1, orderId);
+				pstmt.setString(2, transactionId);
+
+				pstmt.executeUpdate();
+
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	public static void updateStock(ArrayList<Item> shoppingCart) {
+		con = getConnection();
+
+		PreparedStatement pstmt = null;
+		if (con != null) {
+			String updateStock = "UPDATE books SET stock = stock - ? WHERE book_id=?;";
+			try {
+				pstmt = con.prepareStatement(updateStock);
+
+				for (Item item : shoppingCart) {
+					pstmt = con.prepareStatement(updateStock);
+					pstmt.setInt(1, item.getQuantity());
+					pstmt.setInt(2, item.getBook().getBookId());
+
+					pstmt.executeUpdate();
+				}
+
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public static String formatAddress(String address1, String address2,
+			String city, String state, int zip) {
+
+		if (address2 == null) {
+			address2 = "";
+		} else {
+			address2 = address2 + "<br>";
+		}
+		String address = address1.toUpperCase() + "<br>"
+				+ address2.toUpperCase() + city.toUpperCase() + ", "
+				+ state.toUpperCase() + " " + zip;
+
+		return address;
+
+	}
+
+	public static String formatDate(String date) {
+		// Remove trailing fractional seconds
+		String d = date.substring(0, 19);
+
+		LocalDate formatedDate = LocalDate.parse(d,
+				DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+		return formatedDate.format(DateTimeFormatter
+				.ofPattern("EEEE, MMMM dd, yyyy"));
+	}
+
+	public static Order getOrderDetails(String hash) {
+		con = getConnection();
+
+		Order order = null;
+		PreparedStatement pstmt = null;
+
+		if (con != null) {
+			try {
+				String query = "SELECT * FROM orders, orders_books, addresses WHERE hash=?;";
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, hash);
+
+				ResultSet rs = pstmt.executeQuery();
+
+				if (rs.next()) {
+					order = new Order(new ArrayList<Item>(),
+							rs.getBigDecimal("total"),
+							formatDate(rs.getString("date_ordered")), null,
+							hash);
+					order.setShippingAddress(User.formatAddress(
+							rs.getString("address1"), rs.getString("address2"),
+							rs.getString("city"), rs.getString("state"),
+							rs.getInt("zip")));
+				}
+
+				rs.previous();
+
+				while (rs.next()) {
+					Book book = Book.getBookById(rs.getInt("book_id"));
+					Item item = new Item(book, rs.getInt("quantity"));
+					order.addItemOrdered(item);
+				}
+
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return order;
+	}
+
+	public static void main(String args[]) {
+		// System.out
+		// .println(getOrderSummary("348109d9-6173-4fb5-a971-8519e42a8cd8"));
+		// LocalDate.now().plusDays(5)
+		// .format(DateTimeFormatter.ofPattern("EEEE, MMMM dd, yyyy"));
+		// String str = "2016-03-04 11:30:40";
+		// DateTimeFormatter formatter =
+		// DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		// LocalDateTime dateTime = LocalDateTime.parse(str, formatter);
+		// System.out.println(dateTime.format(DateTimeFormatter.ofPattern("EEEE, MMMM dd, yyyy")));
+		// LocalDate date = LocalDate.parse(str,
+		// DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+		// System.out.println(date.format(DateTimeFormatter
+		// .ofPattern("EEEE, MMMM dd, yyyy")));
+	}
 }
