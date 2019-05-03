@@ -51,7 +51,7 @@
 
 	<div align="center">
 		<form action="search-users" method="post">
-			Search for Users: <input type="text" name="q" /> <input
+			Search for Users: <input type="text" name="q" placeholder="Search" /> <input
 				type="submit" value="Submit" />
 		</form>
 

@@ -15,7 +15,6 @@
 <body>
 	<tagfiles:admin_navbar />
 
-	<!-- Greet User Account Holder -->
 	<%
 		response.setHeader("Cache-Control", "no-cache"); //Forces caches to obtain a new copy of the page from the origin server
 		response.setHeader("Cache-Control", "no-store"); //Directs caches not to store the page under any circumstance
@@ -30,10 +29,8 @@
 		} else if (user.getUserRole().equals(WEB.CUSTOMER)) {
 			response.sendRedirect(WEB.HOME);
 		}
-		
 		BigDecimal netSales = User.getOrdersTotal();
 	%>
-
 	<br>
 	<div style="text-align: center">
 		<h3>Net Sales</h3>
@@ -46,7 +43,7 @@
 					<tbody>
 						<tr>
 							<td style="font-weight: bold;">Net Sales:</td>
-							<td style="font-size: 20px; color: green;">$<%= netSales%></td>
+							<td style="font-size: 20px; color: green;">$<%=netSales%></td>
 						</tr>
 					</tbody>
 				</table>
