@@ -1087,10 +1087,10 @@ public class User {
 	}
 
 	public static void main(String args[]) {
-		try{
-		System.out.println(Integer.parseInt(null));
-		}catch(NumberFormatException e){
-			
+		try {
+			System.out.println(Integer.parseInt(null));
+		} catch (NumberFormatException e) {
+
 		}
 		// addNewAddress(29, "4748 Flower West Dr.", "Studio #5", "Box House",
 		// "ND", 49499);

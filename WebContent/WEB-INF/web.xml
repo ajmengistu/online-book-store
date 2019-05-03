@@ -201,7 +201,7 @@
 	</servlet-mapping>
 		<servlet>
 		<servlet-name>ViewAccount</servlet-name>
-		<jsp-file>/admin-acount.jsp</jsp-file>
+		<jsp-file>/admin-account.jsp</jsp-file>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ViewAccount</servlet-name>

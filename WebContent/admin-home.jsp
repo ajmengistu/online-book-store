@@ -42,8 +42,8 @@
 				<table class="table borderless">
 					<tbody>
 						<tr>
-							<td style="font-weight: bold;">Net Sales:</td>
-							<td style="font-size: 20px; color: green;">$<%=netSales%></td>
+							<td style="font-weight: bold; font-size: 25px;">Net Sales:</td>
+							<td style="font-size: 25px; color: green;">$<%=netSales%></td>
 						</tr>
 					</tbody>
 				</table>

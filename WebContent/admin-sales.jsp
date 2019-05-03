@@ -23,32 +23,32 @@
 
 	<%
 		response.setHeader("Cache-Control", "no-cache"); //Forces caches to obtain a new copy of the page from the origin server
-		response.setHeader("Cache-Control", "no-store"); //Directs caches not to store the page under any circumstance
-		response.setDateHeader("Expire", 0); //Causes the proxy cache to see the page as "stale"
-		response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
+			response.setHeader("Cache-Control", "no-store"); //Directs caches not to store the page under any circumstance
+			response.setDateHeader("Expire", 0); //Causes the proxy cache to see the page as "stale"
+			response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
 
-		User user = (User) session.getAttribute("user");
+			User user = (User) session.getAttribute("user");
 
-		if (user == null) {
-			response.sendRedirect(WEB.LOGIN);
-			// If a Customer requested this page 404 or redirect them to their home 
-		} else if (user.getUserRole().equals(WEB.CUSTOMER)) {
-			response.sendRedirect(WEB.HOME);
-		}
-		int q = -1;
-		String query = request.getParameter("q");
-		try{
-			q = Integer.parseInt(query);
-		}catch(NumberFormatException e){			
-		}
-		if (query == null || query.equals("")){
-			q = 113;
-		}
-		ArrayList<Order> orderList = User.getOrderHistory(q);
-		int len = orderList.size();
-		if(len > 10){
-			len = 10;
-		}
+			if (user == null) {
+		response.sendRedirect(WEB.LOGIN);
+		// If a Customer requested this page 404 or redirect them to their home 
+			} else if (user.getUserRole().equals(WEB.CUSTOMER)) {
+		response.sendRedirect(WEB.HOME);
+			}
+			int q = -1;
+			String query = request.getParameter("q");
+			try{
+		q = Integer.parseInt(query);
+			}catch(NumberFormatException e){			
+			}
+			if (query == null || query.equals("")){
+		q = 113;
+			}
+			ArrayList<Order> orderList = User.getOrderHistory(q);
+			int len = orderList.size();
+			if(len > 10){
+		len = 10;
+			}
 	%>
 
 
@@ -63,7 +63,7 @@
 		</form>
 
 		<br>
-		<h2 align="center">User List</h2>
+		<h2 align="center">Sales List</h2>
 		<table class="table" align="center"
 			style="width: 50%; margin-left: auto; margin-right: auto;">
 			<thead class="thead-dark">
@@ -75,7 +75,6 @@
 				</tr>
 			</thead>
 
-			<%-- <c:forEach items="${orderList}" var="order"> --%>
 			<%
 				for(int i=0; i < len; i++) {
 			%>
@@ -88,7 +87,6 @@
 			<%
 				}
 			%>
-			<%-- </c:forEach> --%>
 		</table>
 	</div>
 

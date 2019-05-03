@@ -8,16 +8,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Book {
-	private String genre, title, ISBN, publisher, image;
+	private String format, title, ISBN, publisher, image;
 	private int yearPublished, stock, numberOfRatings, bookId;
 	private BigDecimal price;
 	private double averageRatings;
 	private Author author;
 
-	public Book(String genre, String title, Author name, String ISBN,
+	public Book(String format, String title, Author name, String ISBN,
 			String publisher, int yearPublished, BigDecimal price, int stock,
 			String image) {
-		this.genre = genre;
+		this.format = format;
 		this.title = title;
 		this.author = name;
 		this.ISBN = ISBN;
@@ -28,6 +28,20 @@ public class Book {
 		this.image = image;
 	}
 
+	public Book(String format, Integer bookId, String title, Author name,
+			Double averageRatings, int numOfRatings, String imageUrl,
+			BigDecimal price, int stock, int yearPublished) {
+		this.format = format;
+		this.title = title;
+		this.author = name;
+		this.averageRatings = averageRatings;
+		this.numberOfRatings = numOfRatings;
+		this.image = imageUrl;
+		this.price = price;
+		this.stock = stock;
+		this.yearPublished = yearPublished;
+		this.bookId = bookId;
+	}
 	public Book(Integer bookId, String title, Author name,
 			Double averageRatings, int numOfRatings, String imageUrl,
 			BigDecimal price, int stock, int yearPublished) {
@@ -67,8 +81,8 @@ public class Book {
 		return numberOfRatings;
 	}
 
-	public String getGenre() {
-		return genre;
+	public String getFormat() {
+		return format;
 	}
 
 	public String getTitle() {
@@ -100,7 +114,7 @@ public class Book {
 	}
 
 	public String toString() {
-		return "Book[genre: " + genre + ", title: " + title + ", author: "
+		return "Book[format: " + format + ", title: " + title + ", author: "
 				+ author + "]";
 	}
 
@@ -126,7 +140,7 @@ public class Book {
 				pstmt.setDouble(6,
 						Double.parseDouble(newBook.getPrice().toString()));
 				pstmt.setInt(7, newBook.getQuantity());
-				pstmt.setString(8, newBook.getGenre());
+				pstmt.setString(8, newBook.getFormat());
 				pstmt.setString(9, newBook.getImage());
 				pstmt.executeUpdate();
 
@@ -256,6 +270,59 @@ public class Book {
 		return book;
 	}
 
+	public static ArrayList<Book> getBooks(int bookId) {
+		Connection con = User.getConnection();
+
+		String query = null;
+		ArrayList<Book> books = new ArrayList<Book>();
+		if (bookId == -1) {
+			query = "SELECT * FROM books ORDER BY stock ASC LIMIT 10;";
+		} else {
+			query = "SELECT * FROM books WHERE book_id = ?;";
+		}
+
+		// Check if item already exist, if it does, get the quantity.
+		PreparedStatement pstmt = null;
+		if (con != null) {
+			try {
+
+				pstmt = con.prepareStatement(query);
+				if (bookId != -1) {
+					pstmt.setInt(1, bookId);
+				}
+
+				ResultSet rs = pstmt.executeQuery();
+
+				while (rs.next()) {
+					int bkId = rs.getInt("book_id");
+					String format = rs.getString("book_format");					
+					String title = rs.getString("title");
+					String authors = rs.getString("authors");
+					Double averageRatings = rs.getDouble("average_ratings");
+					Integer ratings = rs.getInt("ratings");
+					String image = rs.getString("image");
+					String price = rs.getString("price");
+					Integer stock = rs.getInt("stock");
+					Integer yearPublished = rs
+							.getInt("original_publication_year");
+
+					Book book = new Book(format, bkId, title, new Author(authors),
+							averageRatings, ratings, image, new BigDecimal(
+									price), stock, yearPublished);
+					books.add(book);
+				}
+
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return books;
+	}
+
 	public static ArrayList<Book> getBookBySearch(String query) {
 		ArrayList<Book> matchedBooks = new ArrayList<>();
 		Connection con = User.getConnection();
@@ -333,7 +400,7 @@ public class Book {
 		// System.out.println(b.getPrice() * 77);
 		// System.out.println(getBookById(8).getPrice());
 
-		for (Book book : getBookBySearch("hemingway"))
+		for (Book book : getBooks(1))
 			System.out.println(book.toString());
 
 	}
