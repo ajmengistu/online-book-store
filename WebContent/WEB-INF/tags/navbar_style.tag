@@ -21,7 +21,7 @@ body {
 	color: white;
 	text-decoration: none;
 	font-size: 17px;
-	width: 20%; /* Four links of equal widths */
+	width: 10%; /* Four links of equal widths */
 	text-align: center;
 }
 

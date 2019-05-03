@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class SearchUsers
  */
-@WebServlet("/SearchUsers")
+@WebServlet("/search-users")
 public class SearchUsers extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -22,11 +22,6 @@ public class SearchUsers extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-
-		String query = request.getParameter("query");
-		request.setAttribute("query", query);
-		RequestDispatcher view = request.getRequestDispatcher("view_users.jsp");
-		view.forward(request, response);
 	}
 
 	/**
@@ -35,6 +30,10 @@ public class SearchUsers extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		String query = request.getParameter("q");
+		request.setAttribute("query", query);
+		RequestDispatcher view = request.getRequestDispatcher("view_users.jsp");
+		view.forward(request, response);
 	}
 
 }

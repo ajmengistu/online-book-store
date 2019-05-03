@@ -23,15 +23,16 @@
 			response.sendRedirect(WEB.LOGIN);
 		} else {
 			User user = (User) session.getAttribute("user");
-			if (user.getUserRole() == WEB.ADMINISTRATOR) {
-		url = "/online-book-store/admin_welcome";
+			
+			if (user.getUserRole().equals(WEB.ADMINISTRATOR)) {
+				url = "/online-book-store/admin_welcome";
 			} else {
-		if (session.getAttribute("cart") != null) {
-			url = "/online-book-store/cart.do";
-		} else {
-			// Send User to their home page. Note: User must have signed-in with an empty shoppingCart. 
-			url = "/online-book-store/home";
-		}
+				if (session.getAttribute("cart") != null) {
+					url = "/online-book-store/cart.do";
+				} else {
+					// Send User to their home page. Note: User must have signed-in with an empty shoppingCart. 
+					url = "/online-book-store/home";
+				}
 			}
 			session.setAttribute("login_status", null);
 		}

@@ -21,14 +21,10 @@
 <tagfiles:navbar_style />
 </head>
 <body>
-	<tagfiles:title_header />
-
-	<h2 align=center style="color: rgb(35, 216, 35);">Administrator
-		Account</h2>
-
-	<!-- Greet User Account Holder -->
+	<!-- Administrator User Navigation Bar -->
+	<tagfiles:admin_navbar />
 	<div>
-		<%
+		<%-- <%
 			response.setHeader("Cache-Control", "no-cache"); //Forces caches to obtain a new copy of the page from the origin server
 			response.setHeader("Cache-Control", "no-store"); //Directs caches not to store the page under any circumstance
 			response.setDateHeader("Expire", 0); //Causes the proxy cache to see the page as "stale"
@@ -49,10 +45,8 @@
 		%>
 		<p align="center" style="color: black; font-weight: bold;"><%="Hello, " + firstName + " " + lastName + ".\n"
 					+ "Email: " + email%></p>
+ --%>
 	</div>
-
-	<!-- Administrator User Navigation Bar -->
-	<tagfiles:admin_navbar />
 
 	<!-- Form to Add Books to the Database -->
 	<br>

@@ -10,23 +10,16 @@
 <title>Search Users</title>
 
 <!-- Bootstrap CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-
+<tagfiles:bootstrapCSS />
 <!-- Font-Awesome CSS -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+<tagfiles:awesomefonts />
 <tagfiles:navbar_style />
 </head>
 <body>
-	<tagfiles:title_header />
-
-	<h2 align=center style="color: rgb(35, 216, 35);">Administrator
-		Account</h2>
+	<tagfiles:admin_navbar />
 
 	<div>
-		<%
+		<%-- 	<%
 			response.setHeader("Cache-Control", "no-cache"); //Forces caches to obtain a new copy of the page from the origin server
 			response.setHeader("Cache-Control", "no-store"); //Directs caches not to store the page under any circumstance
 			response.setDateHeader("Expire", 0); //Causes the proxy cache to see the page as "stale"
@@ -47,17 +40,18 @@
 
 		<p align="center" style="color: black; font-weight: bold;"><%="Hello, " + firstName + " " + lastName + ".\n"
 					+ "Email: " + email%></p>
+ --%>
 	</div>
 
-	<tagfiles:admin_navbar />
+
 
 	<br>
 	<br>
 	<br>
 
 	<div align="center">
-		<form action="search" method="get">
-			Search for Users: <input type="text" name="query" /> <input
+		<form action="search-users" method="post">
+			Search for Users: <input type="text" name="q" /> <input
 				type="submit" value="Submit" />
 		</form>
 

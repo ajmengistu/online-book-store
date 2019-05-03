@@ -8,19 +8,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Welcome</title>
 
-<tagfiles:navbar_style />
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<tagfiles:awesomefonts />
+<tagfiles:bootstrapCSS />
 </head>
 <body>
-	<tagfiles:title_header />
-
-	<h2 align=center style="color: rgb(35, 216, 35);">Administrator
-		Account</h2>
+	<tagfiles:admin_navbar />
 
 	<!-- Greet User Account Holder -->
 	<div>
-		<%
+		<%-- <%
 			response.setHeader("Cache-Control", "no-cache"); //Forces caches to obtain a new copy of the page from the origin server
 			response.setHeader("Cache-Control", "no-store"); //Directs caches not to store the page under any circumstance
 			response.setDateHeader("Expire", 0); //Causes the proxy cache to see the page as "stale"
@@ -38,13 +34,15 @@
 				response.sendRedirect(WEB.WELCOME);
 			}
 		%>
-		<p align="center" style="color: black; font-weight: bold;"><%="Hello, " + firstName + " " + lastName + ".\n"
+ 
+ <p align="center" style="color: black; font-weight: bold;"><%="Hello, " + firstName + " " + lastName + ".\n"
 					+ "Email: " + email%></p>
 	</div>
 
-	<tagfiles:admin_navbar />
 
 	<p align=center
 		style="color: black; font-size: 32px; font-weight: bold; margin-top: 200px;"><%="Welcome back, " + firstName + " " + lastName + "!"%></p>
+--%>
+<tagfiles:bootstrapScripts />
 </body>
 </html>
