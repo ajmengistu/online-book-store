@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>OnlineBookStore: Your Account</title>
+<title>OnlineBookStore: Your Admin Account</title>
 
 <tagfiles:jQueryScripts />
 <tagfiles:awesomefonts />

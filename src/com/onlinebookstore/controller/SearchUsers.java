@@ -32,7 +32,7 @@ public class SearchUsers extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		String query = request.getParameter("q");
 		request.setAttribute("query", query);
-		RequestDispatcher view = request.getRequestDispatcher("view_users.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("view-users.jsp");
 		view.forward(request, response);
 	}
 

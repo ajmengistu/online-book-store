@@ -1057,10 +1057,39 @@ public class User {
 		return orderList;
 	}
 
-	public static void main(String args[]) {
-		addNewAddress(29, "4748 Flower West Dr.", "Studio #5", "Box House",
-				"ND", 49499);
+	public static BigDecimal getOrdersTotal() {
+		con = getConnection();
+		BigDecimal total = new BigDecimal("-1");
 
+		// Check if item already exist, if it does, get the quantity.
+		PreparedStatement pstmt = null;
+		if (con != null) {
+			try {
+				String getTotal = "SELECT " + "SUM(total) as revenue "
+						+ "FROM orders;";
+				pstmt = con.prepareStatement(getTotal);
+
+				ResultSet rs = pstmt.executeQuery();
+
+				if (rs.next()) {
+					total = rs.getBigDecimal("revenue");
+				}
+
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return total;
+	}
+
+	public static void main(String args[]) {
+		// addNewAddress(29, "4748 Flower West Dr.", "Studio #5", "Box House",
+		// "ND", 49499);
+		// System.out.println(getOrdersTotal());
 		// for (Order order : getOrderHistory(113)) {
 		// System.out.println(order);
 		// }

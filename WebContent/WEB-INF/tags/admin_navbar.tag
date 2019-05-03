@@ -6,24 +6,24 @@
         aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" href="#" style="color:aquamarine;">Online<b>BookStore</b></a>
+      <a class="navbar-brand" href="admin-home" style="color:aquamarine;">Online<b>BookStore</b></a>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
           <li class="nav-item active">
-            <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="admin-home">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="#">Sales/Orders <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="admin-sales">Sales/Orders <span class="sr-only">(current)</span></a>
           </li> <li class="nav-item active">
-            <a class="nav-link" href="#">Payments <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="admin-payments">Payments <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="view_users">Customers/Users <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="view-users">Customers/Users <span class="sr-only">(current)</span></a>
           </li> <li class="nav-item active">
-            <a class="nav-link" href="#">Stock <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="admin-stock">Stock <span class="sr-only">(current)</span></a>
           </li>
           </li> <li class="nav-item active">
-            <a class="nav-link" href="add_books">Add Books <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="add-books">Add Books <span class="sr-only">(current)</span></a>
           </li>
         </ul>
         <!-- <form class="form-inline my-2 my-lg-0">
@@ -34,10 +34,10 @@
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
             role="button" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">
-            <span style="color:aquamarine;">Welcome, John Doe!</span>
+            <span style="color:aquamarine;">Welcome, ${user.getFirstName()} ${user.getLastName()}!</span>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Your Account</a>
+            <a class="dropdown-item" href="admin-account">Your Account</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="logout.do"><button class="btn btn-warning">Sign
                 out</button></a>

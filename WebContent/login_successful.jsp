@@ -23,20 +23,22 @@
 			response.sendRedirect(WEB.LOGIN);
 		} else {
 			User user = (User) session.getAttribute("user");
-			
+
 			if (user.getUserRole().equals(WEB.ADMINISTRATOR)) {
-				url = "/online-book-store/admin_welcome";
+				url = WEB.ADMIN_HOME;
 			} else {
 				if (session.getAttribute("cart") != null) {
-					url = "/online-book-store/cart.do";
+					// Note: User/Customer logged-in with a non-empty shopping cart 
+					url = "cart.do";
 				} else {
 					// Send User to their home page. Note: User must have signed-in with an empty shoppingCart. 
-					url = "/online-book-store/home";
+					url = WEB.HOME;
 				}
 			}
 			session.setAttribute("login_status", null);
 		}
 	%>
+
 
 	<script
 		src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js'></script>
