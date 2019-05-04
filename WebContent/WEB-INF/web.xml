@@ -94,42 +94,8 @@
 	<servlet-mapping>
 		<servlet-name>AdminWelcomePage</servlet-name>
 		<url-pattern>/admin-home</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>RegisterServlet</servlet-name>
-		<servlet-class>com.onlinebookstore.controller.RegisterServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>RegisterServlet</servlet-name>
-		<url-pattern>/register.do</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>SuccessfulRegistrationPage</servlet-name>
-		<jsp-file>/registration_successful.jsp</jsp-file>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>SuccessfulRegistrationPage</servlet-name>
-		<url-pattern>/registration_successful</url-pattern>
-	</servlet-mapping>
+	</servlet-mapping>	
 	
-	
-	
-	<servlet>
-		<servlet-name>WelcomePage</servlet-name>
-		<jsp-file>/welcome.jsp</jsp-file>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>WelcomePage</servlet-name>
-		<url-pattern>/welcome</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>LogoutServlet</servlet-name>
-		<servlet-class>com.onlinebookstore.controller.LogoutServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>LogoutServlet</servlet-name>
-		<url-pattern>/logout.do</url-pattern>
-	</servlet-mapping>
 	<servlet>
 		<servlet-name>AddBooksPage</servlet-name>
 		<jsp-file>/admin-add-books.jsp</jsp-file>
@@ -138,38 +104,10 @@
 		<servlet-name>AddBooksPage</servlet-name>
 		<url-pattern>/admin-add-books</url-pattern>
 	</servlet-mapping>
-	<servlet>
-		<servlet-name>AddBookServlet</servlet-name>
-		<servlet-class>com.onlinebookstore.controller.AddBookServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>AddBookServlet</servlet-name>
-		<url-pattern>/add_books.do</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>AddBookErrorPage</servlet-name>
-		<jsp-file>/add_books_error.jsp</jsp-file>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>AddBookErrorPage</servlet-name>
-		<url-pattern>/add_books_error</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>AddBookSuccessPage</servlet-name>
-		<jsp-file>/add_books_success.jsp</jsp-file>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>AddBookSuccessPage</servlet-name>
-		<url-pattern>/add_books_success</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>SearchUsers</servlet-name>
-		<servlet-class>com.onlinebookstore.controller.SearchUsers</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>SearchUsers</servlet-name>
-		<url-pattern>/search_users</url-pattern>
-	</servlet-mapping>
+
+
+
+
 	<servlet>
 		<servlet-name>ViewUsers</servlet-name>
 		<jsp-file>/admin-view-users.jsp</jsp-file>

@@ -20,7 +20,6 @@
 			response.sendRedirect(WEB.LOGIN);
 		} else {
 			session.setAttribute("registration_status", null);
-			//session.invalidate();
 		}
 	%>
 	<script
@@ -33,7 +32,7 @@
 			text : 'Registration Successful!',
 			type : 'success'
 		}).then(function() {
-			window.location = '/online-book-store/login';
+			window.location = '<%=WEB.LOGIN%>';
 		});
 	</script>
 </body>
