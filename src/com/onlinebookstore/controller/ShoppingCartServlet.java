@@ -29,11 +29,11 @@ public class ShoppingCartServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Inside");
 		HttpSession session = request.getSession(false);
-		if (session != null && session.getAttribute("user") != null) {
+		if (session != null && session.getAttribute(WEB.USER) != null) {
 			System.out.println("FIRSTTIME------------");
 
 			if (session.getAttribute("shoppingCart") == null) {
-				User user = (User) session.getAttribute("user");
+				User user = (User) session.getAttribute(WEB.USER);
 				shoppingCart = User.getCart(user.getUserId());
 				System.out.println("hello");
 			}
@@ -45,7 +45,7 @@ public class ShoppingCartServlet extends HttpServlet {
 			getCost(session);
 			getTotalNumOfItems(session);
 			session.setAttribute("shoppingCart", shoppingCart);
-			response.sendRedirect("shopping_cart");
+			response.sendRedirect(WEB.SHOPPING_CART);
 		}
 	}
 
@@ -109,7 +109,7 @@ public class ShoppingCartServlet extends HttpServlet {
 		getCost(session);
 		getTotalNumOfItems(session);
 		session.setAttribute("shoppingCart", shoppingCart);
-		response.sendRedirect("shopping_cart");
+		response.sendRedirect(WEB.SHOPPING_CART);
 
 	}
 

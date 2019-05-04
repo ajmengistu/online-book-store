@@ -44,6 +44,40 @@
 		<servlet-name>AdminSignOut</servlet-name>
 		<url-pattern>/errors/admin-sign-out</url-pattern>
 	</servlet-mapping>
+	<!-- CUSTOMER -->
+		<servlet>
+		<servlet-name>Account</servlet-name>
+		<jsp-file>/c/account.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Account</servlet-name>
+		<url-pattern>/c/account</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>ShoppingCart</servlet-name>
+		<jsp-file>/c/shopping-cart.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ShoppingCart</servlet-name>
+		<url-pattern>/c/shopping-cart</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>ViewBookDetails</servlet-name>
+		<jsp-file>/book/book-details.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ViewBookDetails</servlet-name>
+		<url-pattern>/book/book-details</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>CheckOut</servlet-name>
+		<jsp-file>/c/checkout.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CheckOut</servlet-name>
+		<url-pattern>/c/checkout</url-pattern>
+	</servlet-mapping>
+	
 	<!-- 
 	<servlet>
 		<servlet-name>AdminRegisterPage</servlet-name>
@@ -153,22 +187,8 @@
 		<servlet-name>ViewBookDetails</servlet-name>
 		<url-pattern>/view_book_details</url-pattern>
 	</servlet-mapping>
-	<servlet>
-		<servlet-name>ShoppingCart</servlet-name>
-		<jsp-file>/shopping_cart.jsp</jsp-file>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ShoppingCart</servlet-name>
-		<url-pattern>/shopping_cart</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>CheckOut</servlet-name>
-		<jsp-file>/checkout.jsp</jsp-file>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>CheckOut</servlet-name>
-		<url-pattern>/checkout</url-pattern>
-	</servlet-mapping>
+	
+	
 	<servlet>
 		<servlet-name>Account</servlet-name>
 		<jsp-file>/account.jsp</jsp-file>

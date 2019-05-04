@@ -22,7 +22,7 @@ import com.braintreegateway.ValidationError;
 import com.onlinebookstore.model.Item;
 import com.onlinebookstore.model.User;
 
-@WebServlet("/c/place-order")
+@WebServlet("/c/place-order.do")
 public class OrderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -94,8 +94,12 @@ public class OrderServlet extends HttpServlet {
 			// shoppingCart session
 			// Show paymentSuccessful
 			session.setAttribute("hash", pair.getValue());
-			request.getRequestDispatcher("payment-successful.jsp").forward(
-					request, response);
+			System.out.println("--before success");
+			// request.getRequestDispatcher("online-book-store/success/payment-successful.jsp").forward(
+			// request, response);
+			session.setAttribute("payment-status", WEB.SUCCESSFUL);
+			response.sendRedirect(WEB.PAYMENT_SUCCESSFUL);
+			System.out.println("--after success");
 		} else if (result.getTransaction() != null) {
 			Transaction transaction = result.getTransaction();
 			System.out.println("Failed!: " + transaction.getId());
@@ -108,7 +112,7 @@ public class OrderServlet extends HttpServlet {
 
 			// show paymentFailed message
 			// redirect back to checkout page
-			request.getRequestDispatcher("paymentFailed.jsp").forward(request,
+			request.getRequestDispatcher(WEB.PAYMENT_FAILED).forward(request,
 					response);
 		} else {
 			for (ValidationError error : result.getErrors()
@@ -119,21 +123,9 @@ public class OrderServlet extends HttpServlet {
 			}
 			// show paymentFailed message
 			// redirect back to checkout page
-			request.getRequestDispatcher("paymentFailed.jsp").forward(request,
+			request.getRequestDispatcher(WEB.PAYMENT_FAILED).forward(request,
 					response);
 		}
 
 	}
-
-	// public static void main(String[] args) {
-	// // String uniqueID = UUID.randomUUID().toString();
-	// // System.out.println(uniqueID);
-	// BraintreeGateway gateway = new BraintreeGateway(Environment.SANDBOX,
-	// WEB.MERCHANT_ID, WEB.PUBLIC_KEY, WEB.PRIVATE_KEY);
-	// PaymentMethod paymentMethod = gateway.paymentMethod().find(""
-	// +
-	// "eyJ2ZXJzaW9uIjoyLCJhdXRob3JpemF0aW9uRmluZ2VycHJpbnQiOiJkYmEzOGFmZGU1OGRjYzAwNGY1YTgzOTY2ODhlMjJlM2YxNDFjODU3MzY1ZjUyNGFmNjVhZmIwMzRkNDVjNWMzfGNyZWF0ZWRfYXQ9MjAxOS0wNS0wMlQxNzowMjo0OC42OTQ0NDkyMjYrMDAwMFx1MDAyNm1lcmNoYW50X2lkPTY0Zm1iZng0bXQ2cGM2OWpcdTAwMjZwdWJsaWNfa2V5PWNudDVybnF0NXp4Y21jYmYiLCJjb25maWdVcmwiOiJodHRwczovL2FwaS5zYW5kYm94LmJyYWludHJlZWdhdGV3YXkuY29tOjQ0My9tZXJjaGFudHMvNjRmbWJmeDRtdDZwYzY5ai9jbGllbnRfYXBpL3YxL2NvbmZpZ3VyYXRpb24iLCJncmFwaFFMIjp7InVybCI6Imh0dHBzOi8vcGF5bWVudHMuc2FuZGJveC5icmFpbnRyZWUtYXBpLmNvbS9ncmFwaHFsIiwiZGF0ZSI6IjIwMTgtMDUtMDgifSwiY2hhbGxlbmdlcyI6W10sImVudmlyb25tZW50Ijoic2FuZGJveCIsImNsaWVudEFwaVVybCI6Imh0dHBzOi8vYXBpLnNhbmRib3guYnJhaW50cmVlZ2F0ZXdheS5jb206NDQzL21lcmNoYW50cy82NGZtYmZ4NG10NnBjNjlqL2NsaWVudF9hcGkiLCJhc3NldHNVcmwiOiJodHRwczovL2Fzc2V0cy5icmFpbnRyZWVnYXRld2F5LmNvbSIsImF1dGhVcmwiOiJodHRwczovL2F1dGgudmVubW8uc2FuZGJveC5icmFpbnRyZWVnYXRld2F5LmNvbSIsImFuYWx5dGljcyI6eyJ1cmwiOiJodHRwczovL29yaWdpbi1hbmFseXRpY3Mtc2FuZC5zYW5kYm94LmJyYWludHJlZS1hcGkuY29tLzY0Zm1iZng0bXQ2cGM2OWoifSwidGhyZWVEU2VjdXJlRW5hYmxlZCI6dHJ1ZSwicGF5cGFsRW5hYmxlZCI6dHJ1ZSwicGF5cGFsIjp7ImRpc3BsYXlOYW1lIjoib25saW5lYm9va3N0b3JlIiwiY2xpZW50SWQiOm51bGwsInByaXZhY3lVcmwiOiJodHRwOi8vZXhhbXBsZS5jb20vcHAiLCJ1c2VyQWdyZWVtZW50VXJsIjoiaHR0cDovL2V4YW1wbGUuY29tL3RvcyIsImJhc2VVcmwiOiJodHRwczovL2Fzc2V0cy5icmFpbnRyZWVnYXRld2F5LmNvbSIsImFzc2V0c1VybCI6Imh0dHBzOi8vY2hlY2tvdXQucGF5cGFsLmNvbSIsImRpcmVjdEJhc2VVcmwiOm51bGwsImFsbG93SHR0cCI6dHJ1ZSwiZW52aXJvbm1lbnROb05ldHdvcmsiOnRydWUsImVudmlyb25tZW50Ijoib2ZmbGluZSIsInVudmV0dGVkTWVyY2hhbnQiOmZhbHNlLCJicmFpbnRyZWVDbGllbnRJZCI6Im1hc3RlcmNsaWVudDMiLCJiaWxsaW5nQWdyZWVtZW50c0VuYWJsZWQiOnRydWUsIm1lcmNoYW50QWNjb3VudElkIjoib25saW5lYm9va3N0b3JlIiwiY3VycmVuY3lJc29Db2RlIjoiVVNEIn0sIm1lcmNoYW50SWQiOiI2NGZtYmZ4NG10NnBjNjlqIiwidmVubW8iOiJvZmYifQ==");
-	// System.out.println(paymentMethod.getClass().getName());
-	// System.out.println(paymentMethod.getClass());
-	// }
 }

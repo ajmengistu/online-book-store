@@ -26,21 +26,12 @@
 		response.setDateHeader("Expire", 0); //Causes the proxy cache to see the page as "stale"
 		response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
 
-		if (session.getAttribute("user") == null)
+		if (session.getAttribute(WEB.USER) == null)
 			response.sendRedirect(WEB.LOGIN);
+
 		Order order = (Order) session.getAttribute("order");
 		BigDecimal total = WEB.SHIPPING_COST.add(order.getTotal());
 	%>
-
-
-
-
-
-
-
-
-
-
 	<!-- Navigation Bar -->
 	<c:choose>
 		<c:when test="${user != null}">
@@ -103,9 +94,6 @@
 						<thead>
 							<tr style="text-align: center;">
 								<th style="width: 10%">Product</th>
-								<!-- <th style="width: 35%"></th>
-								<th style="width: 8%">Price</th>
-								<th style="width: 50%">Quantity</th> -->
 							</tr>
 						</thead>
 						<tbody>

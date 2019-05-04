@@ -25,7 +25,7 @@ public class OrderDetails extends HttpServlet {
 		System.out.println(request.getParameter("o"));
 		HttpSession session = request.getSession();
 
-		User user = (User) session.getAttribute("user");
+		User user = (User) session.getAttribute(WEB.USER);
 
 		if (user != null) {
 			String hash = request.getParameter("o");
@@ -37,7 +37,7 @@ public class OrderDetails extends HttpServlet {
 					.println("----------------------------------------------------------");
 			if (order != null) {
 				session.setAttribute("order", order);
-				request.getRequestDispatcher("/order-details.jsp").forward(
+				request.getRequestDispatcher("/c/order-details.jsp").forward(
 						request, response);
 			} else {
 				request.getRequestDispatcher(WEB.ERROR_404).forward(

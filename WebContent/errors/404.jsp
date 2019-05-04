@@ -19,7 +19,7 @@
 	<div class="container">
 		<h3 style="text-align: center">SORRY, we couldn't find that page</h3>
 		<h5 style="text-align: center">
-			Try searching or go to <a href="home">OnlineBookStore's home page</a>
+			Try searching or go to <a href=<%=WEB.HOME%>>OnlineBookStore's home page</a>
 		</h5>
 		<br> <br> <img alt=""
 			src="http://localhost:8080/online-book-store/images/brown-dog.jpg"

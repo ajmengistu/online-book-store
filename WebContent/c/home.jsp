@@ -51,7 +51,7 @@
 						<div class="card" style="border: none;">
 
 							<!-- Book Image -->
-							<a href="book?id=${bookId}&title=${title}"><img
+							<a href="/online-book-store/book/bk?id=${bookId}&title=${title}"><img
 								src="${image}" alt="img" title="${title}"
 								style="height: 210px; width: 120px; margin-left: 20px;"></a>
 
@@ -60,7 +60,7 @@
 								<h6 class="card-text"
 									style="overflow: hidden; border: none; text-overflow: ellipsis; display: -webkit-box; line-height: 30px; /* fallback */ max-height: 65px; /* fallback */ -webkit-line-clamp: 2; /* number of lines to
                                     show */ -webkit-box-orient: vertical;">
-									<a href="book?id=${bookId}&title=${title}">${title}</a>
+									<a href="/online-book-store/book/bk?id=${bookId}&title=${title}">${title}</a>
 								</h6>
 
 								<!-- Author -->
@@ -103,7 +103,7 @@
 						<div class="card" style="border: none;">
 
 							<!-- Book Image -->
-							<a href="book?id=${bookId}&title=${title}"><img
+							<<a href="/online-book-store/book/bk?id=${bookId}&title=${title}"><img
 								src="${image}" alt="img" title="${title}"
 								style="height: 210px; width: 120px; margin-left: 20px;"></a>
 
@@ -112,7 +112,7 @@
 								<h6 class="card-text"
 									style="overflow: hidden; border: none; text-overflow: ellipsis; display: -webkit-box; line-height: 30px; /* fallback */ max-height: 65px; /* fallback */ -webkit-line-clamp: 2; /* number of lines to
                                     show */ -webkit-box-orient: vertical;">
-									<a href="book?id=${bookId}&title=${title}">${title}</a>
+									<a href="/online-book-store/book/bk?id=${bookId}&title=${title}">${title}</a>
 								</h6>
 
 								<!-- Author -->
@@ -155,7 +155,7 @@
 						<div class="card" style="border: none;">
 
 							<!-- Book Image -->
-							<a href="book?id=${bookId}&title=${title}"><img
+							<a href="/online-book-store/book/bk?id=${bookId}&title=${title}"><img
 								src="${image}" alt="img" title="${title}"
 								style="height: 210px; width: 120px; margin-left: 20px;"></a>
 
@@ -164,7 +164,7 @@
 								<h6 class="card-text"
 									style="overflow: hidden; border: none; text-overflow: ellipsis; display: -webkit-box; line-height: 30px; /* fallback */ max-height: 65px; /* fallback */ -webkit-line-clamp: 2; /* number of lines to
                                     show */ -webkit-box-orient: vertical;">
-									<a href="book?id=${bookId}&title=${title}">${title}</a>
+									<a href="/online-book-store/book/bk?id=${bookId}&title=${title}">${title}</a>
 								</h6>
 
 								<!-- Author -->
@@ -206,7 +206,7 @@
 						<div class="card" style="border: none;">
 
 							<!-- Book Image -->
-							<a href="book?id=${bookId}&title=${title}"><img
+							<a href="/online-book-store/book/bk?id=${bookId}&title=${title}"><img
 								src="${image}" alt="img" title="${title}"
 								style="height: 210px; width: 120px; margin-left: 20px;"></a>
 
@@ -215,7 +215,7 @@
 								<h6 class="card-text"
 									style="overflow: hidden; border: none; text-overflow: ellipsis; display: -webkit-box; line-height: 30px; /* fallback */ max-height: 65px; /* fallback */ -webkit-line-clamp: 2; /* number of lines to
                                     show */ -webkit-box-orient: vertical;">
-									<a href="book?id=${bookId}&title=${title}">${title}</a>
+									<a href="/online-book-store/book/bk?id=${bookId}&title=${title}">${title}</a>
 								</h6>
 
 								<!-- Author -->

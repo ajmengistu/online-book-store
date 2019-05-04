@@ -1,7 +1,7 @@
 <%@ taglib prefix="tagfiles" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="match" uri="match-functions"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ page import="com.onlinebookstore.controller.WEB"%>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -39,9 +39,6 @@
 				</div>
 				<div class="col" style="margin-left: 50px;">
 					<div class="card-block px-2">
-						<!-- <span class="badge badge-danger" style="margin-bottom: 15px;">Out
-							of Stock</span> <span class="badge badge-warning"
-							style="margin-bottom: 15px;">Low in Stock</span> -->
 						<span class="badge badge-success" style="margin-bottom: 15px;">In
 							Stock</span>
 						<h4 class="card-title" style="font-size: 30px;">${title}</h4>
@@ -55,7 +52,7 @@
 							<match:ListStarRatings rating="${averageRatings}"></match:ListStarRatings>
 							<span>${numOfRatings}</span>
 						</p>
-						<form action="cart.do?id=${bookId}" method="post">
+						<form action='<%=WEB.CART_DO%>?id=${bookId}' method="post">
 							<button class="btn btn-primary" style="">Add to Cart</button>
 						</form>
 					</div>
@@ -69,8 +66,6 @@
 		<br>
 	</div>
 
-	<!-- Send A query via a query tag to get items that have similar authors & popular by that year -->
-	<!--  -->
 
 	<div class="container mt-3">
 		<div class="row">
@@ -80,15 +75,16 @@
 						<div class="card" style="border: none;">
 
 							<!-- Book Image -->
-							<img src="${image}" alt="img"
-								style="height: 210px; width: 120px; margin-left: 20px;">
+							<a href="/online-book-store/book/bk?id=${bookId}&title=${title}"><img
+								src="${image}" alt="img" title="${title}"
+								style="height: 210px; width: 120px; margin-left: 20px;"></a>
 
 							<div class="card-body">
 								<!-- Title -->
 								<h6 class="card-text"
 									style="overflow: hidden; border: none; text-overflow: ellipsis; display: -webkit-box; line-height: 30px; /* fallback */ max-height: 65px; /* fallback */ -webkit-line-clamp: 2; /* number of lines to
                                     show */ -webkit-box-orient: vertical;">
-									<a href="book?id=${bookId}">${title}</a>
+									<a href="/online-book-store/book/bk?id=${bookId}&title=${title}">${title}</a>
 								</h6>
 
 								<!-- Author -->
@@ -115,7 +111,7 @@
 			</div>
 		</div>
 	</div>
-
+ 
 	<!-- Footer -->
 	<tagfiles:footer />
 	<!-- jQuery -->

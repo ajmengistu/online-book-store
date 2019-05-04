@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@ page import="com.onlinebookstore.controller.*"%>
+<%@ page import="com.onlinebookstore.controller.WEB"%>
 <%@ page import="com.onlinebookstore.model.*"%>
 <%@ page import="java.util.ArrayList"%>
 <html>
@@ -17,7 +17,7 @@
 		response.setDateHeader("Expire", 0); //Causes the proxy cache to see the page as "stale"
 		response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
 
-		if (session.getAttribute("user") == null)
+		if (session.getAttribute(WEB.USER) == null)
 			response.sendRedirect(WEB.LOGIN);
 	%>
 
@@ -32,7 +32,7 @@
 			text : 'Please try again!',
 			type : 'error'
 		}).then(function() {
-			window.location = '/checkout';
+			window.location = '<%=WEB.CHECKOUT%>';
 		});
 	</script>
 </body>

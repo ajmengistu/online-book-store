@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="com.onlinebookstore.controller.WEB"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -18,6 +19,20 @@
 </style>
 </head>
 <body>
+	<%
+		response.setHeader("Cache-Control", "no-cache"); //Forces caches to obtain a new copy of the page from the origin server
+		response.setHeader("Cache-Control", "no-store"); //Directs caches not to store the page under any circumstance
+		response.setDateHeader("Expire", 0); //Causes the proxy cache to see the page as "stale"
+		response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
+
+		Integer size = (Integer) session.getAttribute("numOfItems");
+		if (size != null && size == 0) {
+			response.sendRedirect(WEB.HOME);
+		}
+	%>
+
+
+
 	<!-- Navigation Bar -->
 	<c:choose>
 		<c:when test="${user != null}">
@@ -60,7 +75,8 @@
 											<p>by ${item.getBook().getAuthor().getName()}</p></td>
 										<td style="color: rgb(236, 74, 74); font-weight: bold;">$${item.getBook().getPrice()}</td>
 										<td>
-											<form action="cart.do?id=${item.getBook().getBookId()}"
+											<form
+												action='<%=WEB.CART_DO%>?id=${item.getBook().getBookId()}'
 												class="form-inline" method="post">
 												<select onchange="change(${count})" name="quantity"
 													class="form-control" style="margin-left: 42%;">
@@ -75,9 +91,7 @@
 													<option value="8">8</option>
 													<option value="9">9</option>
 													<option selected="selected">${item.getQuantity()}</option>
-													<%-- </select> <span id="${item.getBook().getBookId()}"></span> --%>
 												</select> <span id="${count}"></span>
-												<%-- <button id="${item.getBook().getBookId()}" class="btn btn-warning" style="margin-left: 10%; display: none;">Update</button> --%>
 											</form>
 										</td>
 									</tr>
@@ -109,13 +123,13 @@
 								</tr>
 							</tbody>
 						</table>
-						<br> <a href="checkout.do" class="btn btn-primary">Checkout</a>
+						<br> <a href=<%=WEB.CHECKOUT_DO%> class="btn btn-primary">Checkout</a>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="container" style="margin-left: 14.3%; margin-top: 1%;">
-			<a href="home" class="btn btn-warning"><i
+			<a href=<%=WEB.HOME%> class="btn btn-warning"><i
 				class="fa
                     fa-angle-left"></i> Continue Shopping</a>
 		</div>
@@ -127,7 +141,8 @@
 				<div class="container">
 					<h4>Your Shopping Cart is empty.</h4>
 					<p>
-						Continue shopping on <a href="home">OnlineBookStore homepage!</a>
+						Continue shopping on <a href=<%=WEB.HOME%>>OnlineBookStore
+							homepage!</a>
 					</p>
 				</div>
 			</c:if>
@@ -138,8 +153,8 @@
 				<div class="container">
 					<h4>Your Shopping Cart is empty.</h4>
 					<p>
-						If you already have an account, <a href="login">Sign In</a> to see
-						your Cart. Continue shopping on <a href="home">OnlineBookStore
+						If you already have an account, <a href=<%=WEB.LOGIN%>>Sign In</a>
+						to see your Cart. Continue shopping on <a href=<%=WEB.HOME%>>OnlineBookStore
 							homepage!</a>
 					</p>
 				</div>

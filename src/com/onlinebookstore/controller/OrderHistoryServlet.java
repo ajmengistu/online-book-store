@@ -26,7 +26,7 @@ public class OrderHistoryServlet extends HttpServlet {
 				.println("------------Getting Order History-----------------------");
 
 		HttpSession session = request.getSession();
-		User user = (User) session.getAttribute("user");
+		User user = (User) session.getAttribute(WEB.USER);
 		if (user != null) {
 			ArrayList<Order> orderList = User.getOrderHistory(user.getUserId());
 			session.setAttribute("orderList", orderList);

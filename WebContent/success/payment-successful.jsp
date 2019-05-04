@@ -3,7 +3,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ page import="com.onlinebookstore.controller.*"%>
 <%@ page import="com.onlinebookstore.model.*"%>
-<%@ page import="java.util.ArrayList"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -17,8 +16,13 @@
 		response.setDateHeader("Expire", 0); //Causes the proxy cache to see the page as "stale"
 		response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
 
-		if (session.getAttribute("user") == null)
+		if (session.getAttribute(WEB.USER) == null)
 			response.sendRedirect(WEB.LOGIN);
+		if (session.getAttribute("payment-status") == null) {
+			response.sendRedirect(WEB.HOME);
+		}else{
+			session.setAttribute("payment-status", null);
+		}
 	%>
 
 
@@ -32,7 +36,7 @@
 			text : '',
 			type : 'success'
 		}).then(function() {
-			window.location = 'order-details?o=${hash}';
+			window.location = '<%=WEB.ORDER_DETAILS%>?o=${hash}';
 		});
 	</script>
 </body>

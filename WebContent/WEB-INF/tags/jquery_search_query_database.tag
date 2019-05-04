@@ -5,7 +5,7 @@
 			$.ajax({
 				dataType : "json",
 				type : 'GET',
-				url : "searchbooks",
+				url : "/online-book-store/c/searchbooks",
 				data : {
 					q : request.term
 				},
@@ -30,7 +30,7 @@
 		minLength : 3
 	}).data("ui-autocomplete")._renderItem = function(ul, item) {
 		console.log(item)
-		var inner_html = '<a href="book?id='
+		var inner_html = '<a href="/online-book-store/book/bk?id='
 				+ item.bookId
 				+ '&title='
 				+ item.title

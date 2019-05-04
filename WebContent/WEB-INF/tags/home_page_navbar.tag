@@ -1,7 +1,7 @@
 <%@ tag language="java" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	<a class="navbar-brand" href="home"
+	<a class="navbar-brand" href="/online-book-store/c/home"
 		style="color: aquamarine; padding: 10px;"><b>Online</b>BookStore</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
 		data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
@@ -31,20 +31,20 @@
 			</a>
 				<div class="dropdown-menu dropdown-menu-right"
 					aria-labelledby="navbarDropdownMenuLink">
-					<a class="dropdown-item" href="login"> <span
+					<a class="dropdown-item" href="/online-book-store/c/login"> <span
 						class="text-warning"></span>
 						<button type="button"
 							class="btn btn-warning
                                     btn-md"
 							style="margin-bottom: 20px;">Sign in</button>
-					</a> <a class="dropdown-item" href="register">New customer? <span
+					</a> <a class="dropdown-item" href="/online-book-store/c/register">New customer? <span
 						style="text-decoration: underline;">Register here</span>
 					</a>
 
 				</div></li>
 
 			<li class="nav-item active" style="margin-right: 20px;"><a
-				class="nav-link" href="shopping_cart"><b><i
+				class="nav-link" href="/online-book-store/c/shopping-cart"><b><i
 						class="fa
                                     fa-shopping-cart fa-2x"></i>
 						Cart (<span class="text-warning"><c:choose>

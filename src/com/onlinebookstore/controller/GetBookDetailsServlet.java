@@ -14,7 +14,7 @@ import com.onlinebookstore.model.Book;
 /**
  * Servlet implementation class GetBookDetailsServlet
  */
-@WebServlet("/c/book")
+@WebServlet("/book/bk")
 public class GetBookDetailsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -27,9 +27,9 @@ public class GetBookDetailsServlet extends HttpServlet {
 		// Get book information of the requested book by book_id
 		String bookId = request.getParameter("id");
 		Book book = Book.getBookById(Integer.parseInt(bookId));
-
+		System.out.println("hello----------");
 		RequestDispatcher rd = request
-				.getRequestDispatcher("/view_book_details.jsp");
+				.getRequestDispatcher("/book/book-details.jsp");
 
 		request.setAttribute("title", book.getTitle());
 		request.setAttribute("author", book.getAuthor().getName());
@@ -52,6 +52,7 @@ public class GetBookDetailsServlet extends HttpServlet {
 		request.setAttribute("bookId", book.getBookId());
 		// getstock
 		// get isbn13,isbn
+		System.out.println(book);
 		rd.forward(request, response);
 
 	}

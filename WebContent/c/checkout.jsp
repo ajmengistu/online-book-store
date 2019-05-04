@@ -26,15 +26,19 @@
 		response.setDateHeader("Expire", 0); //Causes the proxy cache to see the page as "stale"
 		response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
 
-		if (session.getAttribute("user") == null)
+		if (session.getAttribute(WEB.USER) == null)
 			response.sendRedirect(WEB.LOGIN);
+		Integer size = (Integer) session.getAttribute("numOfItems");
+		if (size == 0) {
+			response.sendRedirect(WEB.HOME);
+		}
 	%>
 
 
 	<div class="container">
 		<nav class="navbar navbar-expand-lg navbar-light bg-dark"> <span
-			class="navbar-brand" style="color: aquamarine;"><a
-			href="home" style="color: inherit; text-decoration: none;"><b>Online</b>BookStore</a></span>
+			class="navbar-brand" style="color: aquamarine;"><a href="home"
+			style="color: inherit; text-decoration: none;"><b>Online</b>BookStore</a></span>
 		</nav>
 	</div>
 	<br>
@@ -100,8 +104,7 @@
 				<br>
 				<!-- Set up a container element for the button -->
 				<div class="container">
-					<form id="placeOrder" method="post"
-						action="/online-book-store/place-order">
+					<form id="placeOrder" method="post" action=<%=WEB.PLACE_ORDER_DO%>>
 						<div id="payment-form"></div>
 					</form>
 				</div>

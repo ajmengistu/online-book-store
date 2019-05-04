@@ -15,16 +15,23 @@ public interface WEB {
 	/* Customer Paths */
 	public String CUSTOMER = "CUSTOMER";
 	public String C = "/c";
+	public String BOOK = "/book";
+	public String BOOK_SEARCH = HOST + BOOK + "/bk";
 	public String SHOPPING_CART = HOST + C + "/shopping-cart";
 	public String HOME = HOST + C + "/home";
 	public String REGISTER = HOST + C + "/register";
 	public String CHECKOUT = HOST + C + "/checkout";
-	
+	public String ACCOUNT = HOST + C + "/account";
+	public String BOOK_DETAILS = HOST + BOOK + "/book-details";
+	public String ORDER_DETAILS = HOST + C + "/order-details";
 
 	/* Servlets */
 	public String CART_DO = HOST + C + "/cart.do";
 	public String LOGIN_DO = HOST + C + "/login.do";
+	public String LOGOUT_DO = HOST + C + "/logout.do";
 	public String REGISTER_DO = HOST + C + "/register.do";
+	public String CHECKOUT_DO = HOST + C + "/checkout.do";
+	public String PLACE_ORDER_DO = HOST + C + "/place-order.do";
 
 	/* Administrator Paths */
 	public String ADMINISTRATOR = "ADMINISTRATOR";
@@ -41,10 +48,15 @@ public interface WEB {
 	public String ERRORS = "errors";
 	public String ERROR_404 = HOST + ERRORS + "/404.jsp";
 	public String ADMIN_SIGN_OUT = HOST + ERRORS + "/admin-sign-out";
+	public String PAYMENT_FAILED = HOST + ERRORS + "/payment-failed.jsp";
 
 	/* SUCCESS Paths */
+	public String SUCCESSFUL = "successful";
 	public String SUCCESS = "/success";
 	public String REGISTRATION_SUCCESSFUL = HOST + SUCCESS
 			+ "/registration-successful.jsp";
 	public String LOGIN_SUCCESSFUL = HOST + SUCCESS + "/login-successful.jsp";
+	public String PAYMENT_SUCCESSFUL = HOST + SUCCESS
+			+ "/payment-successful.jsp";
+
 }
