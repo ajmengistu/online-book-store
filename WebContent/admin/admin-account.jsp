@@ -1,15 +1,19 @@
+<%@ taglib prefix="tagfiles" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="match" uri="match-functions"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="com.onlinebookstore.controller.WEB"%>
+<%@ page import="com.onlinebookstore.model.User"%>
+
+
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="tagfiles" tagdir="/WEB-INF/tags"%>
-<%@ page import="com.onlinebookstore.controller.WEB"%>
-<%@ page import="com.onlinebookstore.model.User, java.math.BigDecimal"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
+<head>	
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Welcome</title>
+<title>OnlineBookStore: Your Admin Account</title>
 
-<tagfiles:awesomefonts />
 <tagfiles:bootstrapCSS />
 </head>
 <body>
@@ -27,13 +31,13 @@
 			response.sendRedirect(WEB.LOGIN);
 			// If a Customer requested this page 404 or redirect them to their home 
 		} else if (user.getUserRole().equals(WEB.CUSTOMER)) {
-			response.sendRedirect(WEB.HOME);
+			request.getRequestDispatcher(WEB.ERROR_404).forward(request,
+					response);
 		}
-		BigDecimal netSales = User.getOrdersTotal();
 	%>
 	<br>
 	<div style="text-align: center">
-		<h3>Net Sales</h3>
+		<h3>Login &#38; Security</h3>
 	</div>
 	<br>
 	<div class="row justify-content-center align-items-center">
@@ -42,8 +46,23 @@
 				<table class="table borderless">
 					<tbody>
 						<tr>
-							<td style="font-weight: bold; font-size: 25px;">Net Sales:</td>
-							<td style="font-size: 25px; color: green;">$<%=netSales%></td>
+							<td style="font-weight: bold;">Name:</td>
+							<td style="">${user.getFirstName()}&nbsp; ${user.getLastName()}</td>
+							<td><button type="button" class="btn btn-secondary">Edit</button>
+							</td>
+						</tr>
+						<tr>
+							<td style="font-weight: bold;">Email:</td>
+							<td style="">${user.getEmail()}</td>
+							<td><button type="button" class="btn btn-secondary">Edit</button>
+							</td>
+
+						</tr>
+						<tr>
+							<td style="font-weight: bold;">Password:</td>
+							<td style="">**********</td>
+							<td><button type="button" class="btn btn-secondary">Edit</button>
+							</td>
 						</tr>
 					</tbody>
 				</table>
@@ -58,3 +77,4 @@
 	<tagfiles:bootstrapScripts />
 </body>
 </html>
+

@@ -21,27 +21,28 @@
 
 	<%
 		response.setHeader("Cache-Control", "no-cache"); //Forces caches to obtain a new copy of the page from the origin server
-			response.setHeader("Cache-Control", "no-store"); //Directs caches not to store the page under any circumstance
-			response.setDateHeader("Expire", 0); //Causes the proxy cache to see the page as "stale"
-			response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
+		response.setHeader("Cache-Control", "no-store"); //Directs caches not to store the page under any circumstance
+		response.setDateHeader("Expire", 0); //Causes the proxy cache to see the page as "stale"
+		response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
 
-			User user = (User) session.getAttribute("user");
+		User user = (User) session.getAttribute("user");
 
-			if (user == null) {
-		response.sendRedirect(WEB.LOGIN);
-		// If a Customer requested this page 404 or redirect them to their home 
-			} else if (user.getUserRole().equals(WEB.CUSTOMER)) {
-		response.sendRedirect(WEB.HOME);
-			}
-			
-			int q = -1;
-			String query = request.getParameter("q");
-			try{
-		q = Integer.parseInt(query);
-			}catch(NumberFormatException e){			
-			}
-			
-			ArrayList<Payment> paymentList = Payment.getPayments(q);
+		if (user == null) {
+			response.sendRedirect(WEB.LOGIN);
+			// If a Customer requested this page 404 or redirect them to their home 
+		} else if (user.getUserRole().equals(WEB.CUSTOMER)) {
+			request.getRequestDispatcher(WEB.ERROR_404).forward(
+			request, response);
+		}
+		
+		int q = -1;
+		String query = request.getParameter("q");
+		try{
+			q = Integer.parseInt(query);
+		}catch(NumberFormatException e){			
+		}
+		
+		ArrayList<Payment> paymentList = Payment.getPayments(q);
 	%>
 
 
@@ -67,7 +68,7 @@
 					<th scope="col">Order Id</th>
 					<th scope="col">Transaction Id</th>
 					<th scope="col">Date Created</th>
-					
+
 				</tr>
 			</thead>
 

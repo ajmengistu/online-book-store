@@ -28,7 +28,7 @@ public class CheckOutServlet extends HttpServlet {
 			System.out.println("Sign-in Before Checking Out");
 			response.sendRedirect(WEB.LOGIN);
 		} else {
-			User user = (User) session.getAttribute(WEB.User);
+			User user = (User) session.getAttribute(WEB.USER);
 
 			getUserAddress(user.getUserId(), session);
 
@@ -59,7 +59,7 @@ public class CheckOutServlet extends HttpServlet {
 
 	private boolean isUserSignedIn(HttpSession session) {
 		boolean status = false;
-		if (session != null && session.getAttribute(WEB.User) != null) {
+		if (session != null && session.getAttribute(WEB.USER) != null) {
 			status = true;
 		}
 		return status;

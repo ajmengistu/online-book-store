@@ -89,11 +89,11 @@
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>AddBooksPage</servlet-name>
-		<jsp-file>/add-books.jsp</jsp-file>
+		<jsp-file>/admin-add-books.jsp</jsp-file>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>AddBooksPage</servlet-name>
-		<url-pattern>/add-books</url-pattern>
+		<url-pattern>/admin-add-books</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>AddBookServlet</servlet-name>
@@ -199,14 +199,14 @@
 		<servlet-name>ViewStock</servlet-name>
 		<url-pattern>/admin-stock</url-pattern>
 	</servlet-mapping>
-	<servlet>
-		<servlet-name>ViewAccount</servlet-name>
-		<jsp-file>/admin-account.jsp</jsp-file>
+	<!-- <servlet>
+		<servlet-name>AdminAccount</servlet-name>
+		<jsp-file>admin/admin-account.jsp</jsp-file>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>ViewAccount</servlet-name>
-		<url-pattern>/admin-account</url-pattern>
-	</servlet-mapping>
+		<servlet-name>AdminAccount</servlet-name>
+		<url-pattern>admin/admin-account</url-pattern>
+	</servlet-mapping> -->
 	<error-page>
 		<!-- Missing resource -->
 		<error-code>404</error-code>

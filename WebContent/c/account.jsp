@@ -49,7 +49,7 @@
 
 	<br>
 	<div style="text-align: center">
-		<h3>Login & Security</h3>
+		<h3>Login &#38; Security</h3>
 	</div>
 	<br>
 	<div class="row justify-content-center align-items-center">

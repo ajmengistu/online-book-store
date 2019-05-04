@@ -2,15 +2,13 @@
 <%@ taglib prefix="match" uri="match-functions"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <%@ page
 	import="com.onlinebookstore.controller.WEB, com.onlinebookstore.model.*, java.util.ArrayList"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>OnlineBookStore: View Sales</title>
+<title>OnlineBookStore: View Stock</title>
 
 <!-- Bootstrap CSS -->
 <tagfiles:bootstrapCSS />
@@ -33,23 +31,20 @@
 			response.sendRedirect(WEB.LOGIN);
 			// If a Customer requested this page 404 or redirect them to their home 
 		} else if (user.getUserRole().equals(WEB.CUSTOMER)) {
-			response.sendRedirect(WEB.HOME);
+			request.getRequestDispatcher(WEB.ERROR_404).forward(
+			request, response);
 		}
+		
 		int q = -1;
 		String query = request.getParameter("q");
 		try{
 			q = Integer.parseInt(query);
 		}catch(NumberFormatException e){			
 		}
-		if (query == null || query.equals("")){
-			q = 113;
-		}
-		ArrayList<Order> orderList = User.getOrderHistory(q);
-		int len = orderList.size();
-		if(len > 10){
-			len = 10;
-		}
+		
+		ArrayList<Book> books = Book.getBooks(q);
 	%>
+
 
 
 	<br>
@@ -57,32 +52,41 @@
 	<br>
 
 	<div align="center">
-		<form action="admin-sales" method="post">
-			Search for Order: <input type="number" name="q" placeholder="User Id" />
+		<form action="admin-stock" method="post">
+			Search for Book: <input type="number" name="q" placeholder="Book Id" />
 			<input type="submit" value="Submit" />
 		</form>
 
 		<br>
-		<h2 align="center">Sales List</h2>
+		<h2 align="center">Book List</h2>
 		<table class="table" align="center"
 			style="width: 50%; margin-left: auto; margin-right: auto;">
 			<thead class="thead-dark">
 				<tr style="text-align: center;">
-					<th scope="col">Order#</th>
-					<th scope="col">Total</th>
-					<th scope="col">Date Ordered</th>
-					<th scope="col">Address Id</th>
+					<th scope="col">Book Id</th>
+					<th scope="col">Title</th>
+					<th scope="col">Authors</th>
+					<th scope="col">Publication Year</th>
+					<th scope="col">Image</th>
+					<th scope="col">Price</th>
+					<th scope="col">Stock</th>
+					<th scope="col">Format</th>
 				</tr>
 			</thead>
 
 			<%
-				for(int i=0; i < len; i++) {
+				for(Book book : books){
 			%>
 			<tr style="text-align: center;">
-				<td><%=orderList.get(i).getOrderNum()%></td>
-				<td>$<%=orderList.get(i).getTotal()%></td>
-				<td><%=orderList.get(i).getDateOrdered()%></td>
-				<td><%=orderList.get(i).getShippingAddress()%></td>
+				<td><%=book.getBookId()%></td>
+				<td><%=book.getTitle()%></td>
+				<td><%=book.getAuthor().getName()%></td>
+				<td><%=book.getYearPublished()%></td>
+				<td><img src="<%=book.getImage()%>" alt="img"
+					style="height: 150px; width: 90px; margin-left: 20px;"></td>
+				<td>$<%=book.getPrice()%></td>
+				<td><%=book.getQuantity()%></td>
+				<td><%=book.getFormat()%></td>
 			</tr>
 			<%
 				}

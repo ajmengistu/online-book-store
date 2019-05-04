@@ -25,7 +25,7 @@ body {
 			if (user.getUserRole().equals(WEB.ADMINISTRATOR)) {
 				response.sendRedirect(WEB.ADMIN_HOME);
 			}
-		}
+		} 
 	%>
 
 	<div class="container" style="margin-top: 150px;">

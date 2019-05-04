@@ -15,7 +15,6 @@ import javax.servlet.http.HttpSession;
 
 import com.braintreegateway.BraintreeGateway;
 import com.braintreegateway.Environment;
-import com.braintreegateway.PaymentMethod;
 import com.braintreegateway.Result;
 import com.braintreegateway.Transaction;
 import com.braintreegateway.TransactionRequest;

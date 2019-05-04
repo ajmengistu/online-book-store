@@ -2,51 +2,36 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="tagfiles" tagdir="/WEB-INF/tags"%>
-<%@ page import="com.onlinebookstore.controller.WEB"%>
+<%@ page
+	import="com.onlinebookstore.controller.WEB, com.onlinebookstore.model.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Add Books</title>
+<title>OnlineBookStore: Admin Add Books</title>
 
-<!-- Bootstrap CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-
-<!-- Font-Awesome CSS -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-<!-- Administrator Navigation Bar CSS -->
-<tagfiles:navbar_style />
+<tagfiles:bootstrapCSS />
 </head>
 <body>
 	<!-- Administrator User Navigation Bar -->
 	<tagfiles:admin_navbar />
-	<div>
-		<%-- <%
-			response.setHeader("Cache-Control", "no-cache"); //Forces caches to obtain a new copy of the page from the origin server
-			response.setHeader("Cache-Control", "no-store"); //Directs caches not to store the page under any circumstance
-			response.setDateHeader("Expire", 0); //Causes the proxy cache to see the page as "stale"
-			response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
+	<%
+		response.setHeader("Cache-Control", "no-cache"); //Forces caches to obtain a new copy of the page from the origin server
+		response.setHeader("Cache-Control", "no-store"); //Directs caches not to store the page under any circumstance
+		response.setDateHeader("Expire", 0); //Causes the proxy cache to see the page as "stale"
+		response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
 
-			String firstName = (String) session.getAttribute("firstName");
-			String lastName = (String) session.getAttribute("lastName");
-			String email = (String) session.getAttribute("email");
-			String userRole = (String) session.getAttribute("userRole");
+		User user = (User) session.getAttribute("user");
 
-			if (firstName == null || lastName == null || email == null
-					|| userRole == null) {
-				response.sendRedirect(WEB.LOGIN);
-			} else if (userRole.equals(WEB.CUSTOMER)) {
-				/* If a Customer attempts to access this Administrator webpage, send them to their welcome page. */
-				response.sendRedirect(WEB.WELCOME);
-			}
-		%>
-		<p align="center" style="color: black; font-weight: bold;"><%="Hello, " + firstName + " " + lastName + ".\n"
-					+ "Email: " + email%></p>
- --%>
-	</div>
+		if (user == null) {
+			response.sendRedirect("http://localhost:8080/online-book-store/login");
+			// If a Customer requested this page 404 or redirect them to their home 
+		} else if (user.getUserRole().equals(WEB.CUSTOMER)) {
+			request.getRequestDispatcher(WEB.ERROR_404).forward(request,
+					response);
+		}
+	%>
+
 
 	<!-- Form to Add Books to the Database -->
 	<br>
@@ -108,18 +93,9 @@
 			</div>
 		</div>
 	</div>
-	<!-- Optional JavaScript -->
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-		crossorigin="anonymous"></script>
+	<!-- Footer -->
+	<tagfiles:footer />
+	<!-- BootStrap Scripts -->
+	<tagfiles:bootstrapScripts />
 </body>
 </html>

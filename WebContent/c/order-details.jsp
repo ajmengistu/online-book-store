@@ -80,7 +80,7 @@
 
 							</tr>
 							<tr>
-								<td>Shipping & handling:</td>
+								<td><span>Shipping &#38; handling:</span></td>
 								<td style="">$<%=WEB.SHIPPING_COST%></td>
 
 							</tr>
