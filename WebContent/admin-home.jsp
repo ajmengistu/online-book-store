@@ -52,6 +52,9 @@
 	</div>
 
 
+	<!-- Footer -->
+	<tagfiles:footer />
+	<!-- BootStrap Scripts -->
 	<tagfiles:bootstrapScripts />
 </body>
 </html>

@@ -21,6 +21,7 @@ public class OrderDetails extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("here--");
 		System.out.println(request.getParameter("o"));
 		HttpSession session = request.getSession();
 
@@ -29,15 +30,22 @@ public class OrderDetails extends HttpServlet {
 		if (user != null) {
 			String hash = request.getParameter("o");
 			Order order = (Order) User.getOrderDetails(hash);
-			System.out.println("----------------------------------------------------------");
+			System.out
+					.println("----------------------------------------------------------");
 			System.out.println(order);
-			System.out.println("----------------------------------------------------------");
-			session.setAttribute("order", order);
-			request.getRequestDispatcher("/order-details.jsp")
-					.forward(request, response);
-//			response.sendRedirect("/online-book-store/order-details.jsp");
+			System.out
+					.println("----------------------------------------------------------");
+			if (order != null) {
+				session.setAttribute("order", order);
+				request.getRequestDispatcher("/order-details.jsp").forward(
+						request, response);
+			} else {
+				request.getRequestDispatcher(WEB.ERROR_404).forward(
+						request, response);
+			}
 		} else {
 			// 404 or send them to login page
+			response.sendRedirect(WEB.LOGIN);
 		}
 	}
 

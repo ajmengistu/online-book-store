@@ -83,7 +83,7 @@
 				<td><%=book.getYearPublished()%></td>
 				<td><img src="<%=book.getImage()%>" alt="img"
 					style="height: 150px; width: 90px; margin-left: 20px;"></td>
-				<td><%=book.getPrice()%></td>
+				<td>$<%=book.getPrice()%></td>
 				<td><%=book.getQuantity()%></td>
 				<td><%=book.getFormat()%></td>
 			</tr>
@@ -93,8 +93,9 @@
 		</table>
 	</div>
 
-	<!-- Optional JavaScript -->
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<!-- Footer -->
+	<tagfiles:footer />
+	<!-- BootStrap Scripts -->
 	<tagfiles:bootstrapScripts />
 </body>
 </html>

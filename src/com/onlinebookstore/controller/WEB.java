@@ -25,4 +25,5 @@ public interface WEB {
 	public String CHECKOUT = "checkout"; // checkout.jsp
 	public String User = "user"; // current user
 	public String SHOPPING_CART = "shopping_cart"; // shopping_cart.jsp
+	public String ERROR_404 = "404.jsp";
 }

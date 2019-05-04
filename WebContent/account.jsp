@@ -1,7 +1,8 @@
 <%@ taglib prefix="tagfiles" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="match" uri="match-functions"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.onlinebookstore.controller.WEB"%>
+<%@ page
+	import="com.onlinebookstore.controller.WEB, com.onlinebookstore.model.*"%>
 
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -23,9 +24,12 @@
 		response.setHeader("Cache-Control", "no-store"); //Directs caches not to store the page under any circumstance
 		response.setDateHeader("Expire", 0); //Causes the proxy cache to see the page as "stale"
 		response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
-
+		User user = (User) session.getAttribute("user");
 		if (session.getAttribute("user") == null)
 			response.sendRedirect(WEB.LOGIN);
+		else if (user.getUserRole().equals(WEB.ADMINISTRATOR)) {
+			response.sendRedirect(WEB.ADMIN_HOME);
+		}
 	%>
 
 

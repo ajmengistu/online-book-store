@@ -18,7 +18,7 @@
             <a class="nav-link" href="admin-payments">Payments <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="view-users">Customers/Users <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="admin-view-users">Customers/Users <span class="sr-only">(current)</span></a>
           </li> <li class="nav-item active">
             <a class="nav-link" href="admin-stock">Stock <span class="sr-only">(current)</span></a>
           </li>

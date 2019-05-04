@@ -2,6 +2,8 @@
 <%@ taglib prefix="match" uri="match-functions"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.onlinebookstore.controller.WEB"%>
+<%@ page import="com.onlinebookstore.model.User"%>
+
 
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -12,37 +14,26 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>OnlineBookStore: Your Admin Account</title>
 
-<tagfiles:jQueryScripts />
-<tagfiles:awesomefonts />
-<tagfiles:carouselCSS />
 <tagfiles:bootstrapCSS />
 </head>
 <body>
+	<tagfiles:admin_navbar />
+
 	<%
 		response.setHeader("Cache-Control", "no-cache"); //Forces caches to obtain a new copy of the page from the origin server
 		response.setHeader("Cache-Control", "no-store"); //Directs caches not to store the page under any circumstance
 		response.setDateHeader("Expire", 0); //Causes the proxy cache to see the page as "stale"
 		response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
 
-		if (session.getAttribute("user") == null)
+		User user = (User) session.getAttribute("user");
+
+		if (user == null) {
 			response.sendRedirect(WEB.LOGIN);
+			// If a Customer requested this page 404 or redirect them to their home 
+		} else if (user.getUserRole().equals(WEB.CUSTOMER)) {
+			response.sendRedirect(WEB.HOME);
+		}
 	%>
-
-
-
-	<!-- Navigation Bar -->
-	<c:choose>
-		<c:when test="${user != null}">
-			<tagfiles:customer_navbar />
-			<br />
-		</c:when>
-		<c:otherwise>
-			<tagfiles:home_page_navbar />
-			<br />
-		</c:otherwise>
-	</c:choose>
-
-
 	<br>
 	<div style="text-align: center">
 		<h3>Login & Security</h3>
@@ -81,12 +72,8 @@
 
 	<!-- Footer -->
 	<tagfiles:footer />
-	<!-- jQuery -->
-	<tagfiles:jquery_search_query_database />
 	<!-- BootStrap Scripts -->
 	<tagfiles:bootstrapScripts />
-	<!-- CarouselJS -->
-	<tagfiles:carouselJS />
 </body>
 </html>
 

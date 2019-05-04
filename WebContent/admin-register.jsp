@@ -1,6 +1,8 @@
 <%@ taglib prefix="tagfiles" tagdir="/WEB-INF/tags"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ page
+	import="com.onlinebookstore.controller.WEB, com.onlinebookstore.model.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,6 +19,15 @@ body {
 }
 </style>
 <body>
+	<%
+		User user = (User) session.getAttribute("user");
+		if (session.getAttribute("user") != null) {
+			if (user.getUserRole().equals(WEB.ADMINISTRATOR)) {
+				response.sendRedirect(WEB.ADMIN_HOME);
+			}
+		}
+	%>
+
 	<div class="container" style="margin-top: 150px;">
 		<div class="row">
 			<div class="col-mid-10 offset=mid-1">

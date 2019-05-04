@@ -1,6 +1,8 @@
 <%@ taglib prefix="tagfiles" tagdir="/WEB-INF/tags"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ page
+	import="com.onlinebookstore.controller.WEB, com.onlinebookstore.model.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,10 +24,16 @@ body {
 		// Get the status of the user registration from the RegisterServlet.java class
 		String status = (String) request.getAttribute("status");
 		// When this page is first requested via ".../register", show an empty string status.
-		if (status == null)
+		if(status == null){
 			status = "";
-		if (session != null && session.getAttribute("user") != null)
-			response.sendRedirect("home");
+		}
+
+		User user = (User) session.getAttribute("user");
+		if (session.getAttribute("user") != null) {
+			if (user.getUserRole().equals(WEB.CUSTOMER)) {
+				response.sendRedirect(WEB.HOME);
+			}
+		}
 	%>
 
 	<div class="container" style="margin-top: 150px;">

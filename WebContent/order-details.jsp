@@ -1,5 +1,6 @@
 <%@ taglib prefix="tagfiles" tagdir="/WEB-INF/tags"%>
-<%@ page import="com.onlinebookstore.controller.WEB"%>
+<%@ page
+	import="com.onlinebookstore.controller.WEB, com.onlinebookstore.model.*, java.math.BigDecimal"%>
 
 <%@ taglib prefix="match" uri="match-functions"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -27,6 +28,8 @@
 
 		if (session.getAttribute("user") == null)
 			response.sendRedirect(WEB.LOGIN);
+		Order order = (Order) session.getAttribute("order");
+		BigDecimal total = WEB.SHIPPING_COST.add(order.getTotal());
 	%>
 
 
@@ -78,12 +81,12 @@
 							</tr>
 							<tr>
 								<td>Shipping & handling:</td>
-								<td style=""><%=WEB.SHIPPING_COST%></td>
+								<td style="">$<%=WEB.SHIPPING_COST%></td>
 
 							</tr>
 							<tr style="background-color: #ccffb3; margin-top: 10%;">
 								<td style="font-weight: bold; font-size: 15px;">Order Total</td>
-								<td style="font-weight: bold; font-size: 15px;">$${order.getTotal()}</td>
+								<td style="font-weight: bold; font-size: 15px;">$<%=total%></td>
 							</tr>
 						</tbody>
 					</table>

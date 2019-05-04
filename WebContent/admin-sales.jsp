@@ -90,8 +90,9 @@
 		</table>
 	</div>
 
-	<!-- Optional JavaScript -->
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<!-- Footer -->
+	<tagfiles:footer />
+	<!-- BootStrap Scripts -->
 	<tagfiles:bootstrapScripts />
 </body>
 </html>

@@ -54,7 +54,7 @@
 	<div align="center">
 		<form action="admin-payments" method="post">
 			Search for Payment: <input type="number" name="q"
-				placeholder="User Id" /> <input type="submit" value="Submit" />
+				placeholder="Order Id" /> <input type="submit" value="Submit" />
 		</form>
 
 		<br>
@@ -86,8 +86,9 @@
 		</table>
 	</div>
 
-	<!-- Optional JavaScript -->
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<!-- Footer -->
+	<tagfiles:footer />
+	<!-- BootStrap Scripts -->
 	<tagfiles:bootstrapScripts />
 </body>
 </html>
