@@ -39,7 +39,7 @@
 	<br>
 
 	<div align="center">
-		<form action="search-users" method="post">
+		<form action="/online-book-store/admin/search-users" method="post">
 			Search for Users: <input type="text" name="q" placeholder="Search" />
 			<input type="submit" value="Submit" />
 		</form>

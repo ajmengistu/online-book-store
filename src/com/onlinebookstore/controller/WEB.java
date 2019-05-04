@@ -39,6 +39,7 @@ public interface WEB {
 	public String ADMIN_HOME = HOST + ADMIN + "/admin-home";
 	public String ADMIN_REGISTER = HOST + ADMIN + "/admin-register";
 	public String ADD_BOOKS = HOST + ADMIN + "/admin-add-books";
+	public String ADMIN_VIEW_USERS = HOST + ADMIN + "/admin-view-users";
 
 	/* Customer Paths & Administrator Paths */
 	public String USER = "user"; // current user (admin or customer)

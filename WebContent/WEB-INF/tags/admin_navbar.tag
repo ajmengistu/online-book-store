@@ -23,7 +23,7 @@
             <a class="nav-link" href="admin-stock">Stock <span class="sr-only">(current)</span></a>
           </li>
           </li> <li class="nav-item active">
-            <a class="nav-link" href="add-books">Add Books <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="admin-add-books">Add Books <span class="sr-only">(current)</span></a>
           </li>
         </ul>
         <!-- <form class="form-inline my-2 my-lg-0">
