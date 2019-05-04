@@ -13,7 +13,7 @@ import com.braintreegateway.ClientTokenRequest;
 import com.braintreegateway.Environment;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@WebServlet("/token")
+@WebServlet("/c/token")
 public class ClientTokenServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

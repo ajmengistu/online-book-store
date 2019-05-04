@@ -14,7 +14,7 @@ import com.onlinebookstore.model.User;
 /**
  * Servlet implementation class AddAddress
  */
-@WebServlet("/addAddress.do")
+@WebServlet("/c/addAddress.do")
 public class AddAddress extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

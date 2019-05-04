@@ -15,7 +15,7 @@ import com.onlinebookstore.model.Book;
 /**
  * Servlet implementation class SearchBooks
  */
-@WebServlet("/searchbooks")
+@WebServlet("/c/searchbooks")
 public class SearchBooks extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +17,7 @@ import com.onlinebookstore.model.User;
 /**
  * Servlet implementation class LoginServlet
  */
-// @WebServlet("/LoginServlet")
+@WebServlet("/c/login.do")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -45,7 +46,7 @@ public class LoginServlet extends HttpServlet {
 		if (user != null) {
 			// Bind valid user information to a session.
 			HttpSession session = request.getSession();
-			session.setAttribute("user", user);
+			session.setAttribute(WEB.USER, user);
 			session.setAttribute("login_status", "SUCCESSFUL");
 
 			System.out.println("Login successful");
@@ -62,7 +63,7 @@ public class LoginServlet extends HttpServlet {
 				// Start a new/fresh shoppingCart session
 				session.setAttribute("shoppingCart", null);
 				// Send them to their shopping_cart.jsp page
-				session.setAttribute("cart", "cart.do");
+				session.setAttribute("cart", WEB.CART_DO);
 			}
 
 			session.setAttribute("numOfItems",

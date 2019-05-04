@@ -16,7 +16,7 @@ import com.onlinebookstore.model.User;
 /**
  * Servlet implementation class OrderHistoryServlet
  */
-@WebServlet("/order-history")
+@WebServlet("/c/order-history")
 public class OrderHistoryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

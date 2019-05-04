@@ -4,17 +4,47 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	id="WebApp_ID" version="3.0">
 	<display-name>online-book-store</display-name>
+	<!-- HOME -->
 	<welcome-file-list>
-		<welcome-file>home.jsp</welcome-file>
+		<welcome-file>/c/home.jsp</welcome-file>
 	</welcome-file-list>
 	<servlet>
+		<servlet-name>ViewHome</servlet-name>
+		<jsp-file>/c/home.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ViewHome</servlet-name>
+		<url-pattern>/c/home</url-pattern>
+	</servlet-mapping>
+	<!-- REGISTRATION -->
+	<servlet>
 		<servlet-name>RegisterPage</servlet-name>
-		<jsp-file>/register.jsp</jsp-file>
+		<jsp-file>/c/register.jsp</jsp-file>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>RegisterPage</servlet-name>
-		<url-pattern>/register</url-pattern>
+		<url-pattern>/c/register</url-pattern>
 	</servlet-mapping>
+
+	<!-- LOGIN -->
+	<servlet>
+		<servlet-name>LoginPage</servlet-name>
+		<jsp-file>/c/login.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LoginPage</servlet-name>
+		<url-pattern>/c/login</url-pattern>
+	</servlet-mapping>
+	<!-- ERRORS -->	
+		<servlet>
+		<servlet-name>AdminSignOut</servlet-name>
+		<jsp-file>/errors/admin-sign-out.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AdminSignOut</servlet-name>
+		<url-pattern>/errors/admin-sign-out</url-pattern>
+	</servlet-mapping>
+	<!-- 
 	<servlet>
 		<servlet-name>AdminRegisterPage</servlet-name>
 		<jsp-file>/admin-register.jsp</jsp-file>
@@ -47,30 +77,9 @@
 		<servlet-name>SuccessfulRegistrationPage</servlet-name>
 		<url-pattern>/registration_successful</url-pattern>
 	</servlet-mapping>
-	<servlet>
-		<servlet-name>SuccessfulLoginPage</servlet-name>
-		<jsp-file>/login_successful.jsp</jsp-file>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>SuccessfulLoginPage</servlet-name>
-		<url-pattern>/login_successful</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>LoginPage</servlet-name>
-		<jsp-file>/login.jsp</jsp-file>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>LoginPage</servlet-name>
-		<url-pattern>/login</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>LoginServlet</servlet-name>
-		<servlet-class>com.onlinebookstore.controller.LoginServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>LoginServlet</servlet-name>
-		<url-pattern>/login.do</url-pattern>
-	</servlet-mapping>
+	
+	
+	
 	<servlet>
 		<servlet-name>WelcomePage</servlet-name>
 		<jsp-file>/welcome.jsp</jsp-file>
@@ -135,14 +144,7 @@
 		<servlet-name>ViewUsers</servlet-name>
 		<url-pattern>/admin-view-users</url-pattern>
 	</servlet-mapping>
-	<servlet>
-		<servlet-name>ViewHome</servlet-name>
-		<jsp-file>/home.jsp</jsp-file>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ViewHome</servlet-name>
-		<url-pattern>/home</url-pattern>
-	</servlet-mapping>
+	
 	<servlet>
 		<servlet-name>ViewBookDetails</servlet-name>
 		<jsp-file>/view_book_details.jsp</jsp-file>
@@ -199,17 +201,18 @@
 		<servlet-name>ViewStock</servlet-name>
 		<url-pattern>/admin-stock</url-pattern>
 	</servlet-mapping>
-	<!-- <servlet>
+	<servlet>
 		<servlet-name>AdminAccount</servlet-name>
-		<jsp-file>admin/admin-account.jsp</jsp-file>
+		<jsp-file>/admin/admin-account.jsp</jsp-file>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>AdminAccount</servlet-name>
-		<url-pattern>admin/admin-account</url-pattern>
-	</servlet-mapping> -->
+		<url-pattern>/admin/admin-account</url-pattern>
+	</servlet-mapping>
+	-->
 	<error-page>
 		<!-- Missing resource -->
 		<error-code>404</error-code>
-		<location>/404.jsp</location>
-	</error-page>
+		<location>/errors/404.jsp</location>
+	</error-page> 
 </web-app>

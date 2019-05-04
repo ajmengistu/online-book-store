@@ -3,6 +3,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page
+	import="com.onlinebookstore.controller.WEB, com.onlinebookstore.model.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,6 +18,14 @@
 
 </head>
 <body>
+
+	<%
+		User user = (User) session.getAttribute(WEB.USER);
+		if (user != null && user.getUserRole().equals(WEB.ADMINISTRATOR)) {
+			response.sendRedirect(WEB.ADMIN_SIGN_OUT);
+		}
+	%>
+
 	<!-- Navigation Bar -->
 	<c:choose>
 		<c:when test="${user != null}">
@@ -240,7 +250,7 @@
 	<tagfiles:footer />
 	<!-- jQuery -->
 	<tagfiles:jquery_search_query_database />
-<!-- BootStrap Scripts -->
+	<!-- BootStrap Scripts -->
 	<tagfiles:bootstrapScripts />
 	<!-- CarouselJS -->
 	<tagfiles:carouselJS />

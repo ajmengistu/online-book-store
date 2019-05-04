@@ -22,14 +22,14 @@
 		if ((String) session.getAttribute("login_status") == null) {
 			response.sendRedirect(WEB.LOGIN);
 		} else {
-			User user = (User) session.getAttribute("user");
+			User user = (User) session.getAttribute(WEB.USER);
 
 			if (user.getUserRole().equals(WEB.ADMINISTRATOR)) {
 				url = WEB.ADMIN_HOME;
 			} else {
 				if (session.getAttribute("cart") != null) {
 					// Note: User/Customer logged-in with a non-empty shopping cart 
-					url = "cart.do";
+					url = WEB.CART_DO;
 				} else {
 					// Send User to their home page. Note: User must have signed-in with an empty shoppingCart. 
 					url = WEB.HOME;

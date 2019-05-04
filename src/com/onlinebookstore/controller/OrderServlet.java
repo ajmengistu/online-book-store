@@ -22,7 +22,7 @@ import com.braintreegateway.ValidationError;
 import com.onlinebookstore.model.Item;
 import com.onlinebookstore.model.User;
 
-@WebServlet("/place-order")
+@WebServlet("/c/place-order")
 public class OrderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

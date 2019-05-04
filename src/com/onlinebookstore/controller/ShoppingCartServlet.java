@@ -19,7 +19,7 @@ import com.onlinebookstore.model.User;
 /**
  * Servlet implementation class CartServlet
  */
-@WebServlet("/cart.do")
+@WebServlet("/c/cart.do")
 public class ShoppingCartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public List<Item> shoppingCart = new ArrayList<Item>();

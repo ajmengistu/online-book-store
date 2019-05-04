@@ -1,6 +1,6 @@
 <%@ tag language="java" pageEncoding="ISO-8859-1"%>
-<script src="css/jquery.min.js"></script>
-<script src="css/owl.carousel.js"></script>
+<script src="../css/jquery.min.js"></script>
+<script src="../css/owl.carousel.js"></script>
 <script>
 	$('.owl-theme').owlCarousel({
 		loop : true,

@@ -1,7 +1,7 @@
 <%@ taglib prefix="tagfiles" tagdir="/WEB-INF/tags"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%-- <%@ page import="com.onlinebookstore.controller.WEB"%> --%>
+<%@ page import="com.onlinebookstore.controller.WEB"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +11,7 @@
 <title>OnlineBookStore: Login</title>
 <style type="text/css">
 body {
-	background-image: url("./images/books.jpg");
+	background-image: url("../images/books.jpg");
 	background-repeat: no-repeat;
 }
 </style>
@@ -22,8 +22,8 @@ body {
 		if (status == null) // Client requested login page for the first time.
 			status = "";
 		// User attempted to login 
-		if (session.getAttribute("user") != null)
-			response.sendRedirect("home");
+		if (session.getAttribute(WEB.USER) != null)
+			response.sendRedirect(WEB.HOME);
 	%>
 
 	<div class="row">
@@ -36,7 +36,7 @@ body {
 					</div>
 
 					<form class="form-horizontal" style="margin-left: 50px;"
-						method="post" action="login.do">
+						method="post" action=<%=WEB.LOGIN_DO%>>
 						<div class="form-group input-group">
 							<input type="email" required autocomplete="on"
 								placeholder="Email" class="form-control" name="email" />
@@ -56,10 +56,10 @@ body {
 						</div>
 
 						<p>
-							<a href="/online-book-store/register">New User</a>
+							<a href=<%=WEB.REGISTER%>>New User</a>
 						</p>
 						<p>
-							<a href="/online-book-store/home">Maybe Later</a>
+							<a href=<%=WEB.HOME%>> Maybe Later</a>
 						</p>
 					</form>
 
@@ -67,10 +67,7 @@ body {
 			</div>
 		</div>
 	</div>
-	<!-- Optional JavaScript -->
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<!-- BootStrap Scripts & CarouselJavaScript -->
-	<tagfiles:carouselJS />
+	
 	<tagfiles:bootstrapScripts />
 </body>
 </html>

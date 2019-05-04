@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class SearchUsers
  */
-@WebServlet("/search-users")
+@WebServlet("/c/search-users")
 public class SearchUsers extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

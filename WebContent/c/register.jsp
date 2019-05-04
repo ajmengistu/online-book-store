@@ -8,13 +8,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>OnlineBookStore: Sign up</title>
-<link rel="stylesheet" type="text/css" href="css/register.css">
+<link rel="stylesheet" type="text/css" href="../css/register.css">
 
 <tagfiles:bootstrapCSS />
 </head>
 <style>
 body {
-	background-image: url("./images/stack_of_books.jpg");
+	background-image: url(<%="../images/stack_of_books.jpg"%>);
 	background-repeat: no-repeat;
 }
 </style>
@@ -24,12 +24,12 @@ body {
 		// Get the status of the user registration from the RegisterServlet.java class
 		String status = (String) request.getAttribute("status");
 		// When this page is first requested via ".../register", show an empty string status.
-		if(status == null){
+		if (status == null) {
 			status = "";
 		}
 
-		User user = (User) session.getAttribute("user");
-		if (session.getAttribute("user") != null) {
+		User user = (User) session.getAttribute(WEB.USER);
+		if (session.getAttribute(WEB.USER) != null) {
 			if (user.getUserRole().equals(WEB.CUSTOMER)) {
 				response.sendRedirect(WEB.HOME);
 			}
@@ -42,7 +42,7 @@ body {
 				<div class="row">
 					<div class="col-mid-5 register-left"
 						style="color: black; font-weight: bold;">
-						<img src="images/black_arrow.png">
+						<img src=<%="../images/black_arrow.png"%>>
 						<h3>Join Us</h3>
 						<h6>Create an account &amp; browse unlimited number of books!</h6>
 						<button type="button" class="btn btn-primary">About</button>
@@ -52,7 +52,7 @@ body {
 						<h4 align="center">Create an account</h4>
 						<div class="register-form">
 
-							<form class="form-horizontal" method="post" action=register.do>
+							<form class="form-horizontal" method="post" action=<%=WEB.REGISTER_DO%>>
 								<div class="form-group">
 									<input required autocomplete="off" placeholder="First Name"
 										class="form-control" name="first_name" />
@@ -87,7 +87,7 @@ body {
 							<br>
 						</div>
 						<p style="font-weight: bold; color: blue">
-							<a href="/online-book-store/login">Login</a>
+							<a href=<%=WEB.LOGIN%>>Login</a>
 						</p>
 					</div>
 				</div>
