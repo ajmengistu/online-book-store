@@ -1,7 +1,8 @@
 <%@ taglib prefix="tagfiles" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="match" uri="match-functions"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.onlinebookstore.controller.WEB"%>
+<%@ page
+	import="com.onlinebookstore.controller.WEB, com.onlinebookstore.model.Book, java.util.ArrayList"%>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -17,6 +18,12 @@
 <tagfiles:bootstrapCSS />
 </head>
 <body>
+
+
+	<%
+		ArrayList<Book> randBooks = Book.getRandomBooks();
+			session.setAttribute("randBooks", randBooks);
+	%>
 	<!-- Navigation Bar -->
 	<c:choose>
 		<c:when test="${user != null}">
@@ -70,48 +77,52 @@
 	<div class="container mt-3">
 		<div class="row">
 			<div class="owl-carousel owl-theme">
-				<match:ListPopularBooks>
+				<c:forEach items="${randBooks}" var="book">
 					<div class="item">
 						<div class="card" style="border: none;">
 
 							<!-- Book Image -->
-							<a href="/online-book-store/book/bk?id=${bookId}&title=${title}"><img
-								src="${image}" alt="img" title="${title}"
+							<a
+								href="/online-book-store/book/bk?id=${book.getBookId()}&title=${book.getTitle()}"><img
+								src="${book.getImage()}" alt="img" title="${book.getTitle()}"
 								style="height: 210px; width: 120px; margin-left: 20px;"></a>
 
+							<!-- Book Title -->
 							<div class="card-body">
 								<!-- Title -->
 								<h6 class="card-text"
 									style="overflow: hidden; border: none; text-overflow: ellipsis; display: -webkit-box; line-height: 30px; /* fallback */ max-height: 65px; /* fallback */ -webkit-line-clamp: 2; /* number of lines to
                                     show */ -webkit-box-orient: vertical;">
-									<a href="/online-book-store/book/bk?id=${bookId}&title=${title}">${title}</a>
+									<a
+										href="/online-book-store/book/bk?id=${book.getBookId()}&title=${book.getTitle()}">${book.getTitle()}</a>
 								</h6>
 
 								<!-- Author -->
 								<p
 									style="overflow: hidden; border: none; text-overflow: ellipsis; display: -webkit-box; line-height: 30px; /* fallback */ max-height: 65px; /* fallback */ -webkit-line-clamp: 2; /* number of lines to
                                     show */ -webkit-box-orient: vertical;">by
-									${author}</p>
+									${book.getAuthor().getName()}</p>
 
 								<!-- Price -->
 								<h5 style="color: red;">
-									$<span class="text-center">${price}</span>
+									$<span class="text-center">${book.getPrice()}</span>
 								</h5>
 
 								<!-- Ratings -->
-								<match:ListStarRatings rating="${averageRating}">
+								<!-- Ratings -->
+								<match:ListStarRatings rating="${book.getAverageRatings()}">
 								</match:ListStarRatings>
-								<span>${numOfRatings}</span>
+								<span>${book.getNumberOfRatings()}</span>
 
 							</div>
 						</div>
 					</div>
-				</match:ListPopularBooks>
+				</c:forEach>
 
 			</div>
 		</div>
 	</div>
- 
+
 	<!-- Footer -->
 	<tagfiles:footer />
 	<!-- jQuery -->

@@ -1109,6 +1109,19 @@ public class User {
 		}
 	}
 
+	public static ArrayList<Book> getRecommendations(int userId){
+		con = getConnection();
+		ArrayList<Book> bookRecommendations = new ArrayList<Book>();
+		
+		PreparedStatement pstmt = null;
+		if(con != null){
+			
+		}
+		
+		return bookRecommendations;
+		
+	}
+
 	public static void main(String args[]) {
 		// changePassword("bye", 107);
 	}

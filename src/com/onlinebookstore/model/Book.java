@@ -42,6 +42,7 @@ public class Book {
 		this.yearPublished = yearPublished;
 		this.bookId = bookId;
 	}
+
 	public Book(Integer bookId, String title, Author name,
 			Double averageRatings, int numOfRatings, String imageUrl,
 			BigDecimal price, int stock, int yearPublished) {
@@ -295,7 +296,7 @@ public class Book {
 
 				while (rs.next()) {
 					int bkId = rs.getInt("book_id");
-					String format = rs.getString("book_format");					
+					String format = rs.getString("book_format");
 					String title = rs.getString("title");
 					String authors = rs.getString("authors");
 					Double averageRatings = rs.getDouble("average_ratings");
@@ -306,9 +307,9 @@ public class Book {
 					Integer yearPublished = rs
 							.getInt("original_publication_year");
 
-					Book book = new Book(format, bkId, title, new Author(authors),
-							averageRatings, ratings, image, new BigDecimal(
-									price), stock, yearPublished);
+					Book book = new Book(format, bkId, title, new Author(
+							authors), averageRatings, ratings, image,
+							new BigDecimal(price), stock, yearPublished);
 					books.add(book);
 				}
 
@@ -381,26 +382,49 @@ public class Book {
 		return book.getBookId() == this.bookId;
 	}
 
-	public static void main(String args[]) {
-		// Book b = getBookById(2);
-		// Book c = getBookById(3);
-		// BigDecimal bc = new BigDecimal(1.02 + "");
-		// BigDecimal cc = new BigDecimal(1.02 + "");
-		// System.out.println(bc.toString());
-		// System.out.println(cc.toString());
-		// System.out.println("tostring" + cc);
-		// BigDecimal r = bc.subtract(cc);
-		// System.out.println(r);
-		// System.out.println(r.equals(new BigDecimal("0.00")));
-		// System.out.println(bc.multiply(new BigDecimal("18")));
-		//
-		// System.out.println(b.getPrice());
-		// System.out.println(c.getPrice());
-		// System.out.println(b.getPrice() - c.getPrice());
-		// System.out.println(b.getPrice() * 77);
-		// System.out.println(getBookById(8).getPrice());
+	public static ArrayList<Book> getRandomBooks() {
+		Connection con = User.getConnection();
+		ArrayList<Book> randomBooks = new ArrayList<>();
+		PreparedStatement pstmt = null;
 
-		for (Book book : getBooks(1))
+		if (con != null) {
+			String query = "SELECT * FROM books ORDER BY RAND() LIMIT 25;";
+			try {
+				pstmt = con.prepareStatement(query);
+				ResultSet rs = pstmt.executeQuery();
+
+				while (rs.next()) {
+					int bookId = rs.getInt("book_id");
+					String title = rs.getString("title");
+					String authors = rs.getString("authors");
+					Double averageRatings = rs.getDouble("average_ratings");
+					Integer ratings = rs.getInt("ratings");
+					String image = rs.getString("image");
+					String price = rs.getString("price");
+					Integer stock = rs.getInt("stock");
+					Integer yearPublished = rs
+							.getInt("original_publication_year");
+
+					Book book = new Book(bookId, title, new Author(authors),
+							averageRatings, ratings, image, new BigDecimal(
+									price), stock, yearPublished);
+					randomBooks.add(book);
+
+				}
+
+				if (pstmt != null)
+					pstmt.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return randomBooks;
+	}
+
+	public static void main(String args[]) {
+		for (Book book : getRandomBooks())
 			System.out.println(book.toString());
 
 	}
