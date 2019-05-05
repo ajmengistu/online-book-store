@@ -46,9 +46,9 @@ public interface WEB {
 	public String LOGIN = HOST + C + "/login";
 
 	/* ERROR Paths */
-	public String ERRORS = "errors";
+	public String ERRORS = "/errors";
 	public String ERROR_404 = HOST + ERRORS + "/404.jsp";
-	public String ADMIN_SIGN_OUT = HOST + ERRORS + "/admin-sign-out";
+	public String ADMIN_SIGN_OUT = HOST + ERRORS + "/admin-sign-out.jsp";
 	public String PAYMENT_FAILED = HOST + ERRORS + "/payment-failed.jsp";
 
 	/* SUCCESS Paths */

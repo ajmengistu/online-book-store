@@ -22,7 +22,8 @@
 	<%
 		User user = (User) session.getAttribute(WEB.USER);
 		if (user != null && user.getUserRole().equals(WEB.ADMINISTRATOR)) {
-			response.sendRedirect(WEB.ADMIN_SIGN_OUT);
+			//request.getRequestDispatcher(WEB.ADMIN_SIGN_OUT).forward(request, response);
+			response.sendRedirect("/online-book-store/errors/admin-sign-out.jsp");
 		}
 	%>
 
