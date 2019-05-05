@@ -104,7 +104,7 @@
 						<div class="card" style="border: none;">
 
 							<!-- Book Image -->
-							<<a href="/online-book-store/book/bk?id=${bookId}&title=${title}"><img
+							<a href="/online-book-store/book/bk?id=${bookId}&title=${title}"><img
 								src="${image}" alt="img" title="${title}"
 								style="height: 210px; width: 120px; margin-left: 20px;"></a>
 

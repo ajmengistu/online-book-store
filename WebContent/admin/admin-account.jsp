@@ -17,7 +17,7 @@
 <tagfiles:bootstrapCSS />
 </head>
 <body>
-	<tagfiles:admin_navbar />
+
 
 	<%
 		response.setHeader("Cache-Control", "no-cache"); //Forces caches to obtain a new copy of the page from the origin server
@@ -35,6 +35,8 @@
 					response);
 		}
 	%>
+	<tagfiles:admin_navbar />
+
 	<br>
 	<div style="text-align: center">
 		<h3>Login &#38; Security</h3>
@@ -47,25 +49,63 @@
 					<tbody>
 						<tr>
 							<td style="font-weight: bold;">Name:</td>
-							<td style="">${user.getFirstName()}&nbsp; ${user.getLastName()}</td>
-							<td><button type="button" class="btn btn-secondary">Edit</button>
-							</td>
+							<td style="">${user.getFirstName()}&nbsp;
+								${user.getLastName()}</td>
+							<td></td>
 						</tr>
 						<tr>
 							<td style="font-weight: bold;">Email:</td>
 							<td style="">${user.getEmail()}</td>
-							<td><button type="button" class="btn btn-secondary">Edit</button>
-							</td>
+							<td></td>
 
 						</tr>
 						<tr>
 							<td style="font-weight: bold;">Password:</td>
-							<td style="">**********</td>
-							<td><button type="button" class="btn btn-secondary">Edit</button>
+							<td style="">*******************</td>
+							<td><button type="button" class="btn btn-secondary"
+									data-toggle="modal" data-target="#modalRegisterForm">Edit</button>
 							</td>
+
 						</tr>
 					</tbody>
 				</table>
+			</div>
+		</div>
+	</div>
+
+
+
+	<div class="modal fade" id="modalRegisterForm" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header text-center">
+					<h4 class="modal-title w-100 font-weight-bold">Edit Password</h4>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body mx-3">
+					<div class="md-form mb-5">
+						<form action=<%=WEB.CHANGE_PASSWORD_DO%> method="post">
+							<label for="inputAddress"><strong></strong></label> <input
+								required type="password" class="form-control"
+								name="current-password" placeholder="Current password">
+							<br> <label for=""><strong></strong></label> <input required
+								type="password" class="form-control" name="new-password"
+								placeholder="New password"> <br> <label
+								for="inputCity"><strong></strong></label> <input required
+								type="password" class="form-control" name="confirm-password"
+								placeholder="Confirm password"> <br>
+
+							<div class="modal-footer d-flex justify-content-center"
+								style="margin-top: 50px;">
+								<button class="btn btn-warning">Update password</button>
+							</div>
+						</form>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

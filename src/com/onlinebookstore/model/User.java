@@ -1086,30 +1086,31 @@ public class User {
 		return total;
 	}
 
-	public static void main(String args[]) {
-		try {
-			System.out.println(Integer.parseInt(null));
-		} catch (NumberFormatException e) {
+	public static void changePassword(String newPass, int userId) {
+		con = getConnection();
+		String[] hashedPasswordAndSalt = getSecurePasswordAndSalt(newPass);
 
+		PreparedStatement pstmt = null;
+		if (con != null) {
+			String changePassword = "UPDATE users SET hashed_password = ?, salt = ? WHERE user_id = ?;";
+			try {
+				pstmt = con.prepareStatement(changePassword);
+				pstmt.setString(1, hashedPasswordAndSalt[0]);
+				pstmt.setString(2, hashedPasswordAndSalt[1]);
+				pstmt.setInt(3, userId);
+
+				pstmt.executeUpdate();
+
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
-		// addNewAddress(29, "4748 Flower West Dr.", "Studio #5", "Box House",
-		// "ND", 49499);
-		// System.out.println(getOrdersTotal());
-		// for (Order order : getOrderHistory(113)) {
-		// System.out.println(order);
-		// }
-		// System.out
-		// .println(getOrderDetails("61b2d54d-f671-4d5f-ab25-40bcf6ea21bb"));
-		// LocalDate.now().plusDays(5)
-		// .format(DateTimeFormatter.ofPattern("EEEE, MMMM dd, yyyy"));
-		// String str = "2016-03-04 11:30:40";
-		// DateTimeFormatter formatter =
-		// DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-		// LocalDateTime dateTime = LocalDateTime.parse(str, formatter);
-		// System.out.println(dateTime.format(DateTimeFormatter.ofPattern("EEEE, MMMM dd, yyyy")));
-		// LocalDate date = LocalDate.parse(str,
-		// DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-		// System.out.println(date.format(DateTimeFormatter
-		// .ofPattern("EEEE, MMMM dd, yyyy")));
 	}
+
+	public static void main(String args[]) {
+		// changePassword("bye", 107);
+	}
+
 }

@@ -55,7 +55,7 @@ public class RegisterServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		String confirm_password = request.getParameter("confirm_password");
-
+		System.out.println(employee_id +"--------------");
 		System.out.println(employee_id == null ? "Customer registering..."
 				: "Administrator registering...");
 		// Verify password confirmation
@@ -72,7 +72,7 @@ public class RegisterServlet extends HttpServlet {
 						response);
 			} else { // Otherwise, add the new Customer or Administrator
 				boolean newUserAdded = false;
-
+				
 				if ((employee_id != null)
 						&& (!User.verifyEmployeeID(employee_id, first_name,
 								last_name))) {
@@ -143,20 +143,20 @@ public class RegisterServlet extends HttpServlet {
 	private void sendErrorMessage(String emp_id, String message,
 			HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		RequestDispatcher rd = null;
-
+		System.out.println("startehere");
+		HttpSession session = request.getSession();
 		if (emp_id == null) { // Customer registering
-			rd = request.getRequestDispatcher(WEB.REGISTER);
-			request.setAttribute("status", message);
+			System.out.println("startehere-----");
+			session.setAttribute("status", message);
+			response.sendRedirect(WEB.ERROR_REGISTER);
 		} else { // Administrator registering
-			rd = request.getRequestDispatcher(WEB.ADMIN_REGISTER);
-			request.setAttribute("status", message);
+			System.out.println("starteheasdfasdfasdfre");
+			session.setAttribute("status", message);
+			response.sendRedirect("/online-book-store/admin/admin-register.jsp");
+			
 		}
 
 		System.out.println(message);
-
-		rd.forward(request, response);
 	}
 
 }

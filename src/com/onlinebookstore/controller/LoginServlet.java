@@ -42,7 +42,7 @@ public class LoginServlet extends HttpServlet {
 		// Verify if login email already exists. Note: each User account is
 		// associated with a unique email.
 		User user = User.verifyUserLoginCredentials(loginEmail, loginPassword);
-
+		System.out.println("here i----");
 		if (user != null) {
 			// Bind valid user information to a session.
 			HttpSession session = request.getSession();
@@ -73,8 +73,7 @@ public class LoginServlet extends HttpServlet {
 			response.sendRedirect(WEB.LOGIN_SUCCESSFUL);
 
 		} else {
-			// loginEmail or password is invalid. Send a generic message.
-			sendErrorMessage("invalid email or password", request, response);
+			response.sendRedirect(WEB.ERROR_LOGIN);
 		}
 
 	}
@@ -87,20 +86,5 @@ public class LoginServlet extends HttpServlet {
 			numOfItems += item.getQuantity();
 		}
 		return numOfItems;
-	}
-
-	/**
-	 * Provide a generic message for security i.e., to not give potential
-	 * hackers extra information. Send message:
-	 * "You have entered an invalid email or password"
-	 */
-	private void sendErrorMessage(String message, HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-
-		System.out.println(message);
-
-		request.setAttribute("status", message);
-		RequestDispatcher rd = request.getRequestDispatcher(WEB.LOGIN);
-		rd.forward(request, response);
 	}
 }

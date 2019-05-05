@@ -40,16 +40,23 @@ public interface WEB {
 	public String ADMIN_REGISTER = HOST + ADMIN + "/admin-register";
 	public String ADD_BOOKS = HOST + ADMIN + "/admin-add-books";
 	public String ADMIN_VIEW_USERS = HOST + ADMIN + "/admin-view-users";
+	public String ADMIN_ACCOUNT = HOST + ADMIN + "/admin-account.jsp";
 
 	/* Customer Paths & Administrator Paths */
 	public String USER = "user"; // current user (admin or customer)
+	public String P = "/password";
 	public String LOGIN = HOST + C + "/login";
+	public String CHANGE_PASSWORD_DO = HOST + P + "/update.do";
 
 	/* ERROR Paths */
 	public String ERRORS = "/errors";
 	public String ERROR_404 = HOST + ERRORS + "/404.jsp";
+	public String ERROR_LOGIN = HOST + ERRORS + "/login-error.jsp";
+	public String ERROR_REGISTER = HOST + ERRORS + "/register-error.jsp";
 	public String ADMIN_SIGN_OUT = HOST + ERRORS + "/admin-sign-out.jsp";
 	public String PAYMENT_FAILED = HOST + ERRORS + "/payment-failed.jsp";
+	public String CHANGE_PASSWORD_FAILED = HOST + ERRORS
+			+ "/change-password-failed.jsp";
 
 	/* SUCCESS Paths */
 	public String SUCCESSFUL = "successful";
@@ -59,5 +66,7 @@ public interface WEB {
 	public String LOGIN_SUCCESSFUL = HOST + SUCCESS + "/login-successful.jsp";
 	public String PAYMENT_SUCCESSFUL = HOST + SUCCESS
 			+ "/payment-successful.jsp";
+	public String CHANGE_PASSWORD_SUCCESSFUL = HOST + SUCCESS
+			+ "/change-password-successful.jsp";
 
 }

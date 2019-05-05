@@ -9,23 +9,30 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Administrator Registration</title>
 
-<link rel="stylesheet" type="text/css" href="css/register.css">
+<link rel="stylesheet" type="text/css" href="../css/register.css">
 <tagfiles:bootstrapCSS />
 </head>
 <style>
 body {
-	background-image: url("./images/architecture-building.jpg");
+	background-image: url("../images/architecture-building.jpg");
 	background-repeat: no-repeat;
 }
 </style>
 <body>
 	<%
+		String status = (String) session.getAttribute("status");
+		if (status == null) {
+			status = "";
+		} else {
+			session.setAttribute("status", null);
+		}
+
 		User user = (User) session.getAttribute("user");
 		if (session.getAttribute("user") != null) {
 			if (user.getUserRole().equals(WEB.ADMINISTRATOR)) {
 				response.sendRedirect(WEB.ADMIN_HOME);
 			}
-		} 
+		}
 	%>
 
 	<div class="container" style="margin-top: 150px;">
@@ -33,7 +40,7 @@ body {
 			<div class="col-mid-10 offset=mid-1">
 				<div class="row">
 					<div class="col-mid-5 register-left" style="color: black;">
-						<img src="images/black_arrow.png">
+						<img src="../images/black_arrow.png">
 						<h3>Join Us</h3>
 						<h6>Create an account &amp; browse unlimited number of books!</h6>
 						<button type="button" class="btn btn-primary">About</button>
@@ -43,7 +50,8 @@ body {
 						<h4 align="center">Create an account</h4>
 						<div class="register-form">
 
-							<form class="form-horizontal" method="post" action=register.do>
+							<form class="form-horizontal" method="post"
+								action="/online-book-store/c/register.do">
 								<div class="form-group">
 									<input required autocomplete="off" placeholder="Employee ID"
 										class="form-control" name="emp_id" />
@@ -72,15 +80,6 @@ body {
 
 								<!-- Registration Confirmation Message-->
 								<div>
-									<%
-										// Get the status of the user registration from the RegisterServlet.java class
-										String status = (String) request.getAttribute("status");
-										// When this page is first requested via ".../register", show an empty string status.
-										if (status == null)
-											status = "";
-										if (session != null && session.getAttribute("firstName") != null)
-											response.sendRedirect("admin_welcome");
-									%>
 									<p align=center style="color: red; font-weight: bold;"><%=status%></p>
 								</div>
 
@@ -91,7 +90,7 @@ body {
 							<br>
 						</div>
 						<p style="font-weight: bold; color: blue">
-							<a href="/online-book-store/login">Login</a>
+							<a href="/online-book-store/c/login">Login</a>
 						</p>
 					</div>
 				</div>

@@ -22,7 +22,7 @@ body {
 
 	<%
 		// Get the status of the user registration from the RegisterServlet.java class
-		String status = (String) request.getAttribute("status");
+		String status = (String) session.getAttribute("status");
 		// When this page is first requested via ".../register", show an empty string status.
 		if (status == null) {
 			status = "";
