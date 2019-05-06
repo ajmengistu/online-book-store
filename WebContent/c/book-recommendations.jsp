@@ -50,7 +50,7 @@
 
 	<c:if test="${empty bookList}">
 		<div class="container">
-			<h5>You do not have any book recommendations right now. Continue shopping at <a href=<%=WEB.HOME%> >Online<b>BookStore</b></a> home page &amp; purchase a book.</h5>
+			<h5>You do not have any book recommendations right now. Continue shopping at <a href=<%=WEB.HOME%> >Online<b>BookStore</b></a> home page!</h5>
 		</div>
 	</c:if>
 
