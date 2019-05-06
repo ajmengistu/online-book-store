@@ -1109,21 +1109,62 @@ public class User {
 		}
 	}
 
-	public static ArrayList<Book> getRecommendations(int userId){
+	/*
+	 * Gets the books that have the same authors as the books that userId has
+	 * ordered in the past. The recommendation list does not contain the books
+	 * that they have already ordered.
+	 */
+	public static ArrayList<Book> getBookRecommendations(int userId) {
 		con = getConnection();
 		ArrayList<Book> bookRecommendations = new ArrayList<Book>();
-		
+
 		PreparedStatement pstmt = null;
-		if(con != null){
-			
+		if (con != null) {
+			String query = "with temp as "
+					+ "(select * from books where authors in "
+					+ "(select authors from books where book_id in "
+					+ "(select book_id from orders_books where order_id in "
+					+ "(select order_id from orders where user_id=?)))) "
+					+ "select * from temp where temp.book_id not in "
+					+ "(select book_id from orders_books where order_id in "
+					+ "(select order_id from orders where user_id=?)) "
+					+ "limit 60;";
+
+			try {
+				pstmt = con.prepareStatement(query);
+				pstmt.setInt(1, userId);
+				pstmt.setInt(2, userId);
+
+				ResultSet rs = pstmt.executeQuery();
+
+				while (rs.next()) {
+					int bookId = rs.getInt("book_id");
+					String title = rs.getString("title");
+					String authors = rs.getString("authors");
+					Double averageRatings = rs.getDouble("average_ratings");
+					Integer ratings = rs.getInt("ratings");
+					String image = rs.getString("image");
+					String price = rs.getString("price");
+					Integer stock = rs.getInt("stock");
+					Integer yearPublished = rs
+							.getInt("original_publication_year");
+
+					Book book = new Book(bookId, title, new Author(authors),
+							averageRatings, ratings, image, new BigDecimal(
+									price), stock, yearPublished);
+					bookRecommendations.add(book);
+				}
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
-		
 		return bookRecommendations;
-		
 	}
 
 	public static void main(String args[]) {
-		// changePassword("bye", 107);
+		for (Book b : getBookRecommendations(115))
+			System.out.println(b);
 	}
 
 }

@@ -70,11 +70,12 @@
 
 	<div class="container mt-3 primary">
 		<h4 style="margin-top: 200px;">Customers also shopped for</h4>
+		<hr>
 		<br>
 	</div>
 
 
-	<div class="container mt-3">
+	<div class="container mt-3">	
 		<div class="row">
 			<div class="owl-carousel owl-theme">
 				<c:forEach items="${randBooks}" var="book">

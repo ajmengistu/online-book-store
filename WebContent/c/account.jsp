@@ -1,5 +1,5 @@
 <%@ taglib prefix="tagfiles" tagdir="/WEB-INF/tags"%>
-<%@ page import="com.onlinebookstore.controller.WEB"%>
+<%@ page import="com.onlinebookstore.controller.WEB, com.onlinebookstore.model.User"%>
 <%@ taglib prefix="match" uri="match-functions"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -26,6 +26,7 @@
 		response.setDateHeader("Expire", 0); //Causes the proxy cache to see the page as "stale"
 		response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
 
+		User user = (User) session.getAttribute(WEB.USER);
 		if (session.getAttribute(WEB.USER) == null)
 			response.sendRedirect(WEB.LOGIN);
 	%>
@@ -69,6 +70,15 @@
 				</table>
 			</div>
 		</div>
+		
+		<c:if test="${user.getUserRole() == 'CUSTOMER'}">
+			<div class="container" style="margin-left: 14.3%; margin-top: 1%;">
+				<a href=<%=WEB.HOME%> class="btn btn-warning"><i
+					class="fa
+                    fa-angle-left"></i> Continue
+					Shopping</a>
+			</div>
+		</c:if>
 	</div>
 
 

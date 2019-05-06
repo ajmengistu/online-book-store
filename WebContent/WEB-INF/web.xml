@@ -140,6 +140,14 @@
     <servlet-name>ChangePassword</servlet-name>
     <url-pattern>/password/change-password</url-pattern>
   </servlet-mapping>
+    <servlet>
+    <servlet-name>BookRecomm</servlet-name>
+    <jsp-file>/c/book-recommendations.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BookRecomm</servlet-name>
+    <url-pattern>/c/book-recommendations</url-pattern>
+  </servlet-mapping>
   <error-page>
     <error-code>404</error-code>
     <location>/errors/404.jsp</location>

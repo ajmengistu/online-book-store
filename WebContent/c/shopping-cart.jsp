@@ -26,9 +26,10 @@
 		response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
 
 		Integer size = (Integer) session.getAttribute("numOfItems");
-		if (size != null && size == 0) {
+		
+		/* if (size != null && size == 0) {
 			response.sendRedirect(WEB.HOME);
-		}
+		} */
 	%>
 
 
