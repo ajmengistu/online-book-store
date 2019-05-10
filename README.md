@@ -54,7 +54,7 @@ https://devcenter.heroku.com/articles/deploying-java
 ## License
 This project is licensed under MIT License
 
-## Ackowledgments
+## Acknowledgments
 * (Kaggle)[https://www.kaggle.com/datasets] for providing the list of books
 * (Stack Overflow)[https://www.stackoverflow.com]
 
