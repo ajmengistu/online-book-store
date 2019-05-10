@@ -5,8 +5,11 @@ was used to simulate user registration and login.
 <br>
 <br>
 <img src="home-page.png" width="60%">
+<br><br>
+<img src="checkout.png" width="60%">
+<br><br>
+<img src="recomm.png" width="60%">
 <br>
-<video src="video4.mp4" width="320" height="200"></video>
 
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
