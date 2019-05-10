@@ -24,7 +24,7 @@
 		response.setDateHeader("Expire", 0); //Causes the proxy cache to see the page as "stale"
 		response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
 
-		if (session.getAttribute("user") == null)
+		if (session.getAttribute(WEB.USER) == null)
 			response.sendRedirect(WEB.LOGIN);
 	%>
 

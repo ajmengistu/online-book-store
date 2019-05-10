@@ -24,7 +24,7 @@
 		User user = (User) session.getAttribute("user");
 
 		if (user == null) {
-			response.sendRedirect("http://localhost:8080/online-book-store/login");
+			response.sendRedirect("http://localhost:8080/c/login");
 			// If a Customer requested this page 404 or redirect them to their home 
 		} else if (user.getUserRole().equals(WEB.CUSTOMER)) {
 			request.getRequestDispatcher(WEB.ERROR_404).forward(request,

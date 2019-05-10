@@ -84,7 +84,7 @@
 
 							<!-- Book Image -->
 							<a
-								href="/online-book-store/book/bk?id=${book.getBookId()}&title=${book.getTitle()}"><img
+								href="/book/bk?id=${book.getBookId()}&title=${book.getTitle()}"><img
 								src="${book.getImage()}" alt="img" title="${book.getTitle()}"
 								style="height: 210px; width: 120px; margin-left: 20px;"></a>
 
@@ -95,7 +95,7 @@
 									style="overflow: hidden; border: none; text-overflow: ellipsis; display: -webkit-box; line-height: 30px; /* fallback */ max-height: 65px; /* fallback */ -webkit-line-clamp: 2; /* number of lines to
                                     show */ -webkit-box-orient: vertical;">
 									<a
-										href="/online-book-store/book/bk?id=${book.getBookId()}&title=${book.getTitle()}">${book.getTitle()}</a>
+										href="/book/bk?id=${book.getBookId()}&title=${book.getTitle()}">${book.getTitle()}</a>
 								</h6>
 
 								<!-- Author -->

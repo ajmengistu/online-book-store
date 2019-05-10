@@ -22,7 +22,7 @@
 			Try searching or go to <a href=<%=WEB.HOME%>>OnlineBookStore's home page</a>
 		</h5>
 		<br> <br> <img alt=""
-			src="http://localhost:8080/online-book-store/images/brown-dog.jpg"
+			src="/images/brown-dog.jpg"
 			style="height: 780px; width: 500px;">
 	</div>
 

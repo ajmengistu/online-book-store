@@ -21,9 +21,8 @@
 
 	<%
 		User user = (User) session.getAttribute(WEB.USER);
-		if (user != null && user.getUserRole().equals(WEB.ADMINISTRATOR)) {
-			//request.getRequestDispatcher(WEB.ADMIN_SIGN_OUT).forward(request, response);
-			response.sendRedirect("/online-book-store/errors/admin-sign-out.jsp");
+		if (user != null && user.getUserRole().equals(WEB.ADMINISTRATOR)) {			
+			response.sendRedirect(WEB.HOST+"/errors/admin-sign-out.jsp");
 		}
 	%>
 
@@ -52,7 +51,9 @@
 						<div class="card" style="border: none;">
 
 							<!-- Book Image -->
-							<a href="/online-book-store/book/bk?id=${bookId}&title=${title}"><img
+						
+							<a href="/book/bk?id=${bookId}&title=${title}"><img
+							
 								src="${image}" alt="img" title="${title}"
 								style="height: 210px; width: 120px; margin-left: 20px;"></a>
 
@@ -61,7 +62,7 @@
 								<h6 class="card-text"
 									style="overflow: hidden; border: none; text-overflow: ellipsis; display: -webkit-box; line-height: 30px; /* fallback */ max-height: 65px; /* fallback */ -webkit-line-clamp: 2; /* number of lines to
                                     show */ -webkit-box-orient: vertical;">
-									<a href="/online-book-store/book/bk?id=${bookId}&title=${title}">${title}</a>
+									<a href="/book/bk?id=${bookId}&title=${title}">${title}</a>
 								</h6>
 
 								<!-- Author -->
@@ -104,7 +105,7 @@
 						<div class="card" style="border: none;">
 
 							<!-- Book Image -->
-							<a href="/online-book-store/book/bk?id=${bookId}&title=${title}"><img
+							<a href="/book/bk?id=${bookId}&title=${title}"><img
 								src="${image}" alt="img" title="${title}"
 								style="height: 210px; width: 120px; margin-left: 20px;"></a>
 
@@ -113,7 +114,7 @@
 								<h6 class="card-text"
 									style="overflow: hidden; border: none; text-overflow: ellipsis; display: -webkit-box; line-height: 30px; /* fallback */ max-height: 65px; /* fallback */ -webkit-line-clamp: 2; /* number of lines to
                                     show */ -webkit-box-orient: vertical;">
-									<a href="/online-book-store/book/bk?id=${bookId}&title=${title}">${title}</a>
+									<a href="/book/bk?id=${bookId}&title=${title}">${title}</a>
 								</h6>
 
 								<!-- Author -->
@@ -156,7 +157,7 @@
 						<div class="card" style="border: none;">
 
 							<!-- Book Image -->
-							<a href="/online-book-store/book/bk?id=${bookId}&title=${title}"><img
+							<a href="/book/bk?id=${bookId}&title=${title}"><img
 								src="${image}" alt="img" title="${title}"
 								style="height: 210px; width: 120px; margin-left: 20px;"></a>
 
@@ -165,7 +166,7 @@
 								<h6 class="card-text"
 									style="overflow: hidden; border: none; text-overflow: ellipsis; display: -webkit-box; line-height: 30px; /* fallback */ max-height: 65px; /* fallback */ -webkit-line-clamp: 2; /* number of lines to
                                     show */ -webkit-box-orient: vertical;">
-									<a href="/online-book-store/book/bk?id=${bookId}&title=${title}">${title}</a>
+									<a href="/book/bk?id=${bookId}&title=${title}">${title}</a>
 								</h6>
 
 								<!-- Author -->
@@ -207,7 +208,7 @@
 						<div class="card" style="border: none;">
 
 							<!-- Book Image -->
-							<a href="/online-book-store/book/bk?id=${bookId}&title=${title}"><img
+							<a href="/book/bk?id=${bookId}&title=${title}"><img
 								src="${image}" alt="img" title="${title}"
 								style="height: 210px; width: 120px; margin-left: 20px;"></a>
 
@@ -216,7 +217,7 @@
 								<h6 class="card-text"
 									style="overflow: hidden; border: none; text-overflow: ellipsis; display: -webkit-box; line-height: 30px; /* fallback */ max-height: 65px; /* fallback */ -webkit-line-clamp: 2; /* number of lines to
                                     show */ -webkit-box-orient: vertical;">
-									<a href="/online-book-store/book/bk?id=${bookId}&title=${title}">${title}</a>
+									<a href="/book/bk?id=${bookId}&title=${title}">${title}</a>
 								</h6>
 
 								<!-- Author -->

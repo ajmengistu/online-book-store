@@ -67,14 +67,14 @@
 				<div class="card" style="width: 18rem; border: none;">
 					<!-- Book Image -->
 					<a
-						href="/online-book-store/book/bk?id=${book.getBookId()}&title=${book.getTitle()}"><img
+						href="<%=WEB.HOST%>/book/bk?id=${book.getBookId()}&title=${book.getTitle()}"><img
 						src="${book.getImage()}" alt="img" title="${book.getTitle()}"
 						style="height: 210px; width: 120px; margin-left: 20px;"></a>
 					<div class="card-body">
 						<!-- Title -->
 						<h6>
 							<a
-								href="/online-book-store/book/bk?id=${book.getBookId()}&title=${book.getTitle()}">${book.getTitle()}</a>
+								href="<%=WEB.HOST%>/book/bk?id=${book.getBookId()}&title=${book.getTitle()}">${book.getTitle()}</a>
 						</h6>
 						<!-- Author -->
 						<p

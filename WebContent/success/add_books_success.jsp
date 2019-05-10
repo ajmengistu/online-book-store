@@ -31,7 +31,7 @@
 			text : 'Book Added Successfully!',
 			type : 'success'
 		}).then(function() {
-			window.location = '/online-book-store/add_books';
+			window.location = '/add_books';
 		});
 	</script>
 </body>

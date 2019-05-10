@@ -8,7 +8,7 @@ public interface WEB {
 	public String PUBLIC_KEY = "cnt5rnqt5zxcmcbf";
 	public String PRIVATE_KEY = "e533d5e2074d2bdad3e78fb988e000f6";
 
-	public String HOST = "/online-book-store";
+	public String HOST = "";
 
 	public BigDecimal SHIPPING_COST = new BigDecimal("5.99");
 

@@ -51,7 +51,7 @@ body {
 						<div class="register-form">
 
 							<form class="form-horizontal" method="post"
-								action="/online-book-store/c/register.do">
+								action="/c/register.do">
 								<div class="form-group">
 									<input required autocomplete="off" placeholder="Employee ID"
 										class="form-control" name="emp_id" />
@@ -90,7 +90,7 @@ body {
 							<br>
 						</div>
 						<p style="font-weight: bold; color: blue">
-							<a href="/online-book-store/c/login">Login</a>
+							<a href="/c/login">Login</a>
 						</p>
 					</div>
 				</div>

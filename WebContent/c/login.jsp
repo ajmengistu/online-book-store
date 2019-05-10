@@ -33,9 +33,9 @@ body {
 				style="width: 600px; margin-left: 250px; margin-top: 50px;">
 				<div class="jumbotron">
 					<div class="form-group" style="text-align: center;">
-						<h1>ACCOUNT LOGIN</h1>
+					 	<h1>ACCOUNT LOGIN</h1>
 					</div>
-
+										
 					<form class="form-horizontal" style="margin-left: 50px;"
 						method="post" action=<%=WEB.LOGIN_DO%>>
 						<div class="form-group input-group">
@@ -51,7 +51,7 @@ body {
 							 Show user a message of why they cannot login -->
 						<div>
 							<p align=center style="color: red; font-weight: bold;"><%=status%></p>
-						</div>
+						</div> 
 						<div class="form-group">
 							<button class="btn btn-primary">SIGN IN</button>
 						</div>
@@ -60,7 +60,7 @@ body {
 							<a href=<%=WEB.REGISTER%>>New User</a>
 						</p>
 						<p>
-							<a href=<%=WEB.HOME%>> Maybe Later</a>
+							<a href=<%=WEB.HOME%>>Maybe Later</a>
 						</p>
 					</form>
 

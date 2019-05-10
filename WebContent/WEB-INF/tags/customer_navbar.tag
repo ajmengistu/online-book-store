@@ -3,7 +3,7 @@
 <%@ taglib prefix="tagfiles" tagdir="/WEB-INF/tags"%>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	<a class="navbar-brand" href="/online-book-store/c/home"
+	<a class="navbar-brand" href="/c/home"
 		style="color: aquamarine; padding: 10px;"><b>Online</b>BookStore</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
 		data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
@@ -27,19 +27,19 @@
 			</a>
 				<div class="dropdown-menu dropdown-menu-right"
 					aria-labelledby="navbarDropdownMenuLink">
-					<a class="dropdown-item" href="/online-book-store/c/account"><i
+					<a class="dropdown-item" href="/c/account"><i
 						class="fa
                                         fa-user"
 						aria-hidden="true"></i>&nbsp&nbsp<span style="font-weight: bold;">Your
-							Account</span> </a> <a class="dropdown-item" href="/online-book-store/c/order-history"><i
+							Account</span> </a> <a class="dropdown-item" href="/c/order-history"><i
 						class="fa
                                         fa-list"
 						aria-hidden="true"></i>&nbsp&nbsp<span>Your
-							Orders</span></a><a class="dropdown-item" href="/online-book-store/c/book-recommendations"><i
+							Orders</span></a><a class="dropdown-item" href="/c/book-recommendations"><i
 						class="fa
                                         fa-book"
 						aria-hidden="true"></i>&nbsp&nbsp<span>Your
-							Recommendations</span></a> <br> <a class="dropdown-item" href="/online-book-store/c/logout.do">
+							Recommendations</span></a> <br> <a class="dropdown-item" href="/c/logout.do">
 						<button type="button"
 							class="btn btn-warning
                                         btn-md">
@@ -49,7 +49,7 @@
 				</div></li>
 
 			<li class="nav-item active" style="margin-right: 20px;"><a
-				class="nav-link" href="/online-book-store/c/cart.do"><b><i
+				class="nav-link" href="/c/cart.do"><b><i
 						class="fa
                                     fa-shopping-cart fa-2x"></i>
 						Cart (<span class="text-warning">${numOfItems}</span>)</b> <span

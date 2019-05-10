@@ -20,7 +20,7 @@
 		<h3 style="text-align: center">SORRY, please sign out from your administrator account to access this page.</h3>
 		<h5 style="text-align: center">Go back to <a href=<%=WEB.ADMIN_HOME%>>administrator home page</a>.</h5>
 		<br> <br> <img alt=""
-			src="http://localhost:8080/online-book-store/images/brown-dog.jpg"
+			src="/images/brown-dog.jpg"
 			style="height: 780px; width: 500px;">
 	</div>
 

@@ -41,7 +41,7 @@
 		<div class="col-md-3">
 			<div class="card card-body bg-white">
 				<form class="form-horizontal" method="post"
-					action=/online-book-store/password/update.do>
+					action=/password/update.do>
 					<div class="form-group">
 						<input type="password" required autocomplete="off"
 							placeholder="Current password" class="form-control"
