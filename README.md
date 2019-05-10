@@ -14,13 +14,25 @@ Apache Tomcat 7.0 or higher. </p>
 
 ```
 https://www.eclipse.org/downloads/packages/
+https://tomcat.apache.org/
 ```
+### Installing
 
-```
-Download repository locally.
-Using Eclipse Java EE import repository.
-```
-## Book Database Used
+## Deployment
+### Amazon Web Services
+### Heroku
+
+## Authors
+* Aderajew Mengistu
+
+## License
+This project is licensed under MIT License
+
+## Ackowledgments
+* (Kaggle)[https://www.kaggle.com/datasets] for providing the list of books
+* (Stack Overflow)[https://www.stackoverflow.com]
+
+## Resources
 ### Kaggle Dataset
 * https://www.kaggle.com/zygmunt/goodbooks-10k
 * Data Source Used: `books.csv`
