@@ -17,11 +17,22 @@ https://www.eclipse.org/downloads/packages/
 https://tomcat.apache.org/
 ```
 ### Installing
-
+Clone the current repository
+```
+git clone 
+```
 ## Deployment
 ### Amazon Web Services
+Deployed Java Applications on AWS Elastic Beanstalk
+```
+https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_Java.html
+```
 ### Heroku
+Deploying Java Apps on Heroku
 
+```
+https://devcenter.heroku.com/articles/deploying-java
+```
 ## Authors
 * Aderajew Mengistu
 
