@@ -2,7 +2,10 @@
 A fully functional web application that interfaces with MySQL using JDBC along with Java, 
 Tomcat, and JSP. Application is deployed on Amazon Web Services (<a href="https://www.uipath.com/rpa/robotic-process-automation" target="_blank" rel="noopener noreferrer">AWS</a>). Also, [UiPath RPA](https://www.uipath.com/rpa/robotic-process-automation)
 was used to simulate user registration and login.
-
+<br>
+<br>
+<img src="home-page.png" width="60%">
+<br>
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 ### Prerequisites/Requirements
