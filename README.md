@@ -19,8 +19,15 @@ https://tomcat.apache.org/
 ### Installing
 Clone the current repository
 ```
-git clone 
+git clone https://github.com/ajmengistu/online-book-store.git
 ```
+Open the project in Eclipse & run the program using Apache TomCat 7.0 or higer
+Vist the default localhost server on a web browser
+```
+localhost:8080/online-book-store/
+```
+
+
 ## Deployment
 ### Amazon Web Services
 Deployed Java Applications on AWS Elastic Beanstalk
